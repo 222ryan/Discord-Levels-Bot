@@ -48,6 +48,7 @@ class levelsys(commands.Cog):
                         lvl += 1
                     xp -= ((50*((lvl-1)**2))+(50*(lvl-1)))
                     if xp == 0:
+                        levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
                         embed2 = discord.Embed(description=f"{message.author.mention} just reached Level: **{lvl}**")
                         embed2.set_thumbnail(url=message.author.avatar_url)
                         await message.channel.send(embed=embed2)
@@ -82,12 +83,13 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                embed = discord.Embed(title="{}'s Level Stats".format(ctx.author.name))
+                embed = discord.Embed(title="{}'s Stats Menu | ".format(ctx.author.name))
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
                 embed.add_field(name="Progress Bar", value=boxes * completed_bar + (20 - boxes) * uncompleted_bar,
                                 inline=False)
+                embed.add_field(name=f"Level", value=f"{lvl}", inline=False)
                 embed.set_thumbnail(url=ctx.message.author.avatar_url)
                 await ctx.channel.send(embed=embed)
 
@@ -96,12 +98,14 @@ class levelsys(commands.Cog):
         if ctx.channel.id == bot_channel:
             rankings = levelling.find().sort("xp", -1)
             i = 1
-            embed = discord.Embed(title="Rankings:")
+            embed = discord.Embed(title=":trophy: Leaderboard | Top 10")
             for x in rankings:
                 try:
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
-                    embed.add_field(name=f"{i}: {temp.name}", value=f"Total XP: {tempxp}", inline=False)
+                    templvl = x["rank"]
+                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}", inline=False)
+                    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png")
                     i += 1
                 except:
                     pass
