@@ -14,6 +14,9 @@
 
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
+
+<p> Here is a list of the availiable config options:
+
 <b> bot_channel </b> 
 	 <pre><p> Channel where bot commands can be sent </p></pre>
 <b> talk_channels </b> 
