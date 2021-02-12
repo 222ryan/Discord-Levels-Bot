@@ -6,12 +6,12 @@ from pymongo import MongoClient
 bot_channel =   # Channel where bot commands can be sent
 talk_channels = []  # Array of channels you can earn XP in
 
-xp_per_message = 100  # How much XP you earn per message
+xp_per_message = 5  # How much XP you earn per message
 
 completed_bar = ":blue_square:"  # Customise the completed bar with any emoji
 uncompleted_bar = ":white_large_square:"  # Customise the un completed bar with any emoji
 
-level_roles = []  # Array of roles you can be rewarded for levelling up
+level_roles = ['']  # Array of roles you can be rewarded for levelling up
 level_roles_num = []  # Rank for each role, in same order as level_roles
 
 cluster = MongoClient(
@@ -75,7 +75,7 @@ class levelsys(commands.Cog):
                     if xp < ((50 * (lvl ** 2)) + (50 * lvl)):
                         break
                     lvl += 1
-                xp -= ((50 * (lvl - 1)) + (50 * (lvl - 1)))
+                xp -= ((50 * (lvl - 1)**2) + (50 * (lvl - 1)))
                 boxes = int((xp / (200 * ((1 / 2) * lvl))) * 20)
                 rankings = levelling.find().sort("xp", -1)
                 for x in rankings:
