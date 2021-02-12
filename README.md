@@ -18,15 +18,17 @@
 <p> Here is a list of the availiable config options. Configs can be found at the top of both 'main.py' and 'levelsys.py'! </p>
 
 <b> bot_channel </b> 
-	 <pre><p> Channel where bot commands can be sent </p></pre>
+	 <pre><p> Channel where bot commands can be sent. </p></pre>
 <b> talk_channels </b> 
-	 <pre><p> Array of channels you can earn XP in </p></pre>
+	 <pre><p> Array of channels you can earn XP in. </p></pre>
 <b> xp_per_message </b> 
-	 <pre><p> How much XP you earn per message </p></pre>
+	 <pre><p> How much XP you earn per message. </p></pre>
 <b> level_roles </b> 
-	 <pre><p> Array of roles you can be rewarded for levelling up </p></pre>
+	 <pre><p> Array of roles you can be rewarded for levelling up. </p></pre>
 <b> level_roles_num </b> 
-	 <pre><p> Rank for each role, in same order as level_roles </p></pre>
+	 <pre><p> Rank for each role, in same order as level_roles. </p></pre>
+<b> completed_bar / uncompleted_bar </b> 
+	 <pre><p> Allows you to customise the xp bar on the stats menu. </p></pre>
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
 
