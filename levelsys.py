@@ -3,18 +3,19 @@ from discord.ext import commands
 from pymongo import MongoClient
 
 # Config - More Options in main.py!
-bot_channel =   # Channel where bot commands can be sent
+bot_channel =  # Channel where bot commands can be sent
 talk_channels = []  # Array of channels you can earn XP in
 
 xp_per_message = 5  # How much XP you earn per message
 
-level_roles = ["boo"]  # Array of roles you can be rewarded for levelling up
-level_roles_num = [5]  # Rank for each role, in same order as level_roles
+level_roles = [""]  # Array of roles you can be rewarded for levelling up
+level_roles_num = [1, 2, 3]  # Rank for each role, in same order as level_roles
 
 cluster = MongoClient(
     "mongodb link here - dont forget to insert password and database name!! and remove the <>")
 
 levelling = cluster["databasename here"]["collectionsname here"]
+
 # End of Config
 
 
@@ -32,7 +33,7 @@ class levelsys(commands.Cog):
             stats = levelling.find_one({"id": message.author.id})
             if not message.author.bot:
                 if stats is None:
-                    newuser = {"id": message.author.id, "xp": 0}
+                    newuser = {"id": message.author.id, "xp": 0, "rank": 1}
                     levelling.insert_one(newuser)
                 else:
                     xp = stats["xp"] + xp_per_message
@@ -93,13 +94,13 @@ class levelsys(commands.Cog):
             embed = discord.Embed(title="Rankings:")
             for x in rankings:
                 try:
-                    temp = ctx.guild.get_members(x["id"])
+                    temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     embed.add_field(name=f"{i}: {temp.name}", value=f"Total XP: {tempxp}", inline=False)
                     i += 1
                 except:
                     pass
-                if i == 11:
+                if i == 10:
                     break
             await ctx.channel.send(embed=embed)
 
