@@ -4,7 +4,7 @@ import levelsys
 
 # Config - More options in levelsys.py!
 prefix = "!"  # Sets the bots prefix
-bot_token = "NzE4Mjg0MzUxMzM4NzA4OTky.Xtmobg.55iJD44tY-3Ru0WNdYVywpIezOk"  # Your discord application token
+bot_token = ""  # Your discord application token
 
 cogs = [levelsys]
 
