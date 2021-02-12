@@ -3,19 +3,18 @@ from discord.ext import commands
 from pymongo import MongoClient
 
 # Config - More Options in main.py!
-bot_channel =  # Channel where bot commands can be sent
+bot_channel =   # Channel where bot commands can be sent
 talk_channels = []  # Array of channels you can earn XP in
 
 xp_per_message = 5  # How much XP you earn per message
 
-level_roles = []  # Array of roles you can be rewarded for levelling up
-level_roles_num = []  # Rank for each role, in same order as level_roles
+level_roles = ["boo"]  # Array of roles you can be rewarded for levelling up
+level_roles_num = [5]  # Rank for each role, in same order as level_roles
 
 cluster = MongoClient(
     "mongodb link here - dont forget to insert password and database name!! and remove the <>")
 
 levelling = cluster["databasename here"]["collectionsname here"]
-
 # End of Config
 
 
@@ -40,10 +39,10 @@ class levelsys(commands.Cog):
                     levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
                     lvl = 0
                     while True:
-                        if xp < ((50 * (lvl ** 2)) + (50 * lvl)):
+                        if xp < ((50 *(lvl**2))+(50*lvl)):
                             break
                         lvl += 1
-                    xp -= ((50 * (lvl - 1)) + (50 * (lvl - 1)))
+                    xp -= ((50*((lvl-1)**2))+(50*(lvl-1)))
                     if xp == 0:
                         await message.channel.send(f"Well done {message.author.mention}, Level {lvl}")
                         for i in range(len(level_roles)):
