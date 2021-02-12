@@ -3,16 +3,16 @@ from discord.ext import commands
 from pymongo import MongoClient
 
 # Config - More Options in main.py!
-bot_channel =  # Channel where bot commands can be sent
+bot_channel =   # Channel where bot commands can be sent
 talk_channels = []  # Array of channels you can earn XP in
 
-xp_per_message = 5  # How much XP you earn per message
+xp_per_message = 100  # How much XP you earn per message
 
 completed_bar = ":blue_square:"  # Customise the completed bar with any emoji
 uncompleted_bar = ":white_large_square:"  # Customise the un completed bar with any emoji
 
-level_roles = ['test', 'test2']  # Array of roles you can be rewarded for levelling up
-level_roles_num = [1, 2]  # Rank for each role, in same order as level_roles
+level_roles = []  # Array of roles you can be rewarded for levelling up
+level_roles_num = []  # Rank for each role, in same order as level_roles
 
 cluster = MongoClient(
     "mongodb link here - dont forget to insert password and database name!! and remove the <>")
@@ -49,7 +49,8 @@ class levelsys(commands.Cog):
                     xp -= ((50*((lvl-1)**2))+(50*(lvl-1)))
                     if xp == 0:
                         embed2 = discord.Embed(description=f"{message.author.mention} just reached Level: **{lvl}**")
-                        await message.channel.send(f"Well done {message.author.mention}, Level {lvl}")
+                        embed2.set_thumbnail(url=message.author.avatar_url)
+                        await message.channel.send(embed=embed2)
                         for i in range(len(level_roles)):
                             if lvl == level_roles_num[i]:
                                 await message.author.add_roles(
