@@ -15,7 +15,7 @@
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 
-<p> Here is a list of the availiable config options:
+<p> Here is a list of the availiable config options: </p>
 
 <b> bot_channel </b> 
 	 <pre><p> Channel where bot commands can be sent </p></pre>
@@ -27,4 +27,18 @@
 	 <pre><p> Array of roles you can be rewarded for levelling up </p></pre>
 <b> level_roles_num </b> 
 	 <pre><p> Rank for each role, in same order as level_roles </p></pre>
+
+![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
+
+<p> Here is a list of the availiable features </p>
+
+<b> XP System </b> 
+	 <pre><p> Modern Levels has a fully working XP system with a clean menu which displays a users stats. </p></pre>
+	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809689498291273758/Capture7.PNG)
+<b> Customisation </b> 
+	 <pre><p> Modern Levels allows you to customise it in a fair quantity of different ways. </p></pre>
+<b> Leaderboards </b> 
+	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. </p></pre>
+<b> Level Roles </b> 
+	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
 
