@@ -82,7 +82,7 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                embed = discord.Embed(title=f"ctx.author.mention's Level Stats".format(ctx.author.name))
+                embed = discord.Embed(title="{}'s Level Stats".format(ctx.author.name))
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
