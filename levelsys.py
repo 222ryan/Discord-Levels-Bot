@@ -8,8 +8,11 @@ talk_channels = []  # Array of channels you can earn XP in
 
 xp_per_message = 5  # How much XP you earn per message
 
-level_roles = [""]  # Array of roles you can be rewarded for levelling up
-level_roles_num = [1, 2, 3]  # Rank for each role, in same order as level_roles
+completed_bar = ":blue_square:"  # Customise the completed bar with any emoji
+uncompleted_bar = ":white_large_square:"  # Customise the un completed bar with any emoji
+
+level_roles = ['test', 'test2']  # Array of roles you can be rewarded for levelling up
+level_roles_num = [1, 2]  # Rank for each role, in same order as level_roles
 
 cluster = MongoClient(
     "mongodb link here - dont forget to insert password and database name!! and remove the <>")
@@ -45,13 +48,14 @@ class levelsys(commands.Cog):
                         lvl += 1
                     xp -= ((50*((lvl-1)**2))+(50*(lvl-1)))
                     if xp == 0:
+                        embed2 = discord.Embed(description=f"{message.author.mention} just reached Level: **{lvl}**")
                         await message.channel.send(f"Well done {message.author.mention}, Level {lvl}")
                         for i in range(len(level_roles)):
                             if lvl == level_roles_num[i]:
                                 await message.author.add_roles(
                                     discord.utils.get(message.author.guild.roles, name=level_roles[i]))
                                 embed = discord.Embed(
-                                    description=f"{message.author.mention} you have unlocked the {level_roles} role!")
+                                    description=f"{message.author.mention} you have unlocked the **{level_roles}** role!")
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
 
@@ -77,11 +81,11 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                embed = discord.Embed(title="{}'s Level Stats".format(ctx.author.name))
+                embed = discord.Embed(title=f"ctx.author.mention's Level Stats".format(ctx.author.name))
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
-                embed.add_field(name="XP Bar", value=boxes * ":blue_square:" + (20 - boxes) * ":white_large_square:",
+                embed.add_field(name="Progress Bar", value=boxes * completed_bar + (20 - boxes) * uncompleted_bar,
                                 inline=False)
                 embed.set_thumbnail(url=ctx.message.author.avatar_url)
                 await ctx.channel.send(embed=embed)
