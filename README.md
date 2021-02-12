@@ -1,4 +1,4 @@
-![]"https://cdn.discordapp.com/attachments/809363224663031829/809686343382859826/MOSHED-2021-2-12-7-24-9.gif"
+![](https://cdn.discordapp.com/attachments/809363224663031829/809686343382859826/MOSHED-2021-2-12-7-24-9.gif)
 
 <p><b>Modern Levels</b> is a Discord bot made with <b>python</b>. Need Help? DM Me on Discord: <b>ryann#7322</b></p>
 
