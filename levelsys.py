@@ -3,7 +3,7 @@ from discord.ext import commands
 from pymongo import MongoClient
 
 # Config - More Options in main.py!
-bot_channel =   # Channel where bot commands can be sent
+bot_channel =  # Channel where bot commands can be sent
 talk_channels = []  # Array of channels you can earn XP in
 
 xp_per_message = 5  # How much XP you earn per message
@@ -11,8 +11,10 @@ xp_per_message = 5  # How much XP you earn per message
 completed_bar = ":blue_square:"  # Customise the completed bar with any emoji
 uncompleted_bar = ":white_large_square:"  # Customise the un completed bar with any emoji
 
-level_roles = ['']  # Array of roles you can be rewarded for levelling up
-level_roles_num = []  # Rank for each role, in same order as level_roles
+level_roles = ["test1", "test2", "test3"]  # Array of roles you can be rewarded for levelling up
+level_roles_num = [2,3,4]  # Rank for each role, in same order as level_roles
+
+leaderboard_amount = 10  # How many users to be displayed on the leaderboard. Recomended is 10
 
 cluster = MongoClient(
     "mongodb link here - dont forget to insert password and database name!! and remove the <>")
@@ -57,7 +59,7 @@ class levelsys(commands.Cog):
                                 await message.author.add_roles(
                                     discord.utils.get(message.author.guild.roles, name=level_roles[i]))
                                 embed = discord.Embed(
-                                    description=f"{message.author.mention} you have unlocked the **{level_roles}** role!")
+                                    description=f"{message.author.mention} you have unlocked the **{level_roles[i]}** role!")
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
 
@@ -83,7 +85,7 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                embed = discord.Embed(title="{}'s Stats Menu | ".format(ctx.author.name))
+                embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name))
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
@@ -98,7 +100,7 @@ class levelsys(commands.Cog):
         if ctx.channel.id == bot_channel:
             rankings = levelling.find().sort("xp", -1)
             i = 1
-            embed = discord.Embed(title=":trophy: Leaderboard | Top 10")
+            embed = discord.Embed(title=f":trophy: Leaderboard | Top {leaderboard_amount}")
             for x in rankings:
                 try:
                     temp = ctx.guild.get_member(x["id"])
@@ -109,7 +111,7 @@ class levelsys(commands.Cog):
                     i += 1
                 except:
                     pass
-                if i == 10:
+                if i == leaderboard_amount:
                     break
             await ctx.channel.send(embed=embed)
 
