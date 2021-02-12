@@ -37,8 +37,10 @@
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809689498291273758/Capture7.PNG)
 <b> Customisation </b> 
 	 <pre><p> Modern Levels allows you to customise it in a fair quantity of different ways. </p></pre>
+	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742462381457418/Capture8.PNG)
 <b> Leaderboards </b> 
 	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. </p></pre>
+	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742768796598292/unknown.png)
 <b> Level Roles </b> 
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
 
