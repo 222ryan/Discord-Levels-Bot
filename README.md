@@ -13,6 +13,6 @@
 <p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. </p>
 
 
-# Config
+![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <b>.</b> 
 	 <pre><p> Coming Soon. </p></pre>
