@@ -1,5 +1,6 @@
 # The token for your discord bot. NOTE: Do not share this with anyone!
 Bot_Token: 
+
 # The prefix for the bots commands
 Prefix: "!"
 
@@ -10,7 +11,7 @@ bot_channel:
 talk_channels: []
 
 # How much XP you earn per message
-xp_per_message: 5
+xp_per_message: 50
 
 # Customise the Progress Bar emojis on the Stats Menu
 completed_bar: ":blue_square:"
@@ -31,3 +32,9 @@ bot_status_text: "📖 | Modern Levels"
 
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: "ONLINE"
+
+# Set's the level a new user will start with - Recommended: 0 or 1
+starting_level: 0
+
+# Sets the image that displays on the leaderboard embed
+leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png"
