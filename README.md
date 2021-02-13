@@ -15,25 +15,9 @@
 
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
-
-<p> Here is a list of the availiable config options. Configs can be found in config.yml! </p>
-
-<b> bot_channel </b> 
-	 <pre><p> Channel where bot commands can be sent. </p></pre>
-<b> talk_channels </b> 
-	 <pre><p> Array of channels you can earn XP in. </p></pre>
-<b> xp_per_message </b> 
-	 <pre><p> How much XP you earn per message. </p></pre>
-<b> level_roles </b> 
-	 <pre><p> Array of roles you can be rewarded for levelling up. </p></pre>
-<b> level_roles_num </b> 
-	 <pre><p> Rank for each role, in same order as level_roles. </p></pre>
-<b> completed_bar / uncompleted_bar </b> 
-	 <pre><p> Allows you to customise the xp bar on the stats menu. </p></pre>
-<b> leaderboard_amount </b> 
-	 <pre><p> Allows you to set the amount of users displayed on the leaderboard. </p></pre>
-<b> bot_status_text / bot_activity </b> 
-	 <pre><p> Allows you to set a custom status of the bot and set the activity of the bot. </p></pre>
+<p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
+<p> Some of these include changing how the <b>Progress Bar</b> looks, <b>XP</b> per message, bot <b>status</b> and <b>activity</b>. </p>
+<p> There's many more options within the config, and more are being added reguarly! </p>
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
 
