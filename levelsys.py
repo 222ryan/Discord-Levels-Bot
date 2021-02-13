@@ -56,7 +56,7 @@ class levelsys(commands.Cog):
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
 
-    @commands.command()
+    @commands.command(aliases=['r', 'level', 'l', 'stats'])
     async def rank(self, ctx):
         if ctx.channel.id == config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
@@ -88,7 +88,7 @@ class levelsys(commands.Cog):
                 embed.set_thumbnail(url=ctx.message.author.avatar_url)
                 await ctx.channel.send(embed=embed)
 
-    @commands.command()
+    @commands.command(aliases=['lb', 'leader', 'rankings'])
     async def leaderboard(self, ctx):
         if ctx.channel.id == bot_channel:
             rankings = levelling.find().sort("xp", -1)
