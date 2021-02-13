@@ -56,7 +56,7 @@ class levelsys(commands.Cog):
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
 
-    @commands.command(aliases=['r', 'level', 'l', 'stats'])
+    @commands.command(aliases=['r', 'level', 'l', 'stats', 'xp', 'progress'])
     async def rank(self, ctx):
         if ctx.channel.id == config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
@@ -101,7 +101,7 @@ class levelsys(commands.Cog):
                     tempxp = x["xp"]
                     templvl = x["rank"]
                     embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}", inline=False)
-                    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png")
+                    embed.set_thumbnail(url=config['leaderboard_image'])
                     i += 1
                 except:
                     pass
