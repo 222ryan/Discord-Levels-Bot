@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from ruamel.yaml import YAML
 
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
-levelling = cluster["database"]["collection"]  # Example: discord.levelling would be ["discord"]["levelling"]
+levelling = cluster["databasename here"]["collectionsname here"]
 
 yaml = YAML()
 
@@ -108,6 +108,21 @@ class levelsys(commands.Cog):
                 if i == config['leaderboard_amount']:
                     break
             await ctx.channel.send(embed=embed)
+
+    @commands.command()
+    async def help(self, ctx):
+        if config['help_command'] == True:
+            prefix = config['Prefix']
+            top = config['leaderboard_amount']
+            xp = config['xp_per_message']
+
+            embed = discord.Embed(title="**Help Page | :book:**", description="Commands & Bot Settings:")
+            embed.add_field(name="Prefix:", value=f"``{prefix}``")
+            embed.add_field(name="Leaderboard:", value=f"``{prefix}leaderboard`` *Shows the Top {top} users*")
+            embed.add_field(name="Rank:", value=f"``{prefix}rank`` *Shows the Stats Menu for the user*")
+            embed.add_field(name="XP:", value=f"*You will earn ``{xp}xp`` per message*")
+            embed.set_thumbnail(url=ctx.guild.icon_url)
+        await ctx.channel.send(embed=embed)
 
 
 def setup(client):
