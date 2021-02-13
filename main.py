@@ -1,16 +1,18 @@
 from discord.ext import commands
 import discord
+from ruamel.yaml import YAML
 import levelsys
 
-# Config - More options in levelsys.py!
-prefix = "!"  # Sets the bots prefix
-bot_token = ""  # Your discord application token
+yaml = YAML()
+
+with open("./config.yml", "r", encoding="utf-8") as file:
+    config = yaml.load(file)
 
 cogs = [levelsys]
 
-client = commands.Bot(command_prefix=prefix, intents=discord.Intents.all())
+client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.all())
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-client.run(bot_token)
+client.run(config['Bot_Token'])
