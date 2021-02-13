@@ -1,0 +1,25 @@
+# The token for your discord bot. NOTE: Do not share this with anyone!
+Bot_Token: 
+
+# The prefix for the bots commands
+Prefix: "!"
+
+# Channel where bot commands can be sent
+bot_channel: 
+
+# Array of channels you can earn XP in
+talk_channels: []
+
+# How much XP you earn per message
+xp_per_message: 5
+
+# Customise the Progress Bar emojis on the Stats Menu
+completed_bar: ":blue_square:"
+uncompleted_bar: ":white_large_square:"
+
+# Array of roles you can be rewarded for levelling up. Rank for each role, in same order as level_roles
+level_roles: ["test1", "test2", "test3"]
+level_roles_num: [2,3,4]
+
+# Amount of users to be shown on the leaderboard
+leaderboard_amount: 10
