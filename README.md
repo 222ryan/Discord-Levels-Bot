@@ -8,6 +8,8 @@
    <pre><p> <i>pip install dnspython</i></p></pre>
    <pre><p> <i>pip install pymongo</i></p></pre>
    <pre><p> <i>pip install ruamel.yaml</i></p></pre>
+   
+   <p> You can also use the 'install.bat' to quickly install all required dependincies. *Make sure the 'install.bat' is located in the same directory as your project!*
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
@@ -26,7 +28,7 @@
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742462381457418/Capture8.PNG)
 <b> Leaderboards </b> 
 	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. (Customisable in config) </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742768796598292/unknown.png)
+	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810099185188995072/unknown.png)
 <b> Level Roles </b> 
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810070090607099954/unknown.png)
