@@ -1,27 +1,20 @@
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
+from ruamel.yaml import YAML
 
-# Config - More Options in main.py!
-bot_channel =  # Channel where bot commands can be sent
-talk_channels = []  # Array of channels you can earn XP in
+cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
+levelling = cluster["database"]["collection"]  # Example: discord.levelling would be ["discord"]["levelling"]
 
-xp_per_message = 5  # How much XP you earn per message
+yaml = YAML()
 
-completed_bar = ":blue_square:"  # Customise the completed bar with any emoji
-uncompleted_bar = ":white_large_square:"  # Customise the un completed bar with any emoji
+with open("./config.yml", "r", encoding="utf-8") as file:
+    config = yaml.load(file)
 
-level_roles = ["test1", "test2", "test3"]  # Array of roles you can be rewarded for levelling up
-level_roles_num = [2,3,4]  # Rank for each role, in same order as level_roles
-
-leaderboard_amount = 10  # How many users to be displayed on the leaderboard. Recomended is 10
-
-cluster = MongoClient(
-    "mongodb link here - dont forget to insert password and database name!! and remove the <>")
-
-levelling = cluster["databasename here"]["collectionsname here"]
-
-# End of Config
+bot_channel = config['bot_channel']
+talk_channels = config['talk_channels']
+level_roles = config['level_roles']
+level_roles_num = config['level_roles_num']
 
 
 class levelsys(commands.Cog):
@@ -34,14 +27,14 @@ class levelsys(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.channel.id in talk_channels:
+        if message.channel.id in config['talk_channels']:
             stats = levelling.find_one({"id": message.author.id})
             if not message.author.bot:
                 if stats is None:
                     newuser = {"id": message.author.id, "xp": 0, "rank": 1}
                     levelling.insert_one(newuser)
                 else:
-                    xp = stats["xp"] + xp_per_message
+                    xp = stats["xp"] + config['xp_per_message']
                     levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
                     lvl = 0
                     while True:
@@ -65,7 +58,7 @@ class levelsys(commands.Cog):
 
     @commands.command()
     async def rank(self, ctx):
-        if ctx.channel.id == bot_channel:
+        if ctx.channel.id == config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
             if stats is None:
                 embed = discord.Embed(description=":x: You haven't sent any messages!")
@@ -89,7 +82,7 @@ class levelsys(commands.Cog):
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="XP", value=f"{xp}/{int(200 * ((1 / 2) * lvl))}", inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
-                embed.add_field(name="Progress Bar", value=boxes * completed_bar + (20 - boxes) * uncompleted_bar,
+                embed.add_field(name="Progress Bar", value=boxes * config['completed_bar'] + (20 - boxes) * config['uncompleted_bar'],
                                 inline=False)
                 embed.add_field(name=f"Level", value=f"{lvl}", inline=False)
                 embed.set_thumbnail(url=ctx.message.author.avatar_url)
@@ -100,7 +93,8 @@ class levelsys(commands.Cog):
         if ctx.channel.id == bot_channel:
             rankings = levelling.find().sort("xp", -1)
             i = 1
-            embed = discord.Embed(title=f":trophy: Leaderboard | Top {leaderboard_amount}")
+            con = config['leaderboard_amount']
+            embed = discord.Embed(title=f":trophy: Leaderboard | Top {con}")
             for x in rankings:
                 try:
                     temp = ctx.guild.get_member(x["id"])
@@ -111,7 +105,7 @@ class levelsys(commands.Cog):
                     i += 1
                 except:
                     pass
-                if i == leaderboard_amount:
+                if i == config['leaderboard_amount']:
                     break
             await ctx.channel.send(embed=embed)
 
