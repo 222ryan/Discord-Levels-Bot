@@ -6,6 +6,7 @@
 	 <pre><p> <i>pip install discord</i></p></pre>
    <pre><p> <i>pip install dnspython</i></p></pre>
    <pre><p> <i>pip install pymongo</i></p></pre>
+   <pre><p> <i>pip install ruamel.yaml</i></p></pre>
 
 
 
