@@ -31,7 +31,9 @@
 <b> completed_bar / uncompleted_bar </b> 
 	 <pre><p> Allows you to customise the xp bar on the stats menu. </p></pre>
 <b> leaderboard_amount </b> 
-	 <pre><p> Allows you to set the amount of users displayed on the leaderboard </p></pre>
+	 <pre><p> Allows you to set the amount of users displayed on the leaderboard. </p></pre>
+<b> bot_status_text / bot_activity </b> 
+	 <pre><p> Allows you to set a custom status of the bot and set the activity of the bot. </p></pre>
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
 
