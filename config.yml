@@ -33,8 +33,5 @@ bot_status_text: "📖 | Modern Levels"
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: "ONLINE"
 
-# Set's the level a new user will start with - Recommended: 0 or 1
-starting_level: 0
-
 # Sets the image that displays on the leaderboard embed
 leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png"
