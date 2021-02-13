@@ -11,7 +11,7 @@
 
 
 
-<p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. </p>
+<p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
 
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
@@ -42,7 +42,7 @@
 	 <pre><p> Modern Levels allows you to customise it in a fair quantity of different ways. </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742462381457418/Capture8.PNG)
 <b> Leaderboards </b> 
-	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. </p></pre>
+	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. (Customisable in config) </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742768796598292/unknown.png)
 <b> Level Roles </b> 
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
