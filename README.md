@@ -1,18 +1,13 @@
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686343382859826/MOSHED-2021-2-12-7-24-9.gif)
 
 <p><b>Modern Levels</b> is a Discord bot made with <b>python</b>. Need Help? DM Me on Discord: <b>ryann#7322</b></p>
+<p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
 
 <h3>To install <b>Requirements :</b></h3> 
 	 <pre><p> <i>pip install discord</i></p></pre>
    <pre><p> <i>pip install dnspython</i></p></pre>
    <pre><p> <i>pip install pymongo</i></p></pre>
    <pre><p> <i>pip install ruamel.yaml</i></p></pre>
-
-
-
-
-<p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
-
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
