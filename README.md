@@ -50,4 +50,5 @@
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742768796598292/unknown.png)
 <b> Level Roles </b> 
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
+	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810070090607099954/unknown.png)
 
