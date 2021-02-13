@@ -10,7 +10,7 @@ with open("./config.yml", "r", encoding="utf-8") as file:
 
 cogs = [levelsys]
 
-client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.all())
+client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.all(), case_insensitive=True)
 client.remove_command('help')
 
 @client.event
