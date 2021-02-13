@@ -3,7 +3,7 @@
 <p><b>Modern Levels</b> is a Discord bot made with <b>python</b>. Need Help? DM Me on Discord: <b>ryann#7322</b></p>
 
 <h3>To install <b>Requirements :</b></h3> 
-	 <pre><p> <i>pip install discord.py</i></p></pre>
+	 <pre><p> <i>pip install discord</i></p></pre>
    <pre><p> <i>pip install dnspython</i></p></pre>
    <pre><p> <i>pip install pymongo</i></p></pre>
 
