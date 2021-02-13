@@ -44,15 +44,15 @@ class levelsys(commands.Cog):
                     xp -= ((50*((lvl-1)**2))+(50*(lvl-1)))
                     if xp == 0:
                         levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
-                        embed2 = discord.Embed(description=f"{message.author.mention} just reached Level: **{lvl}**")
+                        embed2 = discord.Embed(title=f":tada: **LEVEL UP!**", description=f"{message.author.mention} just reached Level: **{lvl}**")
+                        embed2.add_field(name="XP:", value=f"``{xp}/{int(200 * ((1 / 2) * lvl))}``")
                         embed2.set_thumbnail(url=message.author.avatar_url)
                         await message.channel.send(embed=embed2)
                         for i in range(len(level_roles)):
                             if lvl == level_roles_num[i]:
                                 await message.author.add_roles(
                                     discord.utils.get(message.author.guild.roles, name=level_roles[i]))
-                                embed = discord.Embed(
-                                    description=f"{message.author.mention} you have unlocked the **{level_roles[i]}** role!")
+                                embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**", description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!")
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
 
@@ -122,7 +122,9 @@ class levelsys(commands.Cog):
             embed.add_field(name="Rank:", value=f"``{prefix}rank`` *Shows the Stats Menu for the user*")
             embed.add_field(name="XP:", value=f"*You will earn ``{xp}xp`` per message*")
             embed.set_thumbnail(url=ctx.guild.icon_url)
-        await ctx.channel.send(embed=embed)
+            await ctx.channel.send(embed=embed)
+        else:
+            return
 
 
 def setup(client):
