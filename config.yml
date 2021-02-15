@@ -35,3 +35,9 @@ bot_activity: "ONLINE"
 
 # Sets the image that displays on the leaderboard embed
 leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png"
+
+# Sets aliases for the leaderboard command
+leaderboard_alias: ['lb', 'leader', 'rankings']
+
+# Sets aliases for the rank command
+rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
