@@ -3,11 +3,11 @@ from discord.ext import commands
 from pymongo import MongoClient
 from ruamel.yaml import YAML
 
-cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
-levelling = cluster["databasename here"]["collectionsname here"]
+# MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!*
+cluster = MongoClient("mongodb+srv://kumo:Blueberry69@discordbot.ry2us.mongodb.net/discordbot?retryWrites=true&w=majority")
+levelling = cluster["discord"]["levelling"]
 
 yaml = YAML()
-
 with open("./config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
@@ -56,7 +56,9 @@ class levelsys(commands.Cog):
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
 
-    @commands.command(aliases=['r', 'level', 'l', 'stats', 'xp', 'progress'])
+
+    # Rank Command
+    @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx):
         if ctx.channel.id == config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
@@ -88,7 +90,8 @@ class levelsys(commands.Cog):
                 embed.set_thumbnail(url=ctx.message.author.avatar_url)
                 await ctx.channel.send(embed=embed)
 
-    @commands.command(aliases=['lb', 'leader', 'rankings'])
+    # Leaderboard Command
+    @commands.command(aliases=config['leaderboard_alias'])
     async def leaderboard(self, ctx):
         if ctx.channel.id == bot_channel:
             rankings = levelling.find().sort("xp", -1)
@@ -109,6 +112,7 @@ class levelsys(commands.Cog):
                     break
             await ctx.channel.send(embed=embed)
 
+    # Help Command
     @commands.command()
     async def help(self, ctx):
         if config['help_command'] == True:
