@@ -1,3 +1,5 @@
+# Config Version 1.4 // Requires Levelsys & Main 1.7
+
 # The token for your discord bot. NOTE: Do not share this with anyone!
 Bot_Token: 
 
@@ -11,7 +13,7 @@ bot_channel:
 talk_channels: []
 
 # How much XP you earn per message
-xp_per_message: 50
+xp_per_message: 5
 
 # Customise the Progress Bar emojis on the Stats Menu
 completed_bar: ":blue_square:"
