@@ -9,6 +9,9 @@
    <pre><p> <i>pip install pymongo</i></p></pre>
    <pre><p> <i>pip install ruamel.yaml</i></p></pre>
    
+   Try It Out:
+   ![](https://discord.com/oauth2/authorize?client_id=718284351338708992&scope=bot&permissions=8)
+   
    <p> You can also use the 'install.bat' to quickly install all required dependincies. *Make sure the 'install.bat' is located in the same directory as your project!*
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
