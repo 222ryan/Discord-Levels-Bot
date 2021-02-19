@@ -1,3 +1,5 @@
+# Version 1.7 // REQUIRES CONFIG VERSION 1.4
+
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
@@ -8,7 +10,6 @@ cluster = MongoClient("mongodb link here - dont forget to insert password and da
 levelling = cluster["databasename here"]["collectionsname here"]
 
 yaml = YAML()
-
 with open("./config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
@@ -24,7 +25,7 @@ class levelsys(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print("Online!")
+        print("Loaded LevelSystem!")
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -46,6 +47,7 @@ class levelsys(commands.Cog):
                     if xp == 0:
                         levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
                         embed2 = discord.Embed(title=f":tada: **LEVEL UP!**", description=f"{message.author.mention} just reached Level: **{lvl}**")
+                        print(f"User: {message.author} | Leveled UP To: {lvl}")
                         embed2.add_field(name="XP:", value=f"``{xp}/{int(200 * ((1 / 2) * lvl))}``")
                         embed2.set_thumbnail(url=message.author.avatar_url)
                         await message.channel.send(embed=embed2)
@@ -54,9 +56,9 @@ class levelsys(commands.Cog):
                                 await message.author.add_roles(
                                     discord.utils.get(message.author.guild.roles, name=level_roles[i]))
                                 embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**", description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!")
+                                print(f"User: {message.author} | Unlocked Role: {level_roles[i]}")
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
-
 
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
