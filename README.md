@@ -1,7 +1,5 @@
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686343382859826/MOSHED-2021-2-12-7-24-9.gif)
 
- [Click Here To Try It Out!](https://discord.com/oauth2/authorize?client_id=718284351338708992&scope=bot&permissions=8)
-
 <p><b>Modern Levels</b> is a Discord bot made with <b>python</b>. Need Help? DM Me on Discord: <b>ryann#7322</b></p>
 <p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
 
