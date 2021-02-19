@@ -10,6 +10,7 @@
    <pre><p> <i>pip install ruamel.yaml</i></p></pre>
    
    Try It Out:
+   
    ![](https://discord.com/oauth2/authorize?client_id=718284351338708992&scope=bot&permissions=8)
    
    <p> You can also use the 'install.bat' to quickly install all required dependincies. *Make sure the 'install.bat' is located in the same directory as your project!*
