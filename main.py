@@ -1,3 +1,5 @@
+# Version 1.7 // Requires Config 1.4
+
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 import discord
@@ -17,9 +19,19 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    configactivity = config['bot_activity']
+    print('------')
+    print('Online! Details:')
+    print(f"Bot Username: {client.user.name}")
+    print(f"BotID: {client.user.id}")
+    print('------')
+
+    config_status = config['bot_status_text']
+    config_activity = config['bot_activity']
+    print(f"Set Status: {config_status}")
     activity = discord.Game(name=config['bot_status_text'])
-    await client.change_presence(status=configactivity, activity=activity)
+    print(f"Set Activity: {config_activity}")
+    print("------")
+    await client.change_presence(status=config_activity, activity=activity)
 
 
 @client.event
@@ -30,5 +42,6 @@ async def on_command_error(ctx, error):
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
+
 
 client.run(config['Bot_Token'])
