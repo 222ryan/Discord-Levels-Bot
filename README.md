@@ -3,11 +3,11 @@
 <p><b>Modern Levels</b> is a Discord bot made with <b>python</b>. Need Help? Join the Support Server: https://discord.gg/HwJhy88aGm</p>
 <p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
 
-<h3>To install <b>Requirements :</b></h3> 
-	 <pre><p> <i>pip install discord</i></p></pre>
-   <pre><p> <i>pip install dnspython</i></p></pre>
-   <pre><p> <i>pip install pymongo</i></p></pre>
-   <pre><p> <i>pip install ruamel.yaml</i></p></pre>
+<h3>To Install <b>Requirements:</b></h3> 
+	 <pre><p> <i>Run the included instal.bat!</i></p></pre>
+<h3>Need Help Setting Up <b>MongoDB:</b></h3> 
+	 <pre><p> <i>Join the support server, listed above.</i></p></pre>
+	 
    
    <p> You can also use the 'install.bat' to quickly install all required dependincies. *Make sure the 'install.bat' is located in the same directory as your project!*
 
