@@ -1,5 +1,11 @@
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686343382859826/MOSHED-2021-2-12-7-24-9.gif)
-
+<p align="left">
+  <a href="https://discord.gg/HwJhy88aGm">
+    <img src="https://discordapp.com/api/guilds/809362745354354688/widget.png?style=shield" alt="Discord Server">
+  <a href="https://www.python.org/downloads/">
+    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/Red-Discordbot">
+  </a>
+</p
 <p><b>Modern Levels</b> is a Discord bot made with <b>python</b>. Need Help? Join the Support Server: https://discord.gg/HwJhy88aGm</p>
 <p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
 
