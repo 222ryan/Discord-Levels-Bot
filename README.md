@@ -7,9 +7,10 @@
 	 <pre><p> <i>Run the included instal.bat!</i></p></pre>
 <h3>Need Help Setting Up <b>MongoDB:</b></h3> 
 	 <pre><p> <i>Join the support server, listed above.</i></p></pre>
-	 
+<h3>Discord <b>Intents</b> Error:</h3> 
+	 <pre><p> <i>Go to the discord developer portal, click on your bot then click 'bot' on the left side. Then, go to "Privileged Gateway Intents" and enable both settings.</i></p></pre>
    
-   <p> You can also use the 'install.bat' to quickly install all required dependincies. *Make sure the 'install.bat' is located in the same directory as your project!*
+   <p>*Make sure the 'install.bat' is located in the same directory as your project!*
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
