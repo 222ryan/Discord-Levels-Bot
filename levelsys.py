@@ -1,4 +1,4 @@
-# Version 1.7 // REQUIRES CONFIG VERSION 1.4
+# Version 1.8 // REQUIRES CONFIG VERSION 1.5
 
 import discord
 from discord.ext import commands
@@ -24,16 +24,12 @@ class levelsys(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
-    async def on_ready(self):
-        print("Loaded LevelSystem!")
-
-    @commands.Cog.listener()
     async def on_message(self, message):
         if message.channel.id in config['talk_channels']:
             stats = levelling.find_one({"id": message.author.id})
             if not message.author.bot:
                 if stats is None:
-                    newuser = {"id": message.author.id, "xp": 0, "rank": 1}
+                    newuser = {"id": message.author.id, "tag": message.author.mention, "xp": 0, "rank": 1}
                     levelling.insert_one(newuser)
                 else:
                     xp = stats["xp"] + config['xp_per_message']
@@ -115,6 +111,15 @@ class levelsys(commands.Cog):
                     break
             await ctx.channel.send(embed=embed)
 
+    # Reset Command
+    @commands.command()
+    @commands.has_role(config["admin_role"])
+    async def reset(self, ctx, user):
+        userget = user.replace('!', '')
+        levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
+        embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}")
+        await ctx.send(embed=embed)
+
     # Help Command
     @commands.command()
     async def help(self, ctx):
@@ -123,15 +128,13 @@ class levelsys(commands.Cog):
             top = config['leaderboard_amount']
             xp = config['xp_per_message']
 
-            embed = discord.Embed(title="**Help Page | :book:**", description="Commands & Bot Settings:")
-            embed.add_field(name="Prefix:", value=f"``{prefix}``")
-            embed.add_field(name="Leaderboard:", value=f"``{prefix}leaderboard`` *Shows the Top {top} users*")
+            embed = discord.Embed(title="**Help Page | :book:**", description=f"Commands & Bot Settings. **Prefix**: {prefix}")
+            embed.add_field(name="Leaderboard:", value=f"``{prefix}leaderboard`` *Shows the Top **{top}** users*")
             embed.add_field(name="Rank:", value=f"``{prefix}rank`` *Shows the Stats Menu for the user*")
+            embed.add_field(name="Reset:", value=f"``{prefix}reset <user>`` *Sets a user back to XP: 0 and Level: 1*")
             embed.add_field(name="XP:", value=f"*You will earn ``{xp}xp`` per message*")
             embed.set_thumbnail(url=ctx.guild.icon_url)
             await ctx.channel.send(embed=embed)
-        else:
-            return
 
 
 def setup(client):
