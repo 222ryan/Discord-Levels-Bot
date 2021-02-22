@@ -21,7 +21,7 @@ uncompleted_bar: ":white_large_square:"
 
 # Array of roles you can be rewarded for levelling up. Rank for each role, in same order as level_roles
 level_roles: ["test1", "test2", "test3"]
-level_roles_num: [2,3,4]
+level_roles_num: [1,2,3]
 
 # Amount of users to be shown on the leaderboard
 leaderboard_amount: 10
@@ -33,7 +33,7 @@ help_command: True
 bot_status_text: "📖 | Modern Levels"
 
 # IDLE, DND, ONLINE, OFFLINE
-bot_activity: "ONLINE"
+bot_activity: online
 
 # Sets the image that displays on the leaderboard embed
 leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png"
