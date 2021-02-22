@@ -1,4 +1,4 @@
-# Config Version 1.4 // Requires Levelsys & Main 1.7
+# Config Version 1.5 // Requires Levelsys 1.8 & Main 1.7
 
 # The token for your discord bot. NOTE: Do not share this with anyone!
 Bot_Token: 
@@ -11,6 +11,9 @@ bot_channel:
 
 # Array of channels you can earn XP in
 talk_channels: []
+
+# Admin Role for admin type commands
+admin_role: "🕹️| Admin"
 
 # How much XP you earn per message
 xp_per_message: 5
