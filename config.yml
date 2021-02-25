@@ -1,4 +1,4 @@
-# Config Version 1.6 // Requires Levelsys 1.9 & Main 1.7
+# Config Version 1.7 ALPHA // Requires Levelsys 2.0 ALPHA & Main 1.7
 
 # The token for your discord bot. NOTE: Do not share this with anyone!
 Bot_Token: 
@@ -6,8 +6,8 @@ Bot_Token:
 # The prefix for the bots commands
 Prefix: "!"
 
-# Channel where bot commands can be sent
-bot_channel: 
+# Array of channels where bot commands can be sent
+bot_channel: []
 
 # Array of channels you can earn XP in
 talk_channels: []
