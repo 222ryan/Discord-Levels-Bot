@@ -143,8 +143,6 @@ class levelsys(commands.Cog):
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
-                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}",
-                                    inline=False)
                     embed.set_thumbnail(url=config['leaderboard_image'])
                     i += 1
                 except:
