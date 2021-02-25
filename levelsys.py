@@ -42,7 +42,7 @@ class levelsys(commands.Cog):
                     xp -= ((config['xp_per_level'] / 2 * ((lvl - 1) ** 2)) + (config['xp_per_level'] / 2 * (lvl - 1)))
                     if xp == 0:
                         levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
-                        embed2 = discord.Embed(title=f":tada: **LEVEL UP!**", description=f"{message.author.mention} just reached Level: **{lvl}**")
+                        embed2 = discord.Embed(title=f":tada: **LEVEL UP!**", description=f"{message.author.mention} just reached Level: **{lvl}**", colour=config['embed_colour'])
                         print(f"User: {message.author} | Leveled UP To: {lvl}")
                         embed2.add_field(name="XP:", value=f"``{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}``")
                         embed2.set_thumbnail(url=message.author.avatar_url)
@@ -51,7 +51,7 @@ class levelsys(commands.Cog):
                             if lvl == level_roles_num[i]:
                                 await message.author.add_roles(
                                     discord.utils.get(message.author.guild.roles, name=level_roles[i]))
-                                embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**", description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!")
+                                embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**", description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!", colour=config['embed_colour'])
                                 print(f"User: {message.author} | Unlocked Role: {level_roles[i]}")
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
@@ -62,7 +62,7 @@ class levelsys(commands.Cog):
         if ctx.channel.id in config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
             if stats is None:
-                embed = discord.Embed(description=":x: You haven't sent any messages!")
+                embed = discord.Embed(description=":x: You haven't sent any messages!", colour=config['error_embed_colour'])
                 await ctx.channel.send(embed=embed)
             else:
                 xp = stats["xp"]
@@ -79,7 +79,7 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name))
+                embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name), colour=config['rank_embed_colour'])
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
                 embed.add_field(name="XP", value=f"{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
                                 inline=True)
@@ -98,7 +98,7 @@ class levelsys(commands.Cog):
             rankings = levelling.find().sort("xp", -1)
             i = 1
             con = config['leaderboard_amount']
-            embed = discord.Embed(title=f":trophy: Leaderboard | Top {con}")
+            embed = discord.Embed(title=f":trophy: Leaderboard | Top {con}", colour=config['leaderboard_embed_colour'])
             for x in rankings:
                 try:
                     temp = ctx.guild.get_member(x["id"])
@@ -119,7 +119,7 @@ class levelsys(commands.Cog):
     async def reset(self, ctx, user):
         userget = user.replace('!', '')
         levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
-        embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}")
+        embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}", colour=config['success_embed_colour'])
         await ctx.send(embed=embed)
 
     # Help Command
@@ -130,7 +130,7 @@ class levelsys(commands.Cog):
             top = config['leaderboard_amount']
             xp = config['xp_per_message']
 
-            embed = discord.Embed(title="**Help Page | :book:**", description=f"Commands & Bot Settings. **Prefix**: {prefix}")
+            embed = discord.Embed(title="**Help Page | :book:**", description=f"Commands & Bot Settings. **Prefix**: {prefix}", colour=config["embed_colour"])
             embed.add_field(name="Leaderboard:", value=f"``{prefix}leaderboard`` *Shows the Top **{top}** users*")
             embed.add_field(name="Rank:", value=f"``{prefix}rank`` *Shows the Stats Menu for the user*")
             embed.add_field(name="Reset:", value=f"``{prefix}reset <user>`` *Sets a user back to XP: 0 and Level: 1*")
