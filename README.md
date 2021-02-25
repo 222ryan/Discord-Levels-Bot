@@ -10,7 +10,7 @@
 <p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
 
 <h3>To Install <b>Requirements:</b></h3> 
-	 <pre><p> <i>Run the included instal.bat!</i></p></pre>
+	 <pre><p> <i>Run the included install.bat!</i></p></pre>
 <h3>Need Help Setting Up <b>MongoDB:</b></h3> 
 	 <pre><p> <i>Join the support server, listed above.</i></p></pre>
 <h3>Discord <b>Intents</b> Error:</h3> 
