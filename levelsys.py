@@ -1,4 +1,4 @@
-# Version 2.0 ALPHA // REQUIRES CONFIG VERSION 1.7 ALPHA
+# Version 2.0 // REQUIRES CONFIG VERSION 1.7
 
 # Imports
 import discord
@@ -8,7 +8,7 @@ from ruamel.yaml import YAML
 
 # DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
 mainv = 1.8
-configv = '1.7A'
+configv = 1.7
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!*
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
