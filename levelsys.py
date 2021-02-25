@@ -81,7 +81,7 @@ class levelsys(commands.Cog):
                         break
                 embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name), colour=config['rank_embed_colour'])
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
-                embed.add_field(name="XP", value=f"{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
+                embed.add_field(name="XP", value=f"{xp + config['xp_per_message']}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
                                 inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
                 embed.add_field(name="Progress Bar",
