@@ -12,7 +12,7 @@ configv = '1.7A'
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!*
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
-levelling = cluster["databasename here"]["collectionsname here"]
+levelling = cluster["databasename here"]["collectionsname here"]]
 
 # Reads the config file, no need for changing.
 yaml = YAML()
@@ -129,10 +129,6 @@ class levelsys(commands.Cog):
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
     async def leaderboard(self, ctx):
-        stats = levelling.find_one({"id": ctx.author.id})
-        xp = stats["xp"]
-        if config['Prefix'] in ctx.message.content:
-            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
         if ctx.channel.id in bot_channel:
             rankings = levelling.find().sort("xp", -1)
             i = 1
@@ -143,6 +139,7 @@ class levelsys(commands.Cog):
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
+                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}", inline=False)
                     embed.set_thumbnail(url=config['leaderboard_image'])
                     i += 1
                 except:
