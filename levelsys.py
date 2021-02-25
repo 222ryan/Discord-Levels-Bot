@@ -87,15 +87,10 @@ class levelsys(commands.Cog):
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx):
-        stats = levelling.find_one({"id": ctx.author.id})
-        xp = stats["xp"]
-        if config['Prefix'] in ctx.message.content:
-            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
             if ctx.channel.id in config['bot_channel']:
                 stats = levelling.find_one({"id": ctx.author.id})
                 if stats is None:
-                    embed = discord.Embed(description=":x: You haven't sent any messages!",
-                                        colour=config['error_embed_colour'])
+                    embed = discord.Embed(description=":x: You haven't sent any messages!", colour=config['error_embed_colour'])
                     await ctx.channel.send(embed=embed)
                 else:
                     xp = stats["xp"]
@@ -128,10 +123,6 @@ class levelsys(commands.Cog):
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
     async def leaderboard(self, ctx):
-        stats = levelling.find_one({"id": ctx.author.id})
-        xp = stats["xp"]
-        if config['Prefix'] in ctx.message.content:
-            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
             if ctx.channel.id in bot_channel:
                 rankings = levelling.find().sort("xp", -1)
                 i = 1
