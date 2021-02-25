@@ -1,4 +1,4 @@
-# Version 1.9 // REQUIRES CONFIG VERSION 1.6
+# Version 2.0 ALPHA // REQUIRES CONFIG VERSION 1.7 ALPHA
 
 import discord
 from discord.ext import commands
@@ -59,7 +59,7 @@ class levelsys(commands.Cog):
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx):
-        if ctx.channel.id == config['bot_channel']:
+        if ctx.channel.id in config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
             if stats is None:
                 embed = discord.Embed(description=":x: You haven't sent any messages!")
@@ -81,9 +81,11 @@ class levelsys(commands.Cog):
                         break
                 embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name))
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
-                embed.add_field(name="XP", value=f"{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}", inline=True)
+                embed.add_field(name="XP", value=f"{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
+                                inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
-                embed.add_field(name="Progress Bar", value=boxes * config['completed_bar'] + (20 - boxes) * config['uncompleted_bar'],
+                embed.add_field(name="Progress Bar",
+                                value=boxes * config['completed_bar'] + (20 - boxes) * config['uncompleted_bar'],
                                 inline=False)
                 embed.add_field(name=f"Level", value=f"{lvl}", inline=False)
                 embed.set_thumbnail(url=ctx.message.author.avatar_url)
@@ -92,7 +94,7 @@ class levelsys(commands.Cog):
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
     async def leaderboard(self, ctx):
-        if ctx.channel.id == bot_channel:
+        if ctx.channel.id in bot_channel:
             rankings = levelling.find().sort("xp", -1)
             i = 1
             con = config['leaderboard_amount']
