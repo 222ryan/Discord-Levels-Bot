@@ -1,4 +1,4 @@
-# Config Version 1.5 // Requires Levelsys 1.8 & Main 1.7
+# Config Version 1.6 // Requires Levelsys 1.9 & Main 1.7
 
 # The token for your discord bot. NOTE: Do not share this with anyone!
 Bot_Token: 
@@ -18,13 +18,17 @@ admin_role: "🕹️| Admin"
 # How much XP you earn per message
 xp_per_message: 5
 
+# How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
+# If you decide to change this setting whilst users have xp + a level, it will automatically update their stats.
+xp_per_level: 100
+
 # Customise the Progress Bar emojis on the Stats Menu
 completed_bar: ":blue_square:"
 uncompleted_bar: ":white_large_square:"
 
 # Array of roles you can be rewarded for levelling up. Rank for each role, in same order as level_roles
-level_roles: ["test1", "test2", "test3"]
-level_roles_num: [1,2,3]
+level_roles: ["test1", "test2"]
+level_roles_num: [1, 2]
 
 # Amount of users to be shown on the leaderboard
 leaderboard_amount: 10
