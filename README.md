@@ -11,7 +11,7 @@
 
 <h3>To Install <b>Requirements:</b></h3> 
 	 <pre><p> <i>Run the included install.bat!</i></p></pre>
-<h3>Need Help Setting Up <b>MongoDB:</b></h3> 
+<h3>Need Help Setting Up <b>MongoDB?:</b></h3> 
 	 <pre><p> <i>Join the support server, listed above.</i></p></pre>
 <h3>Discord <b>Intents</b> Error:</h3> 
 	 <pre><p> <i>Go to the discord developer portal, click on your bot then click 'bot' on the left side. Then, go to "Privileged Gateway Intents" and enable both settings.</i></p></pre>
@@ -39,4 +39,6 @@
 <b> Level Roles </b> 
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810070090607099954/unknown.png)
+	 
+<p> This feature list is not up to date! Many more features have been added!
 
