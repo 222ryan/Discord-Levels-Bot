@@ -1,4 +1,4 @@
-# Config Version 1.7 ALPHA // Requires Levelsys 2.0 ALPHA & Main 1.7 - 1.8
+# Config Version 1.7 // Requires Levelsys 2.0 & Main 1.8
 
 
 # Discord Config
@@ -36,8 +36,8 @@ bot_status_text: "📖 | Modern Levels"
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: online
 
-# Role for admin type commands
-admin_role: "🕹️| Admin"
+# Admin Role for admin type commands
+admin_role: "🕹️| ADMIN"
 
 # Embed Colour | Must Be Hex Notation
 embed_colour: 0xFFFFFF
@@ -76,6 +76,6 @@ help_command: True
 
 
 # Do NOT Change!! | Could Cause Errors!!
-levelsys: 2.0A
-config: 1.7A
+levelsys: 2.0
+config: 1.7
 main: 1.8
