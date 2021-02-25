@@ -116,11 +116,18 @@ class levelsys(commands.Cog):
     # Reset Command
     @commands.command()
     @commands.has_role(config["admin_role"])
-    async def reset(self, ctx, user):
-        userget = user.replace('!', '')
-        levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
-        embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}", colour=config['success_embed_colour'])
-        await ctx.send(embed=embed)
+    async def reset(self, ctx, user=None):
+        if user:
+            userget = user.replace('!', '')
+            levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
+            embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}", colour=config['success_embed_colour'])
+            await ctx.send(embed=embed)
+        else:
+            prefix = config['Prefix']
+            embed2 = discord.Embed(title=f":x: RESET USER FAILED", description=f"Couldn't Reset! The User: ``{user}`` doesn't exist or you didn't mention a user!",
+                                  colour=config['error_embed_colour'])
+            embed2.add_field(name="Example:", value=f"``{prefix}reset`` {ctx.message.author.mention}")
+            await ctx.send(embed=embed2)
 
     # Help Command
     @commands.command()
