@@ -78,3 +78,4 @@ help_command: True
 # Do NOT Change!! | Could Cause Errors!!
 levelsys: 2.0A
 config: 1.7A
+main: 1.8
