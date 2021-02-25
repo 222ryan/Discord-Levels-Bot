@@ -12,7 +12,7 @@ configv = '1.7A'
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!*
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
-levelling = cluster["databasename here"]["collectionsname here"]]
+levelling = cluster["databasename here"]["collectionsname here"]
 
 # Reads the config file, no need for changing.
 yaml = YAML()
@@ -87,10 +87,6 @@ class levelsys(commands.Cog):
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx):
-        stats = levelling.find_one({"id": ctx.author.id})
-        xp = stats["xp"]
-        if config['Prefix'] in ctx.message.content:
-            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
         if ctx.channel.id in config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
             if stats is None:
@@ -112,6 +108,8 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
+                    if config['Prefix'] in ctx.message.content:
+                        levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
                 embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name),
                                       colour=config['rank_embed_colour'])
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
