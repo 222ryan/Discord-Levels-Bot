@@ -7,7 +7,7 @@ from pymongo import MongoClient
 from ruamel.yaml import YAML
 
 # DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
-mainv = 1.9
+mainv = 1.8
 configv = '1.7A'
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!*
