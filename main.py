@@ -1,4 +1,4 @@
-# Version 1.8 // Requires Config 1.7A
+# Version 1.8 // Requires Config 1.7
 
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound, MissingRequiredArgument
@@ -7,8 +7,8 @@ from ruamel.yaml import YAML
 import levelsys
 
 # Do Not Change!
-configv = '1.7A'
-levelsysv = '2.0A'
+configv = 1.7
+levelsysv = 2.0
 
 yaml = YAML()
 
@@ -49,6 +49,9 @@ async def on_ready():
     activity = discord.Game(name=config['bot_status_text'])
     print(f"Set Activity: {config_activity}")
     print("------")
+    print(f"LevelSys: {levelsysv}")
+    print(f"Config: {configv}")
+    print(f"Main: 1.8")
 
     await client.change_presence(status=config_activity, activity=activity)
 
