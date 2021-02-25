@@ -1,4 +1,4 @@
-# Config Version 1.7 ALPHA // Requires Levelsys 2.0 ALPHA & Main 1.7
+# Config Version 1.7 ALPHA // Requires Levelsys 2.0 ALPHA & Main 1.7 - 1.8
 
 
 # Discord Config
@@ -36,7 +36,7 @@ bot_status_text: "📖 | Modern Levels"
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: online
 
-# Admin Role for admin type commands
+# Role for admin type commands
 admin_role: "🕹️| Admin"
 
 # Embed Colour | Must Be Hex Notation
@@ -59,7 +59,7 @@ leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/80
 leaderboard_alias: ['lb', 'leader', 'rankings']
 
 # Leaderboard Embed Colour | Must Be Hex Notation
-leaderboard_embed_colour: 0x0000ff
+leaderboard_embed_colour: 0xFFFFFF
 
 
 # Rank Conifg
@@ -67,9 +67,14 @@ leaderboard_embed_colour: 0x0000ff
 rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
 
 # Rank Embed Colour | Must Be Hex Notation
-rank_embed_colour: 0xFFA500
+rank_embed_colour: 0xFFFFFF
 
 
 # Help Config
 # True/False - <prefix>help command
 help_command: True
+
+
+# Do NOT Change!! | Could Cause Errors!!
+levelsys: 2.0A
+config: 1.7A
