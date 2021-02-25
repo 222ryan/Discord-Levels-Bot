@@ -20,7 +20,7 @@
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
-<p> Some of these include changing how the <b>Progress Bar</b> looks, <b>XP</b> per message, bot <b>status</b> and <b>activity</b>. </p>
+<p> Some of these include changing how the <b>Progress Bar</b> looks, <b>XP</b> per message,<b>XP</b> per level, bot <b>status</b> and <b>activity</b>. </p>
 <p> There's many more options within the config, and more are being added reguarly! </p>
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
