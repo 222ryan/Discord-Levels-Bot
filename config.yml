@@ -4,6 +4,7 @@
 # Discord Config
 # The token for your discord bot. NOTE: Do not share this with anyone!
 Bot_Token: 
+
 # The prefix for the bots commands
 Prefix: "!"
 
@@ -12,9 +13,6 @@ bot_channel: []
 
 # Array of channels you can earn XP in
 talk_channels: []
-
-# Admin Role for admin type commands
-admin_role: "🕹️| Admin"
 
 
 # Bot Config
@@ -38,6 +36,17 @@ bot_status_text: "📖 | Modern Levels"
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: online
 
+# Admin Role for admin type commands
+admin_role: "🕹️| Admin"
+
+# Embed Colour | Must Be Hex Notation
+embed_colour: 0xFFFFFF
+
+# Error Embed Colour | Must Be Hex Notation
+error_embed_colour: 0xFF0000
+
+# Success Embed Colour | Mist Be Hex Notation
+success_embed_colour: 0x00FF00
 
 # Leaderboard Config
 # Amount of users to be shown on the leaderboard
@@ -49,10 +58,16 @@ leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/80
 # Sets aliases for the leaderboard command
 leaderboard_alias: ['lb', 'leader', 'rankings']
 
+# Leaderboard Embed Colour | Must Be Hex Notation
+leaderboard_embed_colour: 0x0000ff
+
 
 # Rank Conifg
 # Sets aliases for the rank command
 rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
+
+# Rank Embed Colour | Must Be Hex Notation
+rank_embed_colour: 0xFFA500
 
 
 # Help Config
