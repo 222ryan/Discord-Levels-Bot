@@ -1,18 +1,41 @@
 # Version 2.0 ALPHA // REQUIRES CONFIG VERSION 1.7 ALPHA
 
+# Imports
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
 from ruamel.yaml import YAML
 
+# DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
+mainv = 1.9
+configv = '1.7A'
+
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!*
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
 levelling = cluster["databasename here"]["collectionsname here"]
 
+# Reads the config file, no need for changing.
 yaml = YAML()
 with open("./config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
+# DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
+if config['main'] != mainv:
+    print("------")
+    print("Main Is Outdated!")
+    print("Please Update!")
+    print("------")
+    exit()
+
+# DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
+if config['config'] != configv:
+    print("------")
+    print("Config Is Outdated!")
+    print("Please Update!")
+    print("------")
+    exit()
+
+# Some config options which need to be stored here, again, no need for altering.
 bot_channel = config['bot_channel']
 talk_channels = config['talk_channels']
 level_roles = config['level_roles']
@@ -42,16 +65,21 @@ class levelsys(commands.Cog):
                     xp -= ((config['xp_per_level'] / 2 * ((lvl - 1) ** 2)) + (config['xp_per_level'] / 2 * (lvl - 1)))
                     if xp == 0:
                         levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
-                        embed2 = discord.Embed(title=f":tada: **LEVEL UP!**", description=f"{message.author.mention} just reached Level: **{lvl}**", colour=config['embed_colour'])
+                        embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
+                                               description=f"{message.author.mention} just reached Level: **{lvl}**",
+                                               colour=config['embed_colour'])
                         print(f"User: {message.author} | Leveled UP To: {lvl}")
-                        embed2.add_field(name="XP:", value=f"``{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}``")
+                        embed2.add_field(name="XP:",
+                                         value=f"``{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}``")
                         embed2.set_thumbnail(url=message.author.avatar_url)
                         await message.channel.send(embed=embed2)
                         for i in range(len(level_roles)):
                             if lvl == level_roles_num[i]:
                                 await message.author.add_roles(
                                     discord.utils.get(message.author.guild.roles, name=level_roles[i]))
-                                embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**", description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!", colour=config['embed_colour'])
+                                embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**",
+                                                      description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!",
+                                                      colour=config['embed_colour'])
                                 print(f"User: {message.author} | Unlocked Role: {level_roles[i]}")
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
@@ -62,7 +90,8 @@ class levelsys(commands.Cog):
         if ctx.channel.id in config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
             if stats is None:
-                embed = discord.Embed(description=":x: You haven't sent any messages!", colour=config['error_embed_colour'])
+                embed = discord.Embed(description=":x: You haven't sent any messages!",
+                                      colour=config['error_embed_colour'])
                 await ctx.channel.send(embed=embed)
             else:
                 xp = stats["xp"]
@@ -72,16 +101,18 @@ class levelsys(commands.Cog):
                     if xp < ((config['xp_per_level'] / 2 * (lvl ** 2)) + (config['xp_per_level'] / 2 * lvl)):
                         break
                     lvl += 1
-                xp -= ((config['xp_per_level'] / 2 * (lvl - 1)**2) + (config['xp_per_level'] / 2 * (lvl - 1)))
+                xp -= ((config['xp_per_level'] / 2 * (lvl - 1) ** 2) + (config['xp_per_level'] / 2 * (lvl - 1)))
                 boxes = int((xp / (config['xp_per_level'] * 2 * ((1 / 2) * lvl))) * 20)
                 rankings = levelling.find().sort("xp", -1)
                 for x in rankings:
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name), colour=config['rank_embed_colour'])
+                embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name),
+                                      colour=config['rank_embed_colour'])
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
-                embed.add_field(name="XP", value=f"{xp + config['xp_per_message']}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
+                embed.add_field(name="XP",
+                                value=f"{xp + config['xp_per_message']}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
                                 inline=True)
                 embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
                 embed.add_field(name="Progress Bar",
@@ -104,7 +135,8 @@ class levelsys(commands.Cog):
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
-                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}", inline=False)
+                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}",
+                                    inline=False)
                     embed.set_thumbnail(url=config['leaderboard_image'])
                     i += 1
                 except:
@@ -120,12 +152,14 @@ class levelsys(commands.Cog):
         if user:
             userget = user.replace('!', '')
             levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
-            embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}", colour=config['success_embed_colour'])
+            embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}",
+                                  colour=config['success_embed_colour'])
             await ctx.send(embed=embed)
         else:
             prefix = config['Prefix']
-            embed2 = discord.Embed(title=f":x: RESET USER FAILED", description=f"Couldn't Reset! The User: ``{user}`` doesn't exist or you didn't mention a user!",
-                                  colour=config['error_embed_colour'])
+            embed2 = discord.Embed(title=f":x: RESET USER FAILED",
+                                   description=f"Couldn't Reset! The User: ``{user}`` doesn't exist or you didn't mention a user!",
+                                   colour=config['error_embed_colour'])
             embed2.add_field(name="Example:", value=f"``{prefix}reset`` {ctx.message.author.mention}")
             await ctx.send(embed=embed2)
 
@@ -137,7 +171,9 @@ class levelsys(commands.Cog):
             top = config['leaderboard_amount']
             xp = config['xp_per_message']
 
-            embed = discord.Embed(title="**Help Page | :book:**", description=f"Commands & Bot Settings. **Prefix**: {prefix}", colour=config["embed_colour"])
+            embed = discord.Embed(title="**Help Page | :book:**",
+                                  description=f"Commands & Bot Settings. **Prefix**: {prefix}",
+                                  colour=config["embed_colour"])
             embed.add_field(name="Leaderboard:", value=f"``{prefix}leaderboard`` *Shows the Top **{top}** users*")
             embed.add_field(name="Rank:", value=f"``{prefix}rank`` *Shows the Stats Menu for the user*")
             embed.add_field(name="Reset:", value=f"``{prefix}reset <user>`` *Sets a user back to XP: 0 and Level: 1*")
