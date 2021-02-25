@@ -162,7 +162,7 @@ class levelsys(commands.Cog):
             levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
             if user:
                 userget = user.replace('!', '')
-                levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": - config['xp_per_message']}})
+                levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
                 embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}", colour=config['success_embed_colour'])
                 await ctx.send(embed=embed)
             else:
