@@ -40,5 +40,5 @@
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810070090607099954/unknown.png)
 	 
-<p> This feature list is not up to date! Many more features have been added!
+<p> This feature list is not up to date! Many more features have been added! Check <b>config.yml</b> for all features!
 
