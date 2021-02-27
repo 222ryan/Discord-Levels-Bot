@@ -6,9 +6,6 @@ from discord.ext import commands
 from pymongo import MongoClient
 from ruamel.yaml import YAML
 
-# DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
-mainv = 1.8
-configv = 1.7
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!*
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
@@ -19,21 +16,6 @@ yaml = YAML()
 with open("./config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
-# DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
-if config['main'] != mainv:
-    print("------")
-    print("Main Is Outdated!")
-    print("Please Update!")
-    print("------")
-    exit()
-
-# DO NOT TOUCH!! | WILL CAUSE POTENTIAL ERRORS
-if config['config'] != configv:
-    print("------")
-    print("Config Is Outdated!")
-    print("Please Update!")
-    print("------")
-    exit()
 
 # Some config options which need to be stored here, again, no need for altering.
 bot_channel = config['bot_channel']
@@ -127,6 +109,10 @@ class levelsys(commands.Cog):
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
     async def leaderboard(self, ctx):
+        if config['Prefix'] in ctx.message.content:
+            stats = levelling.find_one({"id": ctx.author.id})
+            xp = stats["xp"]
+            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
         if ctx.channel.id in bot_channel:
             rankings = levelling.find().sort("xp", -1)
             i = 1
@@ -171,6 +157,10 @@ class levelsys(commands.Cog):
     # Help Command
     @commands.command()
     async def help(self, ctx):
+        if config['Prefix'] in ctx.message.content:
+            stats = levelling.find_one({"id": ctx.author.id})
+            xp = stats["xp"]
+            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
         if config['help_command'] == True:
             prefix = config['Prefix']
             top = config['leaderboard_amount']
