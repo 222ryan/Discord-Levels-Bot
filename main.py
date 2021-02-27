@@ -1,4 +1,4 @@
-# Version 1.8 // Requires Config 1.7A
+# Version 1.8 // Requires Config 1.7
 
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound, MissingRequiredArgument
