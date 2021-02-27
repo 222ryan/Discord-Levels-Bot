@@ -1,4 +1,4 @@
-# Version 2.0 // REQUIRES CONFIG VERSION 1.7
+# Version 2.1 // REQUIRES CONFIG VERSION 1.7
 
 # Imports
 import discord
