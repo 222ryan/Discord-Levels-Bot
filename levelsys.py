@@ -1,4 +1,4 @@
-# Version 2.1 // REQUIRES CONFIG VERSION 1.7
+# Version 2.0 // REQUIRES CONFIG VERSION 1.7
 
 # Imports
 import discord
@@ -29,16 +29,16 @@ class levelsys(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
-    async def on_message(self, message):
-        if message.channel.id in config['talk_channels']:
-            stats = levelling.find_one({"id": message.author.id})
-            if not message.author.bot:
+    async def on_message(self, ctx):
+        if ctx.channel.id in config['talk_channels']:
+            stats = levelling.find_one({"id": ctx.author.id, })
+            if not ctx.author.bot:
                 if stats is None:
-                    newuser = {"id": message.author.id, "tag": message.author.mention, "xp": 0, "rank": 1}
+                    newuser = {"id": ctx.author.id, "tag": ctx.author.mention, "xp": 0, "rank": 1}
                     levelling.insert_one(newuser)
                 else:
                     xp = stats["xp"] + config['xp_per_message']
-                    levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
+                    levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp}})
                     lvl = 0
                     while True:
                         if xp < ((config['xp_per_level'] / 2 * (lvl ** 2)) + (config['xp_per_level'] / 2 * lvl)):
@@ -46,29 +46,33 @@ class levelsys(commands.Cog):
                         lvl += 1
                     xp -= ((config['xp_per_level'] / 2 * ((lvl - 1) ** 2)) + (config['xp_per_level'] / 2 * (lvl - 1)))
                     if xp == 0:
-                        levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
+                        levelling.update_one({"id": ctx.author.id}, {"$set": {"rank": lvl}})
                         embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
-                                               description=f"{message.author.mention} just reached Level: **{lvl}**",
+                                               description=f"{ctx.author.mention} just reached Level: **{lvl}**",
                                                colour=config['embed_colour'])
-                        print(f"User: {message.author} | Leveled UP To: {lvl}")
+                        print(f"User: {ctx.author} | Leveled UP To: {lvl}")
                         embed2.add_field(name="XP:",
                                          value=f"``{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}``")
-                        embed2.set_thumbnail(url=message.author.avatar_url)
-                        await message.channel.send(embed=embed2)
+                        embed2.set_thumbnail(url=ctx.author.avatar_url)
+                        await ctx.channel.send(embed=embed2)
                         for i in range(len(level_roles)):
                             if lvl == level_roles_num[i]:
-                                await message.author.add_roles(
-                                    discord.utils.get(message.author.guild.roles, name=level_roles[i]))
+                                await ctx.author.add_roles(
+                                    discord.utils.get(ctx.author.guild.roles, name=level_roles[i]))
                                 embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**",
-                                                      description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!",
+                                                      description=f"{ctx.author.mention} has unlocked the **{level_roles[i]}** role!",
                                                       colour=config['embed_colour'])
-                                print(f"User: {message.author} | Unlocked Role: {level_roles[i]}")
-                                embed.set_thumbnail(url=message.author.avatar_url)
-                                await message.channel.send(embed=embed)
+                                print(f"User: {ctx.author} | Unlocked Role: {level_roles[i]}")
+                                embed.set_thumbnail(url=ctx.author.avatar_url)
+                                await ctx.channel.send(embed=embed)
 
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx):
+        if config['Prefix'] in ctx.message.content:
+            stats = levelling.find_one({"id": ctx.author.id})
+            xp = stats["xp"]
+            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
         if ctx.channel.id in config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
             if stats is None:
@@ -90,8 +94,6 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                    if config['Prefix'] in ctx.message.content:
-                        levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
                 embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name),
                                       colour=config['rank_embed_colour'])
                 embed.add_field(name="Name", value=ctx.author.mention, inline=True)
@@ -123,7 +125,7 @@ class levelsys(commands.Cog):
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
-                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}", inline=False)
+                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp + config['xp_per_message']}", inline=False)
                     embed.set_thumbnail(url=config['leaderboard_image'])
                     i += 1
                 except:
@@ -169,10 +171,10 @@ class levelsys(commands.Cog):
             embed = discord.Embed(title="**Help Page | :book:**",
                                   description=f"Commands & Bot Settings. **Prefix**: {prefix}",
                                   colour=config["embed_colour"])
-            embed.add_field(name="Leaderboard:", value=f"``{prefix}leaderboard`` *Shows the Top **{top}** users*")
-            embed.add_field(name="Rank:", value=f"``{prefix}rank`` *Shows the Stats Menu for the user*")
-            embed.add_field(name="Reset:", value=f"``{prefix}reset <user>`` *Sets a user back to XP: 0 and Level: 1*")
-            embed.add_field(name="XP:", value=f"*You will earn ``{xp}xp`` per message*")
+            embed.add_field(name="Leaderboard:", value=f"``{prefix}Leaderboard`` *Shows the Top: **{top}** Users*")
+            embed.add_field(name="Rank:", value=f"``{prefix}Rank`` *Shows the Stats Menu for the User*")
+            embed.add_field(name="Reset:", value=f"``{prefix}Reset <user>`` *Sets a user back to: ``{config['xp_per_message']}xp`` & Level: ``1``*")
+            embed.add_field(name="Other:", value=f"*You will earn ``{xp}xp`` per message | XP Per Level Is: ``{config['xp_per_level']}xp``*")
             embed.set_thumbnail(url=ctx.guild.icon_url)
             await ctx.channel.send(embed=embed)
 
