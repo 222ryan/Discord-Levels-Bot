@@ -1,4 +1,4 @@
-# Version 2.0 // REQUIRES CONFIG VERSION 1.7
+# Version 2.2 // REQUIRES CONFIG VERSION 1.7
 
 # Imports
 import discord
@@ -47,24 +47,26 @@ class levelsys(commands.Cog):
                     xp -= ((config['xp_per_level'] / 2 * ((lvl - 1) ** 2)) + (config['xp_per_level'] / 2 * (lvl - 1)))
                     if xp == 0:
                         levelling.update_one({"id": ctx.author.id}, {"$set": {"rank": lvl}})
-                        embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
-                                               description=f"{ctx.author.mention} just reached Level: **{lvl}**",
-                                               colour=config['embed_colour'])
-                        print(f"User: {ctx.author} | Leveled UP To: {lvl}")
-                        embed2.add_field(name="XP:",
-                                         value=f"``{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}``")
-                        embed2.set_thumbnail(url=ctx.author.avatar_url)
-                        await ctx.channel.send(embed=embed2)
+                        if config['show_levelup_message'] == True:
+                            embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
+                                                description=f"{ctx.author.mention} just reached Level: **{lvl}**",
+                                                colour=config['embed_colour'])
+                            print(f"User: {ctx.author} | Leveled UP To: {lvl}")
+                            embed2.add_field(name="XP:",
+                                            value=f"``{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}``")
+                            embed2.set_thumbnail(url=ctx.author.avatar_url)
+                            await ctx.channel.send(embed=embed2)
                         for i in range(len(level_roles)):
                             if lvl == level_roles_num[i]:
                                 await ctx.author.add_roles(
                                     discord.utils.get(ctx.author.guild.roles, name=level_roles[i]))
-                                embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**",
-                                                      description=f"{ctx.author.mention} has unlocked the **{level_roles[i]}** role!",
-                                                      colour=config['embed_colour'])
-                                print(f"User: {ctx.author} | Unlocked Role: {level_roles[i]}")
-                                embed.set_thumbnail(url=ctx.author.avatar_url)
-                                await ctx.channel.send(embed=embed)
+                                if config['show_newrole_message'] == True:
+                                    embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**",
+                                                        description=f"{ctx.author.mention} has unlocked the **{level_roles[i]}** role!",
+                                                        colour=config['embed_colour'])
+                                    print(f"User: {ctx.author} | Unlocked Role: {level_roles[i]}")
+                                    embed.set_thumbnail(url=ctx.author.avatar_url)
+                                    await ctx.channel.send(embed=embed)
 
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
@@ -130,7 +132,7 @@ class levelsys(commands.Cog):
                     i += 1
                 except:
                     pass
-                if i == config['leaderboard_amount']:
+                if i == config['leaderboard_amount'] + 1:
                     break
             await ctx.channel.send(embed=embed)
 
