@@ -174,10 +174,12 @@ class levelsys(commands.Cog):
             embed = discord.Embed(title="**Help Page | :book:**",
                                   description=f"Commands & Bot Settings. **Prefix**: {prefix}",
                                   colour=config["embed_colour"])
-            embed.add_field(name="Leaderboard:", value=f"``{prefix}leaderboard`` *Shows the Top **{top}** users*")
-            embed.add_field(name="Rank:", value=f"``{prefix}rank`` *Shows the Stats Menu for the user*")
-            embed.add_field(name="Reset:", value=f"``{prefix}reset <user>`` *Sets a user back to XP: 0 and Level: 1*")
-            embed.add_field(name="XP:", value=f"*You will earn ``{xp}xp`` per message*")
+            embed.add_field(name="Leaderboard:", value=f"``{prefix}Leaderboard`` *Shows the Top: **{top}** Users*")
+            embed.add_field(name="Rank:", value=f"``{prefix}Rank`` *Shows the Stats Menu for the User*")
+            embed.add_field(name="Reset:",
+                            value=f"``{prefix}Reset <user>`` *Sets a user back to: ``{config['xp_per_message']}xp`` & Level: ``1``*")
+            embed.add_field(name="Other:",
+                            value=f"*You will earn ``{xp}xp`` per message | XP Per Level Is: ``{config['xp_per_level']}xp``*")
             embed.set_thumbnail(url=ctx.guild.icon_url)
             await ctx.channel.send(embed=embed)
 
