@@ -1,4 +1,4 @@
-# Config Version 1.7 // Requires Levelsys 2.1 & Main 1.8
+# Config Version 1.7 ALPHA // Requires Levelsys 2.0 ALPHA & Main 1.7 - 1.8
 
 
 # Discord Config
@@ -17,7 +17,7 @@ talk_channels: []
 
 # Bot Config
 # How much XP you earn per message
-xp_per_message: 5
+xp_per_message: 10
 
 # How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
 xp_per_level: 100
@@ -38,6 +38,12 @@ bot_activity: online
 
 # Admin Role for admin type commands
 admin_role: "🕹️| Admin"
+
+# Sends a level up message if a user has reached the set amount of xp
+show_levelup_message: True
+
+# sends a message if a user has unlocked a new role from levelling up
+show_newrole_message: True
 
 
 # Leaderboard Config
