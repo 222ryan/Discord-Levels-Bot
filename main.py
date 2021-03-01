@@ -1,7 +1,7 @@
 # Version 1.8 // Requires Config 1.7
 
 from discord.ext import commands
-from discord.ext.commands import CommandNotFound, MissingRequiredArgument
+from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError
 import discord
 from ruamel.yaml import YAML
 import levelsys
@@ -20,7 +20,7 @@ client.remove_command('help')
 @client.event
 async def on_ready():
     print('------')
-    print('Online! Details:')
+    print('Logged In:')
     print(f"Bot Username: {client.user.name}")
     print(f"BotID: {client.user.id}")
     print('------')
@@ -40,6 +40,8 @@ async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
         return
     if isinstance(error, MissingRequiredArgument):
+        return
+    if isinstance(error, CommandInvokeError):
         return
     raise error
 
