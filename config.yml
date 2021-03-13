@@ -75,7 +75,7 @@ embed_colour: 0xFFFFFF
 # Error Embed Colour | Must Be Hex Notation
 error_embed_colour: 0xFF0000
 
-# Success Embed Colour | Mist Be Hex Notation
+# Success Embed Colour | Must Be Hex Notation
 success_embed_colour: 0x00FF00
 
 
