@@ -6,6 +6,7 @@ from discord.ext.commands import CommandNotFound, MissingRequiredArgument, Comma
 import discord
 from ruamel.yaml import YAML
 import levelsys
+import logging
 
 yaml = YAML()
 
@@ -19,20 +20,23 @@ cogs = [levelsys]
 client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.all(), case_insensitive=True)
 client.remove_command('help')
 
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='logs.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
+
 
 @client.event  # On Bot Startup, Will send some details about the bot, feel free to remove the print messages, but keep everything else.
 async def on_ready():
-    print('------')
-    print('Logged In:')
-    print(f"Bot Username: {client.user.name}")
-    print(f"BotID: {client.user.id}")
-    print('------')
-
     config_status = config['bot_status_text']
     config_activity = config['bot_activity']
-    print(f"Set Status: {config_status}")
     activity = discord.Game(name=config['bot_status_text'])
-    print(f"Set Activity: {config_activity}")
+    print('------')
+    print('Logged In:')
+    print(f"Bot Username: {client.user.name}\nBotID: {client.user.id}")
+    print('------')
+    print(f"Set Status To: {config_status}\nSet Activity To: {config_activity}")
     print("------")
 
     await client.change_presence(status=config_activity, activity=activity)
