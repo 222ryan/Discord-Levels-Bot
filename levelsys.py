@@ -71,8 +71,6 @@ class levelsys(commands.Cog):
     async def rank(self, ctx):
         if ctx.channel.id in config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
-            xp = stats["xp"]
-            levelling.update_one({"id": ctx.message.author.id}, {"$set": {"xp": xp - config['xp_per_message']}})
             if stats is None:
                 embed = discord.Embed(description=":x: You haven't sent any messages!",
                                       colour=config['error_embed_colour'])
