@@ -1,4 +1,4 @@
-# Version 1.8 // Requires Config 1.7
+# Version 2.5
 
 # Imports
 from discord.ext import commands
@@ -8,9 +8,8 @@ from ruamel.yaml import YAML
 import levelsys
 import logging
 
-yaml = YAML()
-
 # Opens the config and reads it, no need for changes unless you'd like to change the library (no need to do so unless having issues with ruamel)
+yaml = YAML()
 with open("./config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
@@ -28,7 +27,7 @@ if config['enable_log'] is True:
     logger.addHandler(handler)
 
 
-@client.event  # On Bot Startup, Will send some details about the bot, feel free to remove the print messages, but keep everything else.
+@client.event  # On Bot Startup, Will send some details about the bot and sets it's activity and status. Feel free to remove the print messages, but keep everything else.
 async def on_ready():
     config_status = config['bot_status_text']
     config_activity = config['bot_activity']
@@ -39,11 +38,10 @@ async def on_ready():
     print('------')
     print(f"Set Status To: {config_status}\nSet Activity To: {config_activity}")
     print("------")
-
     await client.change_presence(status=config_activity, activity=activity)
 
 
-@client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send!)
+@client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features (Don't forget to re-add)!)
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
         return
@@ -59,3 +57,5 @@ for i in range(len(cogs)):
 
 
 client.run(config['Bot_Token'])
+
+# End Of Main
