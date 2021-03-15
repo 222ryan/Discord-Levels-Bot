@@ -1,6 +1,3 @@
-# Config Version 1.7 ALPHA // Requires Levelsys 2.0 ALPHA & Main 1.7 - 1.8
-
-
 # Discord Config
 # The token for your discord bot. NOTE: Do not share this with anyone!
 Bot_Token: 
@@ -8,15 +5,14 @@ Bot_Token:
 # The prefix for the bots commands
 Prefix: "!"
 
-# Array of channels where bot commands can be sent
+# Array of channels where bot commands can be sent (*SEPARATED BY COMAS, MUST USE CHANNELS ID!!)
 bot_channel: []
 
-# Array of channels you can earn XP in
+# Array of channels you can earn XP in (*SEPARATED BY COMAS, MUST USE CHANNELS ID!!)
 talk_channels: []
 
 # Enable the discord logging file to logs.log
 enable_log: True
-
 
 # Bot Config
 # How much XP you earn per message
@@ -25,13 +21,13 @@ xp_per_message: 10
 # How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
 xp_per_level: 100
 
-# Customise the Progress Bar emojis on the Stats Menu
-completed_bar: ":blue_square:"
-uncompleted_bar: ":white_large_square:"
+# Customise the Progress Bar emojis on the Stats Menu (Text will work too, if you want that?)
+completed_bar: ":white_large_square:"
+uncompleted_bar: ":black_large_square:"
 
-# Array of roles you can be rewarded for levelling up. Rank for each role, in same order as level_roles
-level_roles: ["test1", "test2"]
-level_roles_num: [1, 2]
+# Array of roles you can be rewarded for levelling up. Rank for each role, in same order as level_roles. *Case sensitive*
+level_roles: ["Role1", "Role2", "Role3"]
+level_roles_num: [1, 2, 3]
 
 # Set what the bot is currently playing
 bot_status_text: "📖 | Modern Levels"
@@ -39,8 +35,8 @@ bot_status_text: "📖 | Modern Levels"
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: online
 
-# Admin Role for admin type commands
-admin_role: "🕹️| Admin"
+# Admin Role for admin type commands - CASE SENSITIVE
+admin_role: "Admin"
 
 # Sends a level up message if a user has reached the set amount of xp
 show_levelup_message: True
@@ -85,5 +81,9 @@ success_embed_colour: 0x00FF00
 # Help Config
 # True/False - <prefix>help command
 help_command: True
+
+
+# End Of Config
+
 
 
