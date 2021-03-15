@@ -14,6 +14,9 @@ bot_channel: []
 # Array of channels you can earn XP in
 talk_channels: []
 
+# Enable the discord logging file to logs.log
+enable_log: True
+
 
 # Bot Config
 # How much XP you earn per message
