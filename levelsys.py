@@ -1,4 +1,4 @@
-# Version 2.4 // REQUIRES CONFIG VERSION 1.7
+# Version 2.5
 
 # Imports
 import discord
@@ -35,13 +35,8 @@ class levelsys(commands.Cog):
                     newuser = {"id": message.author.id, "tag": message.author.mention, "xp": 0, "rank": 1}
                     levelling.insert_one(newuser)
                 else:
-                    if config['Prefix'] in message.content:
-                        stats = levelling.find_one({"id": message.author.id})
-                        xp = stats["xp"] - config['xp_per_message'] + config['xp_per_message']
-                        levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
-                    else:
-                        xp = stats["xp"] + config['xp_per_message']
-                        levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
+                    xp = stats["xp"] + config['xp_per_message']
+                    levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
                     lvl = 0
                     while True:
                         if xp < ((config['xp_per_level'] / 2 * (lvl ** 2)) + (config['xp_per_level'] / 2 * lvl)):
@@ -49,13 +44,14 @@ class levelsys(commands.Cog):
                         lvl += 1
                     xp -= ((config['xp_per_level'] / 2 * ((lvl - 1) ** 2)) + (config['xp_per_level'] / 2 * (lvl - 1)))
                     if xp == 0:
+                        levelling.update_one({"id": message.author.id}, {"$set": {"rank": + config['xp_per_message']}})
                         embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
                                                description=f"{message.author.mention} just reached Level: **{lvl}**",
                                                colour=config['embed_colour'])
                         levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
                         print(f"User: {message.author} | Leveled UP To: {lvl}")
-                        embed2.add_field(name="XP:",
-                                         value=f"``{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}``")
+                        embed2.add_field(name="Next Level:",
+                                         value=f"``{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp``")
                         embed2.set_thumbnail(url=message.author.avatar_url)
                         await message.channel.send(embed=embed2)
                         for i in range(len(level_roles)):
@@ -68,6 +64,8 @@ class levelsys(commands.Cog):
                                 print(f"User: {message.author} | Unlocked Role: {level_roles[i]}")
                                 embed.set_thumbnail(url=message.author.avatar_url)
                                 await message.channel.send(embed=embed)
+
+# WARNING:: DUE TO AN ISSUE, RANK COMMAND WILL GRANT XP UNTIL A FIX GETS PUT IN PLACE! If you find a working method, please let me know!
 
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
@@ -114,7 +112,7 @@ class levelsys(commands.Cog):
             rankings = levelling.find().sort("xp", -1)
             stats = levelling.find_one({"id": ctx.author.id})
             xp = stats["xp"] - config['xp_per_message']
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message']}})
+            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp - config['xp_per_message'] + config['xp_per_message']}})
             i = 1
             con = config['leaderboard_amount']
             embed = discord.Embed(title=f":trophy: Leaderboard | Top {con}", colour=config['leaderboard_embed_colour'])
@@ -138,7 +136,7 @@ class levelsys(commands.Cog):
     async def reset(self, ctx, user=None):
         stats = levelling.find_one({"id": ctx.author.id})
         xp = stats["xp"] - config['xp_per_message']
-        levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message']}})
+        levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message'] - config['xp_per_message']}})
         if user:
             userget = user.replace('!', '')
             levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
@@ -159,7 +157,7 @@ class levelsys(commands.Cog):
         if config['help_command'] is True:
             stats = levelling.find_one({"id": ctx.author.id})
             xp = stats["xp"] - config['xp_per_message']
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message']}})
+            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message'] - config['xp_per_message']}})
             prefix = config['Prefix']
             top = config['leaderboard_amount']
             xp = config['xp_per_message']
