@@ -50,9 +50,10 @@ async def on_member_join(member):
         embed.set_author(name=member.name, icon_url=member.avatar_url)
         embed.set_thumbnail(url=member.guild.icon_url)
         await channel.send(embed=embed)
-        rank = discord.utils.get(member.guild.roles, name=config['on_join_role'])
-        await member.add_roles(rank)
-        print(f"{member} was given the {rank} role.")
+        if config['add_role'] is True:
+            rank = discord.utils.get(member.guild.roles, name=config['on_join_role'])
+            await member.add_roles(rank)
+            print(f"{member} was given the {rank} role.")
 
 
 @client.event
