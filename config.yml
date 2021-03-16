@@ -17,7 +17,10 @@ join_leave_message: False
 join_leave_channel: 
 
 # The role a user will get on joining the server (NOT CHANNEL ID!! + If join_leave_message is True)
-on_join_role: '👍| Member'
+on_join_role: 'Member'
+
+# Enables / Disables adding role when a user joins the guild (Join Message Must Be True)
+add_role: False
 
 # Enable the discord logging file to logs.log
 enable_log: True
