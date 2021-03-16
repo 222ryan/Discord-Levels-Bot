@@ -1,8 +1,8 @@
-# Version 2.5
+# Version 2.6
 
 # Imports
 from discord.ext import commands
-from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError
+from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole
 import discord
 from ruamel.yaml import YAML
 import levelsys
@@ -41,6 +41,30 @@ async def on_ready():
     await client.change_presence(status=config_activity, activity=activity)
 
 
+# If enabled in config, will send a welcome + leave message + role.
+@client.event
+async def on_member_join(member):
+    if config['join_leave_message'] is True:
+        channel = client.get_channel(config['join_leave_channel'])
+        embed = discord.Embed(title=f"**:man_raising_hand: WELCOME**", description=f"Welcome **{member.mention}** to **{member.guild.name}**!", colour=discord.Colour.green())
+        embed.set_author(name=member.name, icon_url=member.avatar_url)
+        embed.set_thumbnail(url=member.guild.icon_url)
+        await channel.send(embed=embed)
+        rank = discord.utils.get(member.guild.roles, name=config['on_join_role'])
+        await member.add_roles(rank)
+        print(f"{member} was given the {rank} role.")
+
+
+@client.event
+async def on_member_remove(member):
+    if config['join_leave_message'] is True:
+        channel = client.get_channel(config['join_leave_channel'])
+        embed = discord.Embed(title=f"**:man_raising_hand: GOODBYE**", description=f"**{member.mention}** has left **{member.guild.name}**!", colour=discord.Colour.red())
+        embed.set_author(name=member.name, icon_url=member.avatar_url)
+        embed.set_thumbnail(url=member.guild.icon_url)
+        await channel.send(embed=embed)
+
+
 @client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features (Don't forget to re-add)!)
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
@@ -49,8 +73,9 @@ async def on_command_error(ctx, error):
         return
     if isinstance(error, CommandInvokeError):
         return
+    if isinstance(error, MissingRole):
+        return
     raise error
-
 
 for i in range(len(cogs)):
     cogs[i].setup(client)
