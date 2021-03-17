@@ -11,7 +11,8 @@ bot_channel: []
 # Array of channels you can earn XP in (*SEPARATED BY COMAS)
 talk_channels: []
 
-join_leave_message: False
+# Sends a message to a specific channel if a new user joins, or an existing user leaves
+join_leave_message: True
 
 # The channel where join / leave messages will be sent to (If enabled)
 join_leave_channel: 
@@ -19,8 +20,8 @@ join_leave_channel:
 # The role a user will get on joining the server (NOT CHANNEL ID!! + If join_leave_message is True)
 on_join_role: 'Member'
 
-# Enables / Disables adding role when a user joins the guild (Join Message Must Be True)
-add_role: False
+# Enables / Disables adding role when a user joins the guild
+add_role: True
 
 # Enable the discord logging file to logs.log
 enable_log: True
