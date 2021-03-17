@@ -9,18 +9,25 @@ A Modern Discord Levelling Bot, fully open-source and customisable.
   </a>
 </p
 
+## Somethings To Know:
+- You will be required a MongoDB database (Free 500mb). Without one the bot will not run. There a no plans to support other platforms as of now.
+- Sometimes for some users, ruamel does not work. Your best bets are to A) Uninstall ruamel.yaml and reinstall ModernLevels. B) Use a different way of handling config files.
+- If changing the colours of the bots embeds breaks the bot, replace the # in the hex code to 0x.
+
+---------------
 ## Setup:
+
 - Firstly, clone the Modern Levels Repository from this page. Once completed, run 'install.bat'. This will install all required dependincies for the bot to work.
 - Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
+- You will then need to insert your Bots Token inside config.yml. After that, you can customise the bot then you're all set!
+- ---------------
 
 
-## Common Errors:
----------------
-
+## The Config:
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
-<p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
-<p> Some of these include changing how the <b>Progress Bar</b> looks, <b>XP</b> per message,<b>XP</b> per level, bot <b>status</b> and <b>activity</b>. </p>
-<p> There's many more options within the config, and more are being added reguarly! </p>
+<p> Modern Levels lets you customise the bot in many different way within the 'config.yml' file. </p
+<p> I try to add as many customisable options as possible so that users don't have to write extra code. </p>
+<p> New Options are being added on a regular basis as updates don't take too long to push! </p>
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
 
