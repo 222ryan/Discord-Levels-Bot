@@ -6,17 +6,9 @@
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/Red-Discordbot">
   </a>
 </p
-<p><b>Modern Levels</b> is a Discord bot made with <b>python</b>. Need Help? Join the Support Server: https://discord.gg/HwJhy88aGm</p>
-<p> Keep in note you will be required to have a MongoDB database. You can get one for free on their website. To set the bot up with MongoDB, go inside levelsys.py and fill out the required information. </p>
-
-<h3>To Install <b>Requirements:</b></h3> 
-	 <pre><p> <i>Run the included install.bat!</i></p></pre>
-<h3>Need Help Setting Up <b>MongoDB?:</b></h3> 
-	 <pre><p> <i>Join the support server, listed above.</i></p></pre>
-<h3>Discord <b>Intents</b> Error:</h3> 
-	 <pre><p> <i>Go to the discord developer portal, click on your bot then click 'bot' on the left side. Then, go to "Privileged Gateway Intents" and enable both settings.</i></p></pre>
-   
-   <p>*Make sure the 'install.bat' is located in the same directory as your project!*
+# Getting Started
+	  * To get started, clone the Modern Levels Repository From This Page. Once done, run 'install.bat'. This will install all required dependincies for you.
+	  * Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
 
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
