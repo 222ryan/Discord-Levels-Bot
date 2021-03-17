@@ -9,9 +9,9 @@
 	  
 Getting Started
 ---------------
-	  * To get started, clone the Modern Levels Repository From This Page. Once done, run 'install.bat'. This will install all required dependincies for you.
-	  * Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
-
+- To get started, clone the Modern Levels Repository From This Page. Once done, run 'install.bat'. This will install all required dependincies for you.
+- Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
+---------------
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <p> Modern Level's lets you customise the bot in many different way within the 'config.yml' file. </p
 <p> Some of these include changing how the <b>Progress Bar</b> looks, <b>XP</b> per message,<b>XP</b> per level, bot <b>status</b> and <b>activity</b>. </p>
