@@ -35,15 +35,15 @@ A Modern Discord Levelling Bot, fully open-source and customisable.
 
 <b> XP System </b> 
 	 <pre><p> Modern Levels has a fully working XP system with a clean menu which displays a users stats. </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809689498291273758/Capture7.PNG)
+	 ![](https://cdn.discordapp.com/attachments/812895798496591882/821614717821911040/unknown.png)
 <b> Customisation </b> 
 	 <pre><p> Modern Levels allows you to customise it in a fair quantity of different ways. </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742462381457418/Capture8.PNG)
-<b> Leaderboards </b> 
-	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. (Customisable in config) </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810099185188995072/unknown.png)
 <b> Level Roles </b> 
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810070090607099954/unknown.png)
+<b> Leaderboards </b> 
+	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. (Customisable in config) </p></pre>
+	 ![](https://cdn.discordapp.com/attachments/812895798496591882/821614937436192788/unknown.png)
 	 
 <p> This feature list is not up to date! Many more features have been added! Check <b>config.yml</b> for all feature
