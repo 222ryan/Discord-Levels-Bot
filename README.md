@@ -6,6 +6,7 @@
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/Red-Discordbot">
   </a>
 </p
+	  
 # Getting Started
 	  * To get started, clone the Modern Levels Repository From This Page. Once done, run 'install.bat'. This will install all required dependincies for you.
 	  * Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
