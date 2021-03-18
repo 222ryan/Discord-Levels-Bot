@@ -1,4 +1,4 @@
-# Version 2.6
+# Version 2.5.1
 
 # Imports
 import discord
@@ -33,6 +33,7 @@ class levelsys(commands.Cog):
             if not message.author.bot:
                 if stats is None:
                     newuser = {"id": message.author.id, "tag": message.author.mention, "xp": 0, "rank": 1}
+                    print(f"User: {message.author.id} has been added to the database! ")
                     levelling.insert_one(newuser)
                 else:
                     xp = stats["xp"] + config['xp_per_message']
@@ -139,9 +140,10 @@ class levelsys(commands.Cog):
         levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message'] - config['xp_per_message']}})
         if user:
             userget = user.replace('!', '')
-            levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": 0}})
+            levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": config['xp_per_message']}})
             embed = discord.Embed(title=f":white_check_mark: RESET USER", description=f"Reset User: {user}",
                                   colour=config['success_embed_colour'])
+            print(f"{userget} was reset!")
             await ctx.send(embed=embed)
         else:
             prefix = config['Prefix']
@@ -149,6 +151,7 @@ class levelsys(commands.Cog):
                                    description=f"Couldn't Reset! The User: ``{user}`` doesn't exist or you didn't mention a user!",
                                    colour=config['error_embed_colour'])
             embed2.add_field(name="Example:", value=f"``{prefix}reset`` {ctx.message.author.mention}")
+            print("Resetting Failed. A user was either not declared or doesn't exist!")
             await ctx.send(embed=embed2)
 
     # Help Command
