@@ -1,4 +1,4 @@
-# Version 2.5.1
+# Version 2.6.1
 
 # Imports
 import discord
