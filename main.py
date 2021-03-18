@@ -1,4 +1,4 @@
-# Version 2.6
+# Version 2.6.1
 
 # Imports
 from discord.ext import commands
@@ -41,7 +41,7 @@ async def on_ready():
     await client.change_presence(status=config_activity, activity=activity)
 
 
-# If enabled in config, will send a welcome + leave message + role.
+# If enabled in config, will send a welcome message + adds a role if a new user joins the guild (if roles are enabled).
 @client.event
 async def on_member_join(member):
     if config['join_leave_message'] is True:
@@ -56,6 +56,7 @@ async def on_member_join(member):
             print(f"{member} was given the {rank} role.")
 
 
+# If enabled in config, will send a leave message if a user leaves the guild
 @client.event
 async def on_member_remove(member):
     if config['join_leave_message'] is True:
@@ -66,7 +67,7 @@ async def on_member_remove(member):
         await channel.send(embed=embed)
 
 
-@client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features (Don't forget to re-add)!)
+@client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features and needed for testing (Don't forget to re-add)!)
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
         return
@@ -81,7 +82,7 @@ async def on_command_error(ctx, error):
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-
+# Uses the bot token to login, so don't remove this.
 client.run(config['Bot_Token'])
 
 # End Of Main
