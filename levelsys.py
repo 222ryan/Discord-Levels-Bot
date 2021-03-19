@@ -1,4 +1,4 @@
-# Version 2.6.1
+# Version 2.5.1
 
 # Imports
 import discord
@@ -127,7 +127,7 @@ class levelsys(commands.Cog):
                     i += 1
                 except:
                     pass
-                if i == config['leaderboard_amount']:
+                if i == config['leaderboard_amount'] + 1:
                     break
             await ctx.channel.send(embed=embed)
 
