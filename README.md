@@ -13,6 +13,7 @@ A Modern Discord Levelling Bot, fully open-source and customisable.
 - You will be required a MongoDB database (Free 500mb). Without one the bot will not run. There a no plans to support other platforms as of now.
 - Sometimes for some users, ruamel does not work. Your best bets are to A) Uninstall ruamel.yaml and reinstall ModernLevels. B) Use a different way of handling config files.
 - If changing the colours of the bots embeds breaks the bot, replace the # in the hex code to 0x.
+- If you recieve an error when running the bot, make sure you have both Privileged Gateway Intents enabled! If that doesn't work, feel free to join the discord server.
 
 ---------------
 ## Setup:
