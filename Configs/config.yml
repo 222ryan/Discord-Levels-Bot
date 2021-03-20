@@ -1,0 +1,101 @@
+# Discord Config
+# The token for your discord bot. NOTE: Do not share this with anyone!
+Bot_Token: NzE4Mjg0MzUxMzM4NzA4OTky.Xtmobg.1S1DB8LyK9wSQhm6MctgxFPkDZw
+
+# The prefix for the bots commands
+Prefix: "!"
+
+# Array of channels where bot commands can be sent (*SEPARATED BY COMAS)
+bot_channel: [812896963182723112, 812895798496591882, 805565838261616670]
+
+# Array of channels you can earn XP in (*SEPARATED BY COMAS)
+talk_channels: [812896963182723112, 812895798496591882, 812893415494254642, 812891732789952552, 812892780392349697, 812894946050048040, 805565838261616670]
+
+# Sends a message to a specific channel if a new user joins, or an existing user leaves
+join_leave_message: True
+
+# The channel where join / leave messages will be sent to (If enabled)
+join_leave_channel: 820489206937026620
+
+# The role a user will get on joining the server (NOT CHANNEL ID!! + If join_leave_message is True)
+on_join_role: '👍| Member'
+
+# Enables / Disables adding role when a user joins the guild
+add_role: True
+
+# Enable the discord logging file to logs.log
+enable_log: True
+
+# Bot Config
+# How much XP you earn per message
+xp_per_message: 10
+
+# How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
+xp_per_level: 100
+
+# Customise the Progress Bar emojis on the Stats Menu (Text will work too, if you want that?)
+completed_bar: ":white_large_square:"
+uncompleted_bar: ":black_large_square:"
+
+# Array of roles you can be rewarded for levelling up. Rank for each role, in same order as level_roles. *Case sensitive*
+level_roles: ["Active"]
+level_roles_num: [5]
+
+# Set what the bot is currently playing
+bot_status_text: "📖 | Modern Levels"
+
+# IDLE, DND, ONLINE, OFFLINE
+bot_activity: online
+
+# Admin Role for admin type commands - CASE SENSITIVE
+admin_role: "🕹️| Developer"
+
+# Sends a level up message if a user has reached the set amount of xp
+show_levelup_message: True
+
+# sends a message if a user has unlocked a new role from levelling up
+show_newrole_message: True
+
+
+# Leaderboard Config
+# Amount of users to be shown on the leaderboard
+leaderboard_amount: 10
+
+# Sets the image that displays on the leaderboard embed
+leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png"
+
+# Sets aliases for the leaderboard command
+leaderboard_alias: ['lb', 'leader', 'rankings']
+
+
+# Rank Config
+# Sets aliases for the rank command
+rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
+
+
+# Embed Config
+# Rank Embed Colour | Must Be Hex Notation
+rank_embed_colour: 0xFFFFFF
+
+# Leaderboard Embed Colour | Must Be Hex Notation
+leaderboard_embed_colour: 0xFFFFFF
+
+# Embed Colour | Must Be Hex Notation
+embed_colour: 0xFFFFFF
+
+# Error Embed Colour | Must Be Hex Notation
+error_embed_colour: 0xFF0000
+
+# Success Embed Colour | Must Be Hex Notation
+success_embed_colour: 0x00FF00
+
+
+# Help Config
+# True/False - <prefix>help command
+help_command: True
+
+
+# End Of Config
+
+
+
