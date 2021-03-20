@@ -1,6 +1,8 @@
-# Version 2.7
+# Version 2.9
 
 # Imports
+import asyncio
+
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
@@ -176,6 +178,13 @@ class levelsys(commands.Cog):
                             value=f"*You will earn ``{xp}xp`` per message | XP Per Level Is: ``{config['xp_per_level']}xp``*")
             embed.set_thumbnail(url=ctx.guild.icon_url)
             await ctx.channel.send(embed=embed)
+
+    @commands.command()
+    @commands.has_role(config["admin_role"])
+    async def restart(self, ctx):
+        await ctx.message.delete()
+        print("Restarting.. Hold On!")
+        await ctx.bot.logout()
 
 
 def setup(client):
