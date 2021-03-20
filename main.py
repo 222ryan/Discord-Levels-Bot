@@ -1,4 +1,4 @@
-# Version 2.7
+# Version 2.9
 
 # Imports
 from discord.ext import commands
@@ -36,6 +36,7 @@ async def on_ready():
     print('------')
     print(f"Set Status To: {config_status}\nSet Activity To: {config_activity}")
     print("------")
+    print("Started System: Levels")
     await client.change_presence(status=config_activity, activity=activity)
 
 
@@ -51,7 +52,7 @@ async def on_member_join(member):
         if config['add_role'] is True:
             rank = discord.utils.get(member.guild.roles, name=config['on_join_role'])
             await member.add_roles(rank)
-            print(f"{member} was given the {rank} role.")
+            print(f"User: {member} was given the {rank} role.")
 
 
 # If enabled in config, will send a leave message if a user leaves the guild
@@ -77,6 +78,7 @@ async def on_command_error(ctx, error):
         return
     raise error
 
+client.load_extension("Systems.spamsys")
 client.load_extension("Systems.levelsys")
 
 
