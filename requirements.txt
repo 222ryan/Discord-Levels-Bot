@@ -1,4 +1,4 @@
-discord.py
+discord
 ruamel.yaml
 pymongo
 dnspython
