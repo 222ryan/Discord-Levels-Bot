@@ -1,19 +1,17 @@
-# Version 2.6.1
+# Version 2.7
 
 # Imports
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole
 import discord
 from ruamel.yaml import YAML
-import levelsys
 import logging
 
 # Opens the config and reads it, no need for changes unless you'd like to change the library (no need to do so unless having issues with ruamel)
 yaml = YAML()
-with open("./config.yml", "r", encoding="utf-8") as file:
+with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
-cogs = [levelsys]
 
 # Command Prefix + Removes the default discord.py help command
 client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.all(), case_insensitive=True)
@@ -22,7 +20,7 @@ client.remove_command('help')
 if config['enable_log'] is True:
     logger = logging.getLogger('discord')
     logger.setLevel(logging.DEBUG)
-    handler = logging.FileHandler(filename='logs.log', encoding='utf-8', mode='w')
+    handler = logging.FileHandler(filename='Logs/logs.log', encoding='utf-8', mode='w')
     handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
     logger.addHandler(handler)
 
@@ -79,8 +77,8 @@ async def on_command_error(ctx, error):
         return
     raise error
 
-for i in range(len(cogs)):
-    cogs[i].setup(client)
+client.load_extension("Systems.levelsys")
+
 
 # Uses the bot token to login, so don't remove this.
 client.run(config['Bot_Token'])
