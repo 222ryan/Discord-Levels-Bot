@@ -1,13 +1,17 @@
-# Warning: This feature is not released yet. These options do nothing at the moment.
+# NOTE: Stopping + Starting the bot when a user is muted may cause issues such as users being perm muted until the role is manually removed from that user
 
-# The Muted Role for when a user spams. NOTE: YOU MUST CHANGE THE ROLE SETTINGS TO MAKE SURE USERS CAN'T SEND MESSAGES! OTHERWISE THIS WILL BE USELESS.
-muted_role:
+# The Muted Role for when a user spams. NOTE: YOU MUST CHANGE THE ROLE SETTINGS TO MAKE SURE USERS CAN'T SEND MESSAGES! OTHERWISE THIS WILL BE USELESS. NOTE: THIS WON'T WORK FOR SERVER OWNERS AND ANY ROLE ABOVE MUTED ROLE!
+muted_role: Muted
 
 # How long a user is muted for (in seconds - 300 = 5 mins)
 muted_time: 300
 
-# How many messages before a warning is sent
+# How many messages before a warning is sent - Recommended: 4-7
 messages_for_warning: 5
 
-# How many messages before being muted
+# How many messages before being muted - Recommended: 8-12
 messages_for_mute: 8
+
+# Clear Warnings -- WARNING: I RECOMMEND CHANGING THIS TO SOMETHING THAT WILL WORK WELL - THE HIGHER THE MESSAGES_FOR_WARNING & MESSAGES_FOR_MUTE IS, THE HIGHER THIS INT SHOULD BE! (CALCULATED IN: SECONDS)
+# Recommended 10-15
+clearing: 13
