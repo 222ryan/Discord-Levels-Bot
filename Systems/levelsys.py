@@ -1,4 +1,4 @@
-# Version 3.0
+# Version 3.1
 
 # Imports
 import discord
@@ -8,8 +8,8 @@ from ruamel.yaml import YAML
 import vacefron
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!* - Need Help? Join The Discord Support Server, Found at top of repo.
-cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
-levelling = cluster["databasename here"]["collectionsname here"]
+cluster = MongoClient("mongodb+srv://kumo:Blueberry69@discordbot.ry2us.mongodb.net/discordbot?retryWrites=true&w=majority")
+levelling = cluster["discord"]["levelling"]
 
 # Reads the config file, no need for changing.
 yaml = YAML()
@@ -147,7 +147,7 @@ class levelsys(commands.Cog):
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
-                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp + config['xp_per_message']}", inline=False)
+                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}", inline=False)
                     embed.set_thumbnail(url=config['leaderboard_image'])
                     i += 1
                 except:
