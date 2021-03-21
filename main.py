@@ -1,4 +1,4 @@
-# Version 2.9
+# Version 2.9.1
 
 # Imports
 from discord.ext import commands
