@@ -26,6 +26,9 @@ add_role: True
 # Enable the discord logging file to logs.log
 enable_log: True
 
+# Enables / Disables the AntiSpam system. True/False
+antispam_system: True
+
 # Bot Config
 # How much XP you earn per message
 xp_per_message: 10
