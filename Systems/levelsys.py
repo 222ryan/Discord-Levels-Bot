@@ -1,12 +1,11 @@
-# Version 2.9
+# Version 2.9.1
 
 # Imports
-import asyncio
-
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
 from ruamel.yaml import YAML
+
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!* - Need Help? Join The Discord Support Server, Found at top of repo.
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
@@ -38,8 +37,13 @@ class levelsys(commands.Cog):
                     print(f"User: {message.author.id} has been added to the database! ")
                     levelling.insert_one(newuser)
                 else:
-                    xp = stats["xp"] + config['xp_per_message']
-                    levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
+                    if config['Prefix'] in message.content:
+                        stats = levelling.find_one({"id": message.author.id})
+                        xp = stats["xp"]
+                        levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
+                    else:
+                        xp = stats["xp"] + config['xp_per_message']
+                        levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
                     lvl = 0
                     while True:
                         if xp < ((config['xp_per_level'] / 2 * (lvl ** 2)) + (config['xp_per_level'] / 2 * lvl)):
@@ -51,7 +55,8 @@ class levelsys(commands.Cog):
                         embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
                                                description=f"{message.author.mention} just reached Level: **{lvl}**",
                                                colour=config['embed_colour'])
-                        levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl}})
+                        xp = stats["xp"]
+                        levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl, "xp": xp + config['xp_per_message'] * 2}})
                         print(f"User: {message.author} | Leveled UP To: {lvl}")
                         embed2.add_field(name="Next Level:",
                                          value=f"``{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp``")
@@ -113,9 +118,6 @@ class levelsys(commands.Cog):
     async def leaderboard(self, ctx):
         if ctx.channel.id in bot_channel:
             rankings = levelling.find().sort("xp", -1)
-            stats = levelling.find_one({"id": ctx.author.id})
-            xp = stats["xp"] - config['xp_per_message']
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp - config['xp_per_message'] + config['xp_per_message']}})
             i = 1
             con = config['leaderboard_amount']
             embed = discord.Embed(title=f":trophy: Leaderboard | Top {con}", colour=config['leaderboard_embed_colour'])
@@ -137,9 +139,6 @@ class levelsys(commands.Cog):
     @commands.command()
     @commands.has_role(config["admin_role"])
     async def reset(self, ctx, user=None):
-        stats = levelling.find_one({"id": ctx.author.id})
-        xp = stats["xp"] - config['xp_per_message']
-        levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message'] - config['xp_per_message']}})
         if user:
             userget = user.replace('!', '')
             levelling.update_one({"tag": userget}, {"$set": {"rank": 1, "xp": config['xp_per_message']}})
@@ -160,9 +159,6 @@ class levelsys(commands.Cog):
     @commands.command()
     async def help(self, ctx):
         if config['help_command'] is True:
-            stats = levelling.find_one({"id": ctx.author.id})
-            xp = stats["xp"] - config['xp_per_message']
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp + config['xp_per_message'] - config['xp_per_message']}})
             prefix = config['Prefix']
             top = config['leaderboard_amount']
             xp = config['xp_per_message']
