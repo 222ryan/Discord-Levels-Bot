@@ -1,4 +1,4 @@
-# Version 3.1
+# Version 3.1.1
 
 # Imports
 import discord
@@ -8,8 +8,8 @@ from ruamel.yaml import YAML
 import vacefron
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!* - Need Help? Join The Discord Support Server, Found at top of repo.
-cluster = MongoClient("mongodb+srv://kumo:Blueberry69@discordbot.ry2us.mongodb.net/discordbot?retryWrites=true&w=majority")
-levelling = cluster["discord"]["levelling"]
+cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
+levelling = cluster["databasename here"]["collectionsname here"]
 
 # Reads the config file, no need for changing.
 yaml = YAML()
@@ -31,22 +31,28 @@ class levelsys(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
-    async def on_message(self, message):
-        if message.channel.id in config['talk_channels']:
-            stats = levelling.find_one({"id": message.author.id})
-            if not message.author.bot:
+    async def on_message(self, ctx):
+        if ctx.channel.id in config['talk_channels']:
+            stats = levelling.find_one({"id": ctx.author.id})
+            if not ctx.author.bot:
                 if stats is None:
-                    newuser = {"id": message.author.id, "tag": message.author.mention, "xp": 0, "rank": 1}
-                    print(f"User: {message.author.id} has been added to the database! ")
+                    newuser = {"id": ctx.author.id, "tag": ctx.author.mention, "xp": 0, "rank": 1}
+                    print(f"User: {ctx.author.id} has been added to the database! ")
                     levelling.insert_one(newuser)
                 else:
-                    if config['Prefix'] in message.content:
-                        stats = levelling.find_one({"id": message.author.id})
+                    if config['Prefix'] in ctx.content:
+                        stats = levelling.find_one({"id": ctx.author.id})
                         xp = stats["xp"]
-                        levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
+                        levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp}})
                     else:
-                        xp = stats["xp"] + config['xp_per_message']
-                        levelling.update_one({"id": message.author.id}, {"$set": {"xp": xp}})
+                        user = ctx.author
+                        role = discord.utils.get(ctx.guild.roles, name=config['double_xp'])
+                        if role in user.roles:
+                            xp = stats["xp"] + config['xp_per_message'] * 2
+                            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp}})
+                        else:
+                            xp = stats["xp"] + config['xp_per_message']
+                            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp}})
                     lvl = 0
                     while True:
                         if xp < ((config['xp_per_level'] / 2 * (lvl ** 2)) + (config['xp_per_level'] / 2 * lvl)):
@@ -54,27 +60,27 @@ class levelsys(commands.Cog):
                         lvl += 1
                     xp -= ((config['xp_per_level'] / 2 * ((lvl - 1) ** 2)) + (config['xp_per_level'] / 2 * (lvl - 1)))
                     if xp == 0:
-                        levelling.update_one({"id": message.author.id}, {"$set": {"rank": + config['xp_per_message']}})
+                        levelling.update_one({"id": ctx.author.id}, {"$set": {"rank": + config['xp_per_message']}})
                         embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
-                                               description=f"{message.author.mention} just reached Level: **{lvl}**",
+                                               description=f"{ctx.author.mention} just reached Level: **{lvl}**",
                                                colour=config['embed_colour'])
                         xp = stats["xp"]
-                        levelling.update_one({"id": message.author.id}, {"$set": {"rank": lvl, "xp": xp + config['xp_per_message'] * 2}})
-                        print(f"User: {message.author} | Leveled UP To: {lvl}")
+                        levelling.update_one({"id": ctx.author.id}, {"$set": {"rank": lvl, "xp": xp + config['xp_per_message'] * 2}})
+                        print(f"User: {ctx.author} | Leveled UP To: {lvl}")
                         embed2.add_field(name="Next Level:",
                                          value=f"``{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp``")
-                        embed2.set_thumbnail(url=message.author.avatar_url)
-                        await message.channel.send(embed=embed2)
+                        embed2.set_thumbnail(url=ctx.author.avatar_url)
+                        await ctx.channel.send(embed=embed2)
                         for i in range(len(level_roles)):
                             if lvl == level_roles_num[i]:
-                                await message.author.add_roles(
-                                    discord.utils.get(message.author.guild.roles, name=level_roles[i]))
+                                await ctx.author.add_roles(
+                                    discord.utils.get(ctx.author.guild.roles, name=level_roles[i]))
                                 embed = discord.Embed(title=":tada: **ROLE UNLOCKED!**",
-                                                      description=f"{message.author.mention} has unlocked the **{level_roles[i]}** role!",
+                                                      description=f"{ctx.author.mention} has unlocked the **{level_roles[i]}** role!",
                                                       colour=config['embed_colour'])
-                                print(f"User: {message.author} | Unlocked Role: {level_roles[i]}")
-                                embed.set_thumbnail(url=message.author.avatar_url)
-                                await message.channel.send(embed=embed)
+                                print(f"User: {ctx.author} | Unlocked Role: {level_roles[i]}")
+                                embed.set_thumbnail(url=ctx.author.avatar_url)
+                                await ctx.channel.send(embed=embed)
 
 # WARNING:: DUE TO AN ISSUE, RANK COMMAND WILL GRANT XP UNTIL A FIX GETS PUT IN PLACE! If you find a working method, please let me know!
 
