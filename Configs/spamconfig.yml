@@ -10,8 +10,8 @@ muted_time: 300
 messages_for_warning: 5
 
 # How many messages before being muted - Recommended: 8-12
-messages_for_mute: 8
+messages_for_mute: 10
 
 # Clear Warnings -- WARNING: I RECOMMEND CHANGING THIS TO SOMETHING THAT WILL WORK WELL - THE HIGHER THE MESSAGES_FOR_WARNING & MESSAGES_FOR_MUTE IS, THE HIGHER THIS INT SHOULD BE! (CALCULATED IN: SECONDS)
 # Recommended 10-15
-clearing: 13
+clearing: 15
