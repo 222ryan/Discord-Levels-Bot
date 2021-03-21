@@ -1,4 +1,4 @@
-# Version 2.9.1
+# Version 2.9.2
 
 # Imports
 from discord.ext import commands
@@ -78,7 +78,9 @@ async def on_command_error(ctx, error):
         return
     raise error
 
-client.load_extension("Systems.spamsys")
+if config['antispam_system'] is True:
+    client.load_extension("Systems.spamsys")
+
 client.load_extension("Systems.levelsys")
 
 
