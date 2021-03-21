@@ -1,11 +1,11 @@
-# Version 2.9.2
+# Version 3.0
 
 # Imports
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
 from ruamel.yaml import YAML
-
+import vacefron
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!* - Need Help? Join The Discord Support Server, Found at top of repo.
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
@@ -21,6 +21,9 @@ bot_channel = config['bot_channel']
 talk_channels = config['talk_channels']
 level_roles = config['level_roles']
 level_roles_num = config['level_roles_num']
+
+# Vac-API, no need for altering!
+vac_api = vacefron.Client()
 
 
 class levelsys(commands.Cog):
@@ -78,6 +81,7 @@ class levelsys(commands.Cog):
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx):
+        member = ctx.author
         if ctx.channel.id in config['bot_channel']:
             stats = levelling.find_one({"id": ctx.author.id})
             if stats is None:
@@ -99,19 +103,36 @@ class levelsys(commands.Cog):
                     rank += 1
                     if stats["id"] == x["id"]:
                         break
-                embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name),
-                                      colour=config['rank_embed_colour'])
-                embed.add_field(name="Name", value=ctx.author.mention, inline=True)
-                embed.add_field(name="XP",
-                                value=f"{xp + config['xp_per_message']}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
-                                inline=True)
-                embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
-                embed.add_field(name="Progress Bar",
-                                value=boxes * config['completed_bar'] + (20 - boxes) * config['uncompleted_bar'],
-                                inline=False)
-                embed.add_field(name=f"Level", value=f"{lvl}", inline=False)
-                embed.set_thumbnail(url=ctx.message.author.avatar_url)
-                await ctx.channel.send(embed=embed)
+                if config['image_mode'] is False:
+                    embed = discord.Embed(title="{}'s Stats Menu | :bar_chart: ".format(ctx.author.name),
+                                          colour=config['rank_embed_colour'])
+                    embed.add_field(name="Name", value=ctx.author.mention, inline=True)
+                    embed.add_field(name="XP",
+                                    value=f"{xp}/{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}",
+                                    inline=True)
+                    embed.add_field(name="Rank", value=f"{rank}/{ctx.guild.member_count}", inline=True)
+                    embed.add_field(name="Progress Bar",
+                                    value=boxes * config['completed_bar'] + (20 - boxes) * config['uncompleted_bar'],
+                                    inline=False)
+                    embed.add_field(name=f"Level", value=f"{lvl}", inline=False)
+                    embed.set_thumbnail(url=ctx.message.author.avatar_url)
+                    await ctx.channel.send(embed=embed)
+                elif config['image_mode'] is True:
+                    gen_card = await vac_api.rank_card(
+                        username=str(member),
+                        avatar=member.avatar_url_as(format="png"),
+                        level=int(lvl),
+                        rank=int(rank),
+                        current_xp=int(xp),
+                        next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
+                        previous_level_xp=5,
+                        xp_color=str("#ffffff"),
+                        custom_background=str(f"{config['background']}"),
+                        is_boosting=bool(member.premium_since),
+                        circle_avatar=config['circle_picture']
+                    )
+                    rank_image = discord.File(fp=await gen_card.read(), filename=f"{member.name}_rank.png")
+                    await ctx.send(file=rank_image)
 
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
