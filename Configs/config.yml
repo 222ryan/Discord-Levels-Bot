@@ -36,6 +36,9 @@ xp_per_message: 10
 # How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
 xp_per_level: 100
 
+# Double XP Role:
+double_xp: "Active"
+
 # Customise the Progress Bar emojis on the Stats Menu (Text will work too, if you want that?)
 completed_bar: ":white_large_square:"
 uncompleted_bar: ":black_large_square:"
