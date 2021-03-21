@@ -1,4 +1,4 @@
-# Version 2.9.1
+# Version 2.9.2
 
 # Imports
 import discord
@@ -31,10 +31,14 @@ class spamsys(commands.Cog):
     async def on_message(self, ctx):
         counter = 0
         spam = open("Systems/spam.txt", "r+")
-        for lines in spam:
-            if lines.strip("\n") == str(ctx.author.id):
-                counter += 1
-        spam.write(f"{str(ctx.author.id)}\n")
+        user = ctx.author
+        if not user.bot:
+            for lines in spam:
+                if lines.strip("\n") == str(ctx.author.id):
+                    counter += 1
+            spam.write(f"{str(ctx.author.id)}\n")
+        else:
+            return
 
         # Sends a warning message
         if counter == config['messages_for_warning']:
@@ -59,7 +63,7 @@ class spamsys(commands.Cog):
 
     @commands.command()
     async def antispam(self, ctx):
-        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.1``", colour=0xFFCC00)
+        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.2``", colour=0xFFCC00)
         embed2.add_field(name="**Mute Time**:", value=f"``{config['muted_time']}s``")
         embed2.add_field(name="**Messages Before Warning**:", value=f"``{config['messages_for_warning']}``")
         embed2.add_field(name="**Messages Before Mute**:", value=f"``{config['messages_for_mute']}``")
