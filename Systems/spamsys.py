@@ -1,4 +1,4 @@
-# Version 2.5
+# Version 2.9.1
 
 # Imports
 import discord
@@ -22,9 +22,9 @@ class spamsys(commands.Cog):
         print("Started System: AntiSpam")
         print("------")
         while True:
-            await asyncio.sleep(15)
+            await asyncio.sleep(config['clearing'])
             spam = open("Systems/spam.txt", "r+")
-            spam.truncate(config['clearing'])
+            spam.truncate(0)
 
     # Everytime a user sends a message, it'll will add it to the spam file
     @commands.Cog.listener()
@@ -59,7 +59,7 @@ class spamsys(commands.Cog):
 
     @commands.command()
     async def antispam(self, ctx):
-        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.0``", colour=0xFFCC00)
+        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.1``", colour=0xFFCC00)
         embed2.add_field(name="**Mute Time**:", value=f"``{config['muted_time']}s``")
         embed2.add_field(name="**Messages Before Warning**:", value=f"``{config['messages_for_warning']}``")
         embed2.add_field(name="**Messages Before Mute**:", value=f"``{config['messages_for_mute']}``")
