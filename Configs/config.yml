@@ -75,6 +75,17 @@ leaderboard_alias: ['lb', 'leader', 'rankings']
 # Sets aliases for the rank command
 rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
 
+# Will send an image rather than an embed - Better for mobile users and easier to read. NOTE: The image can sometimes take a few seconds to send, but shouldn't be noticeable.
+image_mode: True
+
+# Will only work if Image_mode is set to True! Sets the background of the profile card - Leave blank for black (default)
+background:
+
+# Sets the colour of the xp bar. Only works if image_mode is set to True!
+xp_colour: #ffffff
+
+# True = Profile picture will be circular, False = Square profile picture. Only works if image_mode is set to True!
+circle_picture: False
 
 # Embed Config
 # Rank Embed Colour | Must Be Hex Notation
