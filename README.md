@@ -36,10 +36,10 @@ A Modern Discord Levelling Bot, fully open-source and customisable.
 
 <b> XP System </b> 
 	 <pre><p> Modern Levels has a fully working XP system with a clean menu which displays a users stats. </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/812895798496591882/823105216030703616/unknown.png)
-<b> Customisation </b> 
-	 <pre><p> Modern Levels allows you to customise it in a quantity of ways. </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/809363224663031829/809742462381457418/Capture8.PNG)
+	 ![](https://cdn.discordapp.com/attachments/812895798496591882/823428736480313346/ryann_rank.png)
+<b> Anti-Spam </b> 
+	 <pre><p> Modern Levels comes with a built in Anti-Spam system which mutes users if they're detected for spamming. </p></pre>
+	 ![](https://cdn.discordapp.com/attachments/812895798496591882/823429278229463040/unknown.png)
 <b> Level Roles </b> 
 	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
 	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810070090607099954/unknown.png)
