@@ -22,7 +22,6 @@ class spamsys(commands.Cog):
         print("Started System: AntiSpam")
         print("------")
         while True:
-            print("cleared")
             await asyncio.sleep(config['clearing'])
             spam = open("Systems/spam.txt", "r+")
             spam.truncate(0)
