@@ -1,4 +1,4 @@
-# Version 3.0
+# Version 3.1.2
 
 # Imports
 import discord
@@ -22,6 +22,7 @@ class spamsys(commands.Cog):
         print("Started System: AntiSpam")
         print("------")
         while True:
+            print("cleared")
             await asyncio.sleep(config['clearing'])
             spam = open("Systems/spam.txt", "r+")
             spam.truncate(0)
@@ -42,6 +43,7 @@ class spamsys(commands.Cog):
 
         # Sends a warning message
         if counter == config['messages_for_warning']:
+            counter += +1
             embed = discord.Embed(title=f":warning: WARNING",
                                   description=f"<@{ctx.author.id}>, You've been detected for spam. Repeated offences will get you automatically muted! You've been warned. ",
                                   colour=0xFFCC00)
@@ -49,13 +51,11 @@ class spamsys(commands.Cog):
             print(f"User: {ctx.author} has been flagged for spam, we sent them a warning.")
 
         # If a user ignores the warning, they'll receive a mute
-        if counter == config['messages_for_mute']:
-            embed2 = discord.Embed(title=f":x: Auto-Mute", description=f"<@{ctx.author.id}> has been muted for spam. If you believe this was an error, please contact a server admin.", colour=0xFF0000)
-            embed2.add_field(name="**Mute Duration**:", value=f"``{config['muted_time']}`` seconds")
+        if counter == config['messages_for_mute'] + 1:
+            counter += 0
             member = ctx.author
             rank = discord.utils.get(member.guild.roles, name=config['muted_role'])
             await member.add_roles(rank)  # Adds the muted role
-            await ctx.channel.send(embed=embed2)
             print(f"User: {ctx.author} failed to follow the warning, they've now been muted.")
             await asyncio.sleep(config['muted_time'])
             await member.remove_roles(rank)  # Removes the muted role when time is up
@@ -63,7 +63,7 @@ class spamsys(commands.Cog):
 
     @commands.command()
     async def antispam(self, ctx):
-        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.2``", colour=0xFFCC00)
+        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.3``", colour=0xFFCC00)
         embed2.add_field(name="**Mute Time**:", value=f"``{config['muted_time']}s``")
         embed2.add_field(name="**Messages Before Warning**:", value=f"``{config['messages_for_warning']}``")
         embed2.add_field(name="**Messages Before Mute**:", value=f"``{config['messages_for_mute']}``")
