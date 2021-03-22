@@ -1,4 +1,4 @@
-# Version 3.1.2
+# Version 3.2
 
 # Imports
 import discord
@@ -124,6 +124,8 @@ class levelsys(commands.Cog):
                     embed.set_thumbnail(url=ctx.message.author.avatar_url)
                     await ctx.channel.send(embed=embed)
                 elif config['image_mode'] is True:
+                    background = stats["background"]
+                    circle = stats["circle"]
                     gen_card = await vac_api.rank_card(
                         username=str(member),
                         avatar=member.avatar_url_as(format="png"),
@@ -133,9 +135,9 @@ class levelsys(commands.Cog):
                         next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
                         previous_level_xp=5,
                         xp_color=str("#ffffff"),
-                        custom_background=str(f"{config['background']}"),
+                        custom_background=str(background),
                         is_boosting=bool(member.premium_since),
-                        circle_avatar=config['circle_picture']
+                        circle_avatar=circle
                     )
                     rank_image = discord.File(fp=await gen_card.read(), filename=f"{member.name}_rank.png")
                     await ctx.send(file=rank_image)
@@ -208,6 +210,32 @@ class levelsys(commands.Cog):
         await ctx.message.delete()
         print("Restarting.. Hold On!")
         await ctx.bot.logout()
+
+    @commands.command()
+    async def background(self, ctx, link):
+        await ctx.message.delete()
+        levelling.update_one({"id": ctx.author.id}, {"$set": {"background": f"{link}"}})
+        embed = discord.Embed(title=":white_check_mark: **BACKGROUND CHANGED!**", description="Your profile background has been set successfully! If your background does not update, please try a new image.")
+        embed.set_thumbnail(url=link)
+        await ctx.channel.send(embed=embed)
+
+    @commands.command()
+    async def circlepic(self, ctx, value):
+        await ctx.message.delete()
+        if value == "True":
+            levelling.update_one({"id": ctx.author.id}, {"$set": {"circle": True}})
+            embed1 = discord.Embed(title=":white_check_mark: **PROFILE CHANGED!**",
+                                   description="Circle Profile Picture set to: ``True``. Set to ``False`` to return to default.")
+            await ctx.channel.send(embed=embed1)
+        elif value == "False":
+            levelling.update_one({"id": ctx.author.id}, {"$set": {"circle": False}})
+            embed2 = discord.Embed(title=":white_check_mark: **PROFILE CHANGED!**",
+                                   description="Circle Profile Picture set to: ``False``. Set to ``True`` to change it to a circle.")
+            await ctx.channel.send(embed=embed2)
+        else:
+            embed3 = discord.Embed(title=":x: **SOMETHING WENT WRONG!**",
+                                   description="Please make sure you either typed: ``True`` or ``False``.")
+            await ctx.channel.send(embed=embed3)
 
 
 def setup(client):
