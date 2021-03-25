@@ -1,4 +1,4 @@
-# Version 3.2.1
+# Version 3.3
 
 # Imports
 import discord
@@ -199,6 +199,10 @@ class levelsys(commands.Cog):
             embed.add_field(name="Rank:", value=f"``{prefix}Rank`` *Shows the Stats Menu for the User*")
             embed.add_field(name="Reset:",
                             value=f"``{prefix}Reset <user>`` *Sets the user back to: ``{config['xp_per_message']}xp`` & Level: ``1``*")
+            embed.add_field(name="Background:", value=f"``{prefix}background <link>`` *Changes the background of your rank card if ``image_mode`` is enabled*")
+            embed.add_field(name="Circlepic:", value=f"``{prefix}Circlepic <True|False>`` *Changes a users image to a circle if ``image_mode`` is enabled*")
+            embed.add_field(name="Update:",
+                            value=f"``{prefix}Update <user>`` *Updates any missing database fields for a user when updating to a newer version*")
             embed.add_field(name="Other:",
                             value=f"*You will earn ``{xp}xp`` per message | XP Per Level Is: ``{config['xp_per_level']}xp``*")
             embed.set_thumbnail(url=ctx.guild.icon_url)
@@ -236,6 +240,22 @@ class levelsys(commands.Cog):
             embed3 = discord.Embed(title=":x: **SOMETHING WENT WRONG!**",
                                    description="Please make sure you either typed: ``True`` or ``False``.")
             await ctx.channel.send(embed=embed3)
+
+    @commands.command()
+    @commands.has_role(config["admin_role"])
+    async def update(self, ctx, user=None):
+        if user:
+            levelling.update_one({"id": ctx.author.id}, {"$set": {"background": "", "circle": False}})
+            embed = discord.Embed(title=f":white_check_mark: UPDATED USER", description=f"Updated User: {user}",
+                                  colour=config['success_embed_colour'])
+            await ctx.send(embed=embed)
+        else:
+            prefix = config['Prefix']
+            embed2 = discord.Embed(title=f":x: UPDATE USER FAILED",
+                                   description=f"Couldn't Update User: ``{user}`` doesn't exist or you didn't mention a user!",
+                                   colour=config['error_embed_colour'])
+            embed2.add_field(name="Example:", value=f"``{prefix}update`` {ctx.message.author.mention}")
+            await ctx.send(embed=embed2)
 
 
 def setup(client):
