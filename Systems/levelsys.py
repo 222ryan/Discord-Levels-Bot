@@ -1,4 +1,4 @@
-# Version 3.2
+# Version 3.2.1
 
 # Imports
 import discord
@@ -36,7 +36,7 @@ class levelsys(commands.Cog):
             stats = levelling.find_one({"id": ctx.author.id})
             if not ctx.author.bot:
                 if stats is None:
-                    newuser = {"id": ctx.author.id, "tag": ctx.author.mention, "xp": 0, "rank": 1}
+                    newuser = {"id": ctx.author.id, "tag": ctx.author.mention, "xp": 0, "rank": 1, "background": " ", "circle": False}
                     print(f"User: {ctx.author.id} has been added to the database! ")
                     levelling.insert_one(newuser)
                 else:
