@@ -1,4 +1,4 @@
-# Version 3.3
+# Version 3.4
 
 # Imports
 from discord.ext import commands
@@ -17,6 +17,7 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
 client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.all(), case_insensitive=True)
 client.remove_command('help')
 
+# If enabled, will send discord logging files which could potentially be useful for catching errors.
 if config['enable_log'] is True:
     logger = logging.getLogger('discord')
     logger.setLevel(logging.DEBUG)
@@ -80,7 +81,6 @@ async def on_command_error(ctx, error):
 
 if config['antispam_system'] is True:
     client.load_extension("Systems.spamsys")
-
 client.load_extension("Systems.levelsys")
 
 
