@@ -1,4 +1,4 @@
-# Version 3.3
+# Version 3.4
 
 # Imports
 import discord
@@ -12,6 +12,7 @@ with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
 
+# Spam system class
 class spamsys(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -26,7 +27,7 @@ class spamsys(commands.Cog):
             spam = open("Systems/spam.txt", "r+")
             spam.truncate(0)
 
-    # Everytime a user sends a message, it'll will add it to the spam file
+    # Everytime a user sends a message, it'll will add it to the spam file and after every x seconds it will clear
     @commands.Cog.listener()
     async def on_message(self, ctx):
         counter = 0
@@ -60,6 +61,7 @@ class spamsys(commands.Cog):
             await member.remove_roles(rank)  # Removes the muted role when time is up
             print(f"User: {ctx.author} has now been un-muted.")
 
+    # Stats about the antispam system - we do not show when it clears, as this could allow users to bypass this method.
     @commands.command()
     async def antispam(self, ctx):
         embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.3``", colour=0xFFCC00)
@@ -69,5 +71,6 @@ class spamsys(commands.Cog):
         await ctx.channel.send(embed=embed2)
 
 
+# Sets-up the cog for antispam
 def setup(client):
     client.add_cog(spamsys(client))
