@@ -1,4 +1,4 @@
-# Version 3.3
+# Version 3.4
 
 # Imports
 import discord
@@ -6,6 +6,7 @@ from discord.ext import commands
 from pymongo import MongoClient
 from ruamel.yaml import YAML
 import vacefron
+from re import search
 
 # MONGODB SETTINGS *YOU MUST FILL THESE OUT OTHERWISE YOU'LL RUN INTO ISSUES!* - Need Help? Join The Discord Support Server, Found at top of repo.
 cluster = MongoClient("mongodb link here - dont forget to insert password and database name!! and remove the <>")
@@ -36,7 +37,8 @@ class levelsys(commands.Cog):
             stats = levelling.find_one({"id": ctx.author.id})
             if not ctx.author.bot:
                 if stats is None:
-                    newuser = {"id": ctx.author.id, "tag": ctx.author.mention, "xp": 0, "rank": 1, "background": " ", "circle": False}
+                    newuser = {"id": ctx.author.id, "tag": ctx.author.mention, "xp": 0, "rank": 1, "background": " ",
+                               "circle": False}
                     print(f"User: {ctx.author.id} has been added to the database! ")
                     levelling.insert_one(newuser)
                 else:
@@ -65,7 +67,8 @@ class levelsys(commands.Cog):
                                                description=f"{ctx.author.mention} just reached Level: **{lvl}**",
                                                colour=config['embed_colour'])
                         xp = stats["xp"]
-                        levelling.update_one({"id": ctx.author.id}, {"$set": {"rank": lvl, "xp": xp + config['xp_per_message'] * 2}})
+                        levelling.update_one({"id": ctx.author.id},
+                                             {"$set": {"rank": lvl, "xp": xp + config['xp_per_message'] * 2}})
                         print(f"User: {ctx.author} | Leveled UP To: {lvl}")
                         embed2.add_field(name="Next Level:",
                                          value=f"``{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp``")
@@ -82,7 +85,7 @@ class levelsys(commands.Cog):
                                 embed.set_thumbnail(url=ctx.author.avatar_url)
                                 await ctx.channel.send(embed=embed)
 
-# WARNING:: DUE TO AN ISSUE, RANK COMMAND WILL GRANT XP UNTIL A FIX GETS PUT IN PLACE! If you find a working method, please let me know!
+    # WARNING:: DUE TO AN ISSUE, RANK COMMAND WILL GRANT XP UNTIL A FIX GETS PUT IN PLACE! If you find a working method, please let me know!
 
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
@@ -126,9 +129,12 @@ class levelsys(commands.Cog):
                 elif config['image_mode'] is True:
                     background = stats["background"]
                     circle = stats["circle"]
+                    avatar = member.avatar_url_as(format="png")
+                    avatar_size_regex = search("\?size=[0-9]{3,4}$", str(avatar))
+                    avatar = str(avatar).strip(str(avatar_size_regex.group(0))) if avatar_size_regex else str(avatar)
                     gen_card = await vac_api.rank_card(
                         username=str(member),
-                        avatar=member.avatar_url_as(format="png"),
+                        avatar=avatar,
                         level=int(lvl),
                         rank=int(rank),
                         current_xp=int(xp),
@@ -140,7 +146,9 @@ class levelsys(commands.Cog):
                         circle_avatar=circle
                     )
                     rank_image = discord.File(fp=await gen_card.read(), filename=f"{member.name}_rank.png")
-                    await ctx.send(file=rank_image)
+                    embed = discord.Embed()
+                    embed.set_image(url=gen_card.url)
+                    await ctx.send(embed=embed)
 
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
@@ -155,7 +163,8 @@ class levelsys(commands.Cog):
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
-                    embed.add_field(name=f"{i}: {temp.name}", value=f"Level: {templvl} | Total XP: {tempxp}", inline=False)
+                    embed.add_field(name=f"#{i}: {temp.name}",
+                                    value=f"Level: ``{templvl}``\nTotal XP: ``{tempxp}``\n", inline=True)
                     embed.set_thumbnail(url=config['leaderboard_image'])
                     i += 1
                 except:
@@ -199,8 +208,10 @@ class levelsys(commands.Cog):
             embed.add_field(name="Rank:", value=f"``{prefix}Rank`` *Shows the Stats Menu for the User*")
             embed.add_field(name="Reset:",
                             value=f"``{prefix}Reset <user>`` *Sets the user back to: ``{config['xp_per_message']}xp`` & Level: ``1``*")
-            embed.add_field(name="Background:", value=f"``{prefix}background <link>`` *Changes the background of your rank card if ``image_mode`` is enabled*")
-            embed.add_field(name="Circlepic:", value=f"``{prefix}Circlepic <True|False>`` *Changes a users image to a circle if ``image_mode`` is enabled*")
+            embed.add_field(name="Background:",
+                            value=f"``{prefix}background <link>`` *Changes the background of your rank card if ``image_mode`` is enabled*")
+            embed.add_field(name="Circlepic:",
+                            value=f"``{prefix}Circlepic <True|False>`` *Changes a users image to a circle if ``image_mode`` is enabled*")
             embed.add_field(name="Update:",
                             value=f"``{prefix}Update <user>`` *Updates any missing database fields for a user when updating to a newer version*")
             embed.add_field(name="Other:",
@@ -219,7 +230,8 @@ class levelsys(commands.Cog):
     async def background(self, ctx, link):
         await ctx.message.delete()
         levelling.update_one({"id": ctx.author.id}, {"$set": {"background": f"{link}"}})
-        embed = discord.Embed(title=":white_check_mark: **BACKGROUND CHANGED!**", description="Your profile background has been set successfully! If your background does not update, please try a new image.")
+        embed = discord.Embed(title=":white_check_mark: **BACKGROUND CHANGED!**",
+                              description="Your profile background has been set successfully! If your background does not update, please try a new image.")
         embed.set_thumbnail(url=link)
         await ctx.channel.send(embed=embed)
 
