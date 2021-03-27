@@ -34,7 +34,7 @@
 ![](https://cdn.discordapp.com/attachments/812895798496591882/825330772830846976/MODERN_LEVELS_2.png)
 <p><b> This feature list is not up to date! Many more features have been added! Check config.yml for all features </b></p>
 
-<b> XP System: </b> 
+<b> XP System: </b>
 	 <p>  Modern Levels has a fully working XP system with a clean menu which displays a users stats.</p>
 <b> Anti-Spam: </b> 
 	 <p>  Modern Levels comes with a built in Anti-Spamming system which can be customised to your preference to prevent people from spamming. Users who avoid the warning can be automatically muted!</p>
