@@ -1,5 +1,4 @@
 # Modern Levels
-A Modern Discord Levelling Bot, fully open-source and customisable.
 ![](https://cdn.discordapp.com/attachments/812895798496591882/825329818148274186/MODERN_LEVELS.png)
 <p align="left">
   <a href="https://discord.gg/HwJhy88aGm">
