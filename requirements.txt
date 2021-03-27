@@ -2,3 +2,4 @@ discord
 ruamel.yaml
 pymongo
 dnspython
+vacefron.py
