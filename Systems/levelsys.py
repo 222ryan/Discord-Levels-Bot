@@ -212,10 +212,9 @@ class levelsys(commands.Cog):
                             value=f"``{prefix}Circlepic <True|False>`` *Changes a users image to a circle if ``image_mode`` is enabled*")
             embed.add_field(name="Update:",
                             value=f"``{prefix}Update <user>`` *Updates any missing database fields for a user when updating to a newer version*")
-            embed.add_field(name="Other:",
-                            value=f"*You will earn ``{xp}xp`` per message | XP Per Level Is: ``{config['xp_per_level']}xp``*")
             embed.add_field(name="XP Colour:",
                             value=f"``{prefix}xpcolour <hex code>`` *Changes the colour of the xp bar if ``image_mode`` is enabled*")
+            embed.set_footer(text=f"You will earn {xp}xp per message | XP Per Level Is: {config['xp_per_level']}xp*")
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/812895798496591882/825363205853151252/ML_1.png")
             await ctx.channel.send(embed=embed)
 
