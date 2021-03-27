@@ -31,9 +31,6 @@
 
 ## Features:
 ![](https://cdn.discordapp.com/attachments/812895798496591882/825330772830846976/MODERN_LEVELS_2.png)
-
-<p> Here is a list of the availiable features </p>
-
 <b> XP System: </b> 
 	 <p>  Modern Levels has a fully working XP system with a clean menu which displays a users stats.</p>
 <b> Anti-Spam: </b> 
