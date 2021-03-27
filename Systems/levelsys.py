@@ -1,4 +1,4 @@
-# Version 3.5.1
+# Version 3.6
 
 # Imports
 import discord
@@ -38,7 +38,7 @@ class levelsys(commands.Cog):
             if not ctx.author.bot:
                 if stats is None:
                     newuser = {"id": ctx.author.id, "tag": ctx.author.mention, "xp": 0, "rank": 1, "background": " ",
-                               "circle": False}
+                               "circle": False, "xp_colour": "#ffffff"}
                     print(f"User: {ctx.author.id} has been added to the database! ")
                     levelling.insert_one(newuser)
                 else:
@@ -127,6 +127,7 @@ class levelsys(commands.Cog):
                 elif config['image_mode'] is True:
                     background = stats["background"]
                     circle = stats["circle"]
+                    xpcolour = stats["xp_colour"]
                     avatar = member.avatar_url_as(format="png")
                     avatar_size_regex = search("\?size=[0-9]{3,4}$", str(avatar))
                     avatar = str(avatar).strip(str(avatar_size_regex.group(0))) if avatar_size_regex else str(avatar)
@@ -138,7 +139,7 @@ class levelsys(commands.Cog):
                         current_xp=int(xp),
                         next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
                         previous_level_xp=0,
-                        xp_color=str(config['xp_colour']),
+                        xp_color=str(xpcolour),
                         custom_background=str(background),
                         is_boosting=bool(member.premium_since),
                         circle_avatar=circle
@@ -191,7 +192,7 @@ class levelsys(commands.Cog):
             await ctx.send(embed=embed2)
 
     # Help Command
-    @commands.command()
+    @commands.command(aliase="h")
     async def help(self, ctx):
         if config['help_command'] is True:
             prefix = config['Prefix']
@@ -244,16 +245,31 @@ class levelsys(commands.Cog):
             embed2 = discord.Embed(title=":white_check_mark: **PROFILE CHANGED!**",
                                    description="Circle Profile Picture set to: ``False``. Set to ``True`` to change it to a circle.")
             await ctx.channel.send(embed=embed2)
-        else:
+        elif value is None:
             embed3 = discord.Embed(title=":x: **SOMETHING WENT WRONG!**",
                                    description="Please make sure you either typed: ``True`` or ``False``.")
             await ctx.channel.send(embed=embed3)
 
     @commands.command()
+    async def xpcolour(self, ctx, colour):
+        await ctx.message.delete()
+        if colour is None:
+            embed = discord.Embed(title=":x: **SOMETHING WENT WRONG!**",
+                                  description="Please make sure you typed a hex code in!.")
+            await ctx.channel.send(embed=embed)
+            return
+        levelling.update_one({"id": ctx.author.id}, {"$set": {"xp_colour": f"{colour}"}})
+        prefix = config['Prefix']
+        embed = discord.Embed(title=":white_check_mark: **XP COLOUR CHANGED!**",
+                              description=f"Your xp colour has been changed. If you type ``{prefix}rank`` and nothing appears, try a new hex code. \n**Example**:\n*#0000FF* = *Blue*")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/812895798496591882/825363205853151252/ML_1.png")
+        await ctx.send(embed=embed)
+
+    @commands.command()
     @commands.has_role(config["admin_role"])
     async def update(self, ctx, user=None):
         if user:
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"background": "", "circle": False}})
+            levelling.update_one({"id": ctx.author.id}, {"$set": {"background": "", "circle": False, "xp_colour": "#ffffff"}})
             embed = discord.Embed(title=f":white_check_mark: UPDATED USER", description=f"Updated User: {user}",
                                   colour=config['success_embed_colour'])
             await ctx.send(embed=embed)
@@ -270,3 +286,4 @@ def setup(client):
     client.add_cog(levelsys(client))
 
 # End Of Level System
+1
