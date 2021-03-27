@@ -33,9 +33,8 @@ class spamsys(commands.Cog):
         counter = 0
         spam = open("Systems/spam.txt", "r+")
         user = ctx.author
-        member = ctx.author
-        role = discord.utils.get(member.guild.roles, name=config['ignored_role'])
-        if role in member.roles:
+        role = discord.utils.get(user.guild.roles, name=config['ignored_role'])
+        if role in user.roles:
             return
         if not user.bot:
             for lines in spam:
