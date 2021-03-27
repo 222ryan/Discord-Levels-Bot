@@ -24,12 +24,13 @@ A Modern Discord Levelling Bot, fully open-source and customisable.
 - ---------------
 
 
-## The Config:
+## Config:
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
 <p> Modern Levels lets you customise the bot in many different way within the 'config.yml' file. </p
 <p> I try to add as many customisable options as possible so that users don't have to write extra code. </p>
 <p> New Options are being added on a regular basis as updates don't take too long to push! </p>
 
+## Features:
 ![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
 
 <p> Here is a list of the availiable features </p>
