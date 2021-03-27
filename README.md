@@ -35,12 +35,12 @@
 <p> Here is a list of the availiable features </p>
 
 <b> XP System </b> 
-	 <p> * Modern Levels has a fully working XP system with a clean menu which displays a users stats. </p>
+	 * Modern Levels has a fully working XP system with a clean menu which displays a users stats.
 <b> Anti-Spam </b> 
-	 <p> * Modern Levels comes with a built in Anti-Spamming system which can be customised to your preference to prevent people from spamming. Users who avoid the warning can be automatically muted! </p>
+	 * Modern Levels comes with a built in Anti-Spamming system which can be customised to your preference to prevent people from spamming. Users who avoid the warning can be automatically muted!
 <b> Level Roles </b> 
-	 <p> * Roles can be automatically rewarded for reaching a certain level which can be fully customised inside the config. </p>
+	 * Roles can be automatically rewarded for reaching a certain level which can be fully customised inside the config.
 <b> Leaderboards </b> 
-	 <p> * Modern Levels shows a per-server leadeboard, sorted by xp which displays the top users Ranking, Level and Total XP inside of an Embed. </p>
+	 * Modern Levels shows a per-server leadeboard, sorted by xp which displays the top users Ranking, Level and Total XP inside of an Embed.
 	 
-<p> This feature list is not up to date! Many more features have been added! Check <b>config.yml</b> for all features
+<p> This feature list is not up to date! Many more features have been added! Check <b>config.yml</b> for all features </p>
