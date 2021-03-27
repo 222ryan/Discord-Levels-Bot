@@ -138,7 +138,7 @@ class levelsys(commands.Cog):
                         current_xp=int(xp),
                         next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
                         previous_level_xp=0,
-                        xp_color=str("#4863A0"),
+                        xp_color=str(config['xp_colour']),
                         custom_background=str(background),
                         is_boosting=bool(member.premium_since),
                         circle_avatar=circle
