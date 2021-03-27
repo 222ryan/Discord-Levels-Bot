@@ -1,4 +1,4 @@
-# Version 3.4
+# Version 3.6
 
 # Imports
 import discord
@@ -33,6 +33,10 @@ class spamsys(commands.Cog):
         counter = 0
         spam = open("Systems/spam.txt", "r+")
         user = ctx.author
+        member = ctx.author
+        role = discord.utils.get(member.guild.roles, name=config['ignored_role'])
+        if role in member.roles:
+            return
         if not user.bot:
             for lines in spam:
                 if lines.strip("\n") == str(ctx.author.id):
@@ -64,7 +68,7 @@ class spamsys(commands.Cog):
     # Stats about the antispam system - we do not show when it clears, as this could allow users to bypass this method.
     @commands.command()
     async def antispam(self, ctx):
-        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.3``", colour=0xFFCC00)
+        embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System ``v1.4``", colour=0xFFCC00)
         embed2.add_field(name="**Mute Time**:", value=f"``{config['muted_time']}s``")
         embed2.add_field(name="**Messages Before Warning**:", value=f"``{config['messages_for_warning']}``")
         embed2.add_field(name="**Messages Before Mute**:", value=f"``{config['messages_for_mute']}``")
