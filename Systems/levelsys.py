@@ -1,4 +1,4 @@
-# Version 3.4
+# Version 3.4.1
 
 # Imports
 import discord
@@ -139,7 +139,7 @@ class levelsys(commands.Cog):
                         rank=int(rank),
                         current_xp=int(xp),
                         next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
-                        previous_level_xp=5,
+                        previous_level_xp=0,
                         xp_color=str("#ffffff"),
                         custom_background=str(background),
                         is_boosting=bool(member.premium_since),
