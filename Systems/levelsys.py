@@ -1,4 +1,4 @@
-# Version 3.4.1
+# Version 3.5
 
 # Imports
 import discord
@@ -85,8 +85,6 @@ class levelsys(commands.Cog):
                                 embed.set_thumbnail(url=ctx.author.avatar_url)
                                 await ctx.channel.send(embed=embed)
 
-    # WARNING:: DUE TO AN ISSUE, RANK COMMAND WILL GRANT XP UNTIL A FIX GETS PUT IN PLACE! If you find a working method, please let me know!
-
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx):
@@ -140,13 +138,12 @@ class levelsys(commands.Cog):
                         current_xp=int(xp),
                         next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
                         previous_level_xp=0,
-                        xp_color=str("#ffffff"),
+                        xp_color=str("#4863A0"),
                         custom_background=str(background),
                         is_boosting=bool(member.premium_since),
                         circle_avatar=circle
                     )
-                    rank_image = discord.File(fp=await gen_card.read(), filename=f"{member.name}_rank.png")
-                    embed = discord.Embed()
+                    embed = discord.Embed(colour=config['rank_embed_colour'])
                     embed.set_image(url=gen_card.url)
                     await ctx.send(embed=embed)
 
@@ -216,15 +213,14 @@ class levelsys(commands.Cog):
                             value=f"``{prefix}Update <user>`` *Updates any missing database fields for a user when updating to a newer version*")
             embed.add_field(name="Other:",
                             value=f"*You will earn ``{xp}xp`` per message | XP Per Level Is: ``{config['xp_per_level']}xp``*")
-            embed.set_thumbnail(url=ctx.guild.icon_url)
+            embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/812895798496591882/825363205853151252/ML_1.png")
             await ctx.channel.send(embed=embed)
 
     @commands.command()
     @commands.has_role(config["admin_role"])
     async def restart(self, ctx):
         await ctx.message.delete()
-        print("Restarting.. Hold On!")
-        await ctx.bot.logout()
+        exit("Restarting..")
 
     @commands.command()
     async def background(self, ctx, link):
