@@ -81,9 +81,6 @@ rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
 # Will send an image rather than an embed - Better for mobile users and easier to read. NOTE: The image can sometimes take a few seconds to send, but shouldn't be noticeable.
 image_mode: True
 
-# The colour of the xp bar
-xp_colour: "#4863A0"
-
 
 # Embed Config
 # Rank Embed Colour | Must Be Hex Notation
