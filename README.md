@@ -30,21 +30,17 @@
 <p> New Options are being added on a regular basis as updates don't take too long to push! </p>
 
 ## Features:
-![](https://cdn.discordapp.com/attachments/809363224663031829/809688654301757460/MOSHED-2021-2-12-7-33-24.gif)
+![](https://cdn.discordapp.com/attachments/812895798496591882/825330772830846976/MODERN_LEVELS_2.png)
 
 <p> Here is a list of the availiable features </p>
 
 <b> XP System </b> 
 	 <pre><p> Modern Levels has a fully working XP system with a clean menu which displays a users stats. </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/812895798496591882/823428736480313346/ryann_rank.png)
 <b> Anti-Spam </b> 
-	 <pre><p> Modern Levels comes with a built in Anti-Spam system which mutes users if they're detected for spamming. </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/812895798496591882/823429278229463040/unknown.png)
+	 <pre><p> Modern Levels comes with a built in Anti-Spamming system which can be customised to your preference to prevent people from spamming. Users who avoid the warning can be automatically muted! </p></pre>
 <b> Level Roles </b> 
-	 <pre><p> Roles can be added for when a user reaches a certain level and can be set in the config. </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/809363224663031829/810070090607099954/unknown.png)
+	 <pre><p> Roles can be automatically rewarded for reaching a certain level which can be fully customised inside the config. </p></pre>
 <b> Leaderboards </b> 
-	 <pre><p> Modern Levels comes with a leaderboard which displays the Top 10 users in the guild. (Customisable in config) </p></pre>
-	 ![](https://cdn.discordapp.com/attachments/812895798496591882/821614937436192788/unknown.png)
+	 <pre><p> Modern Levels shows a per-server leadeboard, sorted by xp which displays the top users Ranking, Level and Total XP inside of an Embed. </p></pre>
 	 
 <p> This feature list is not up to date! Many more features have been added! Check <b>config.yml</b> for all feature
