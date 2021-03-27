@@ -24,7 +24,7 @@
 
 
 ## Config:
-![](https://cdn.discordapp.com/attachments/809363224663031829/809686324322762762/MOSHED-2021-2-12-7-23-56.gif)
+![](https://cdn.discordapp.com/attachments/812895798496591882/825330391358767144/MODERN_LEVELS_1.png)
 <p> Modern Levels lets you customise the bot in many different way within the 'config.yml' file. </p
 <p> I try to add as many customisable options as possible so that users don't have to write extra code. </p>
 <p> New Options are being added on a regular basis as updates don't take too long to push! </p>
