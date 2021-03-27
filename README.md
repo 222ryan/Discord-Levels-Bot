@@ -20,6 +20,7 @@
 - Firstly, clone the Modern Levels Repository from this page. Once completed, run 'install.bat'. This will install all required dependincies for the bot to work.
 - Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
 - You will then need to insert your Bots Token inside config.yml. After that, you can customise the bot then you're all set!
+- All you need to do now is run 'start.bat'. If you're using heroku, for example, use the provided 'requirements.txt' + 'procfile' and then enable the worker on heroku.
 - ---------------
 
 
@@ -31,6 +32,8 @@
 
 ## Features:
 ![](https://cdn.discordapp.com/attachments/812895798496591882/825330772830846976/MODERN_LEVELS_2.png)
+<p><b> This feature list is not up to date! Many more features have been added! Check config.yml for all features </b></p>
+
 <b> XP System: </b> 
 	 <p>  Modern Levels has a fully working XP system with a clean menu which displays a users stats.</p>
 <b> Anti-Spam: </b> 
@@ -40,4 +43,3 @@
 <b> Leaderboards: </b> 
 	 <p>  Modern Levels shows a per-server leadeboard, sorted by xp which displays the top users Ranking, Level and Total XP inside of an Embed.</p>
 	 
-<p><b> This feature list is not up to date! Many more features have been added! Check config.yml for all features </b></p>
