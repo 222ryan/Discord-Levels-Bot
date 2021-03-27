@@ -77,6 +77,8 @@ async def on_command_error(ctx, error):
         return
     if isinstance(error, MissingRole):
         return
+    if isinstance(error, AttributeError):
+        return
     raise error
 
 if config['antispam_system'] is True:
