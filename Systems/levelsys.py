@@ -63,7 +63,7 @@ class levelsys(commands.Cog):
                 if config['Prefix'] in ctx.content:
                     stats = levelling.find_one({"id": ctx.author.id})
                     xp = stats["xp"]
-                    levelling.update_one({"id": ctx.author.id}, {"$set": {"xp": xp}})
+                    levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
                 else:
                     stats = levelling.find_one({"server": ctx.guild.id})
                     if stats is None:
@@ -92,7 +92,7 @@ class levelsys(commands.Cog):
                                            description=f"{ctx.author.mention} just reached Level: **{lvl}**",
                                            colour=config['embed_colour'])
                     xp = stats["xp"]
-                    levelling.update_one({"id": ctx.author.id},
+                    levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id},
                                          {"$set": {"rank": lvl, "xp": xp + serverstats['xp_per_message'] * 2}})
                     print(f"User: {ctx.author} | Leveled UP To: {lvl}")
                     embed2.add_field(name="Next Level:",
