@@ -61,7 +61,7 @@ class levelsys(commands.Cog):
                 levelling.insert_one(newuser)
             else:
                 if config['Prefix'] in ctx.content:
-                    stats = levelling.find_one({"id": ctx.author.id})
+                    stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
                     xp = stats["xp"]
                     levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
                 else:
