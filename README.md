@@ -1,7 +1,7 @@
 # Modern Levels
 ![](https://cdn.discordapp.com/attachments/812895798496591882/825329818148274186/MODERN_LEVELS.png)
 <p align="left">
-  <a href="https://discord.gg/HwJhy88aGm">
+  <a href="https://discord.gg/E56eZdNjK4">
     <img src="https://discordapp.com/api/guilds/809362745354354688/widget.png?style=shield" alt="Discord Server">
   <a href="https://www.python.org/downloads/">
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/Red-Discordbot">
