@@ -19,7 +19,7 @@
 
 - Firstly, clone the Modern Levels Repository from this page. Once completed, run 'install.bat'. This will install all required dependincies for the bot to work.
 - Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
-- You will then need to insert your Bots Token inside config.yml. After that, you can customise the bot then you're all set!
+- You will then need to insert your Bots Token inside the .env file. After that, you can customise the bot then you're all set!
 - All you need to do now is run 'start.bat'. If you're using heroku, for example, use the provided 'requirements.txt' + 'procfile' and then enable the worker on heroku.
 - ---------------
 
