@@ -18,7 +18,7 @@ class background(commands.Cog):
     async def background(self, ctx, link=None):
         await ctx.message.delete()
         if link:
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"background": f"{link}"}})
+            levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"background": f"{link}"}})
             embed = discord.Embed(title=":white_check_mark: **BACKGROUND CHANGED!**",
                                   description="Your profile background has been set successfully! If your background does not update, please try a new image.")
             embed.set_thumbnail(url=link)
