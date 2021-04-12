@@ -1,5 +1,3 @@
-# Version 3.6
-
 # Imports
 import discord
 from discord.ext import commands
@@ -32,11 +30,11 @@ class spamsys(commands.Cog):
     async def on_message(self, ctx):
         counter = 0
         spam = open("Systems/spam.txt", "r+")
-        user = ctx.author
-        role = discord.utils.get(user.roles, name=config['ignored_role'])
-        if role in user.roles:
+        member = ctx.author
+        role = discord.utils.get(member.guild.roles, name=config['ignored_role'])
+        if role in member.roles:
             return
-        if not user.bot:
+        if not member.bot:
             for lines in spam:
                 if lines.strip("\n") == str(ctx.author.id):
                     counter += 1
