@@ -1,110 +1,75 @@
-# Discord Config
-# The token for your discord bot. NOTE: Do not share this with anyone!
-Bot_Token: 
-
+# ======================================================================================
+#                             WELCOME TO THE CONFIG
+#                                      FOR
+#                                 MODERN LEVELS
+# ======================================================================================
+# NOTE: BOT_TOKEN & MONGO CLIENT DETAILS ARE STORED IN THE .env FILE!
 # The prefix for the bots commands
 Prefix: "!"
 
-# Array of channels where bot commands can be sent (*SEPARATED BY COMAS)
-bot_channel: []
-
-# Array of channels you can earn XP in (*SEPARATED BY COMAS)
-talk_channels: []
-
-# Sends a message to a specific channel if a new user joins, or an existing user leaves
-join_leave_message: True
-
-# The channel where join / leave messages will be sent to (If enabled)
-join_leave_channel: 
-
-# The role a user will get on joining the server (NOT CHANNEL ID!! + If join_leave_message is True)
-on_join_role: '👍| Member'
-
-# Enables / Disables adding role when a user joins the guild
-add_role: True
-
-# Enable the discord logging file to logs.log
-enable_log: True
-
-# Enables / Disables the AntiSpam system. True/False
-antispam_system: True
-
-# Bot Config
-# How much XP you earn per message
-xp_per_message: 10
-
-# How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
-xp_per_level: 100
-
-# Double XP Role:
-double_xp: "Active"
-
-# Customise the Progress Bar emojis on the Stats Menu (Text will work too, if you want that?)
-completed_bar: ":white_large_square:"
-uncompleted_bar: ":black_large_square:"
-
-# Array of roles you can be rewarded for levelling up. Rank for each role, in same order as level_roles. *Case sensitive*
-level_roles: ["Role 1", "Role 2", "Role 3"]
-level_roles_num: [1, 2, 3]
-
 # Set what the bot is currently playing
-bot_status_text: "📖 | Modern Levels"
+bot_status_text: "[!] | Modern Levels"
 
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: online
 
-# Admin Role for admin type commands - CASE SENSITIVE
-admin_role: "Admin"
 
-# Sends a level up message if a user has reached the set amount of xp
-show_levelup_message: True
-
-# sends a message if a user has unlocked a new role from levelling up
-show_newrole_message: True
+# ======================================================================================
+#                                     XP
+# ======================================================================================
+# How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
+xp_per_level: 100
 
 
-# Leaderboard Config
+# ======================================================================================
+#                                  LEADERBOARD
+# ======================================================================================
 # Amount of users to be shown on the leaderboard
 leaderboard_amount: 10
 
 # Sets the image that displays on the leaderboard embed
-leaderboard_image: "https://cdn.discordapp.com/attachments/809363224663031829/809734218103259146/leaderboards.png"
+leaderboard_image: "https://cdn.discordapp.com/attachments/812895798496591882/825363205853151252/ML_1.png"
 
 # Sets aliases for the leaderboard command
 leaderboard_alias: ['lb', 'leader', 'rankings']
 
 
-# Rank Config
+# ======================================================================================
+#                                   RANK
+# ======================================================================================
 # Sets aliases for the rank command
 rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
 
-# Will send an image rather than an embed - Better for mobile users and easier to read. NOTE: The image can sometimes take a few seconds to send, but shouldn't be noticeable.
-image_mode: True
 
-
-# Embed Config
+# ======================================================================================
+#                                   EMBED
+# ======================================================================================
 # Rank Embed Colour | Must Be Hex Notation
-rank_embed_colour: 0xFFFFFF
+rank_embed_colour: 0x4863A0
 
-# Leaderboard Embed Colour | Must Be Hex Notation
-leaderboard_embed_colour: 0xFFFFFF
+# Leaderboard Embed Colour | Must Be Hex Notation (Replace # with 0x)
+leaderboard_embed_colour: 0x4863A0
 
 # Embed Colour | Must Be Hex Notation
-embed_colour: 0xFFFFFF
+embed_colour: 0x4863A0
 
 # Error Embed Colour | Must Be Hex Notation
-error_embed_colour: 0xFF0000
+error_embed_colour: 0x4863A0
 
 # Success Embed Colour | Must Be Hex Notation
-success_embed_colour: 0x00FF00
+success_embed_colour: 0x4863A0
 
 
-# Help Config
+# ======================================================================================
+#                                     HELP
+# ======================================================================================
 # True/False - <prefix>help command
 help_command: True
 
 
-# End Of Config
+# ======================================================================================
+#                                    THE END
+# ======================================================================================
 
 
 
