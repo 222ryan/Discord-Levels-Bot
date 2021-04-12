@@ -18,7 +18,7 @@ class xpcolour(commands.Cog):
     async def xpcolour(self, ctx, colour=None):
         await ctx.message.delete()
         if colour:
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"xp_colour": f"{colour}"}})
+            levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp_colour": f"{colour}"}})
             prefix = config['Prefix']
             embed = discord.Embed(title=":white_check_mark: **XP COLOUR CHANGED!**",
                                   description=f"Your xp colour has been changed. If you type `{prefix}rank` and nothing appears, try a new hex code. \n**Example**:\n*#0000FF* = *Blue*")
