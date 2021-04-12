@@ -18,12 +18,12 @@ class circlepic(commands.Cog):
     async def circlepic(self, ctx, value=None):
         await ctx.message.delete()
         if value == "True":
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"circle": True}})
+            levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"circle": True}})
             embed1 = discord.Embed(title=":white_check_mark: **PROFILE CHANGED!**",
                                    description="Circle Profile Picture set to: `True`. Set to `False` to return to default.")
             await ctx.channel.send(embed=embed1)
         elif value == "False":
-            levelling.update_one({"id": ctx.author.id}, {"$set": {"circle": False}})
+            levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"circle": False}})
             embed2 = discord.Embed(title=":white_check_mark: **PROFILE CHANGED!**",
                                    description="Circle Profile Picture set to: `False`. Set to `True` to change it to a circle.")
             await ctx.channel.send(embed=embed2)
