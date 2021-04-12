@@ -1,5 +1,7 @@
-discord
+discord~=1.0.1
 ruamel.yaml
-pymongo
+pymongo~=3.11.3
 dnspython
 vacefron.py
+psutil~=5.8.0
+python-dotenv~=0.17.0
