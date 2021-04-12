@@ -87,7 +87,7 @@ class levelsys(commands.Cog):
                     lvl += 1
                 xp -= ((config['xp_per_level'] / 2 * ((lvl - 1) ** 2)) + (config['xp_per_level'] / 2 * (lvl - 1)))
                 if xp == 0:
-                    levelling.update_one({"id": ctx.author.id}, {"$set": {"rank": lvl + 1}})
+                    levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"rank": lvl + 1}})
                     embed2 = discord.Embed(title=f":tada: **LEVEL UP!**",
                                            description=f"{ctx.author.mention} just reached Level: **{lvl}**",
                                            colour=config['embed_colour'])
