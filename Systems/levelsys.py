@@ -96,7 +96,7 @@ class levelsys(commands.Cog):
                                          {"$set": {"rank": lvl, "xp": xp + serverstats['xp_per_message'] * 2}})
                     print(f"User: {ctx.author} | Leveled UP To: {lvl}")
                     embed2.add_field(name="Next Level:",
-                                     value=f"``{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp``")
+                                     value=f"`{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp`")
                     embed2.set_thumbnail(url=ctx.author.avatar_url)
                     member = ctx.author
                     channel = discord.utils.get(member.guild.channels, name=serverstats["level_channel"])
