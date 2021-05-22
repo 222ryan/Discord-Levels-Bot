@@ -24,7 +24,6 @@ class rank(commands.Cog):
             user = member
         userget = user.replace('!', '')
         stats = levelling.find_one({"guildid": ctx.message.guild.id, "tag": userget})
-        server = levelling.find_one({"guildid": ctx.guild.id})
         if stats is None:
             embed = discord.Embed(description=":x: No Data Found!",
                                   colour=config['error_embed_colour'])
