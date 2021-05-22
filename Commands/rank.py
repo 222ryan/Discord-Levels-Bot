@@ -48,7 +48,7 @@ class rank(commands.Cog):
             background = stats2["background"]
             circle = stats2["circle"]
             xpcolour = stats2["xp_colour"]
-            member = ctx.author.id
+            member = ctx.author
             gen_card = await vac_api.rank_card(
                 username=str(stats2['name']),
                 avatar=stats['pfp'],
