@@ -1,4 +1,7 @@
 # Imports
+import asyncio
+from os import listdir
+
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole
 import discord
@@ -22,6 +25,7 @@ client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.a
 client.remove_command('help')
 
 # sends discord logging files which could potentially be useful for catching errors.
+os.remove("Logs/logs.txt")
 FORMAT = '[%(asctime)s]:[%(levelname)s]: %(message)s'
 logging.basicConfig(filename='Logs/logs.txt', level=logging.DEBUG, format=FORMAT)
 logging.debug('Started Logging')
@@ -36,14 +40,12 @@ async def on_ready():
     logging.info('Getting Bot Activity from Config')
     print("If you encounter any bugs, please let me know.")
     print('------')
-    print('Logged In:')
-    print(f"Bot Username: {client.user.name}\nBotID: {client.user.id}")
+    print('Logged In As:')
+    print(f"Username: {client.user.name}\nID: {client.user.id}")
     print('------')
-    print(f"Set Status To: {config_status}\nSet Activity To: {config_activity}")
-    print("------")
-    print("Started System: Levels")
+    print(f"Status: {config_status}\nActivity: {config_activity}")
+    print('------')
     await client.change_presence(status=config_activity, activity=activity)
-    logging.info('Logged In And Set Activity')
 
 
 @client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features and needed for testing (Don't forget to re-add)!)
@@ -60,43 +62,29 @@ async def on_command_error(ctx, error):
     if isinstance(error, MissingRole):
         logging.error('A user has missing roles!')
         return
+    if isinstance(error, PermissionError):
+        logging.error('A user has missing permissions!')
     if isinstance(error, KeyError):
         logging.error('Key Error')
         return
+    if isinstance(error, TypeError):
+        logging.error('Type Error - Probably caused as server was being registered while anti-spam or double-xp tried triggering')
     raise error
 
-logging.info('Checking if anti-spam is enabled')
-if spamconfig['antispam_system'] is True:
-    client.load_extension("Systems.spamsys")
-    logging.info('Loaded AntiSpam')
-logging.info('Checking if help is enabled')
-if config['help_command'] is True:
-    client.load_extension("Commands.help")
-    logging.info('Loaded Help Command')
+logging.info("------------- Loading -------------")
+for fn in listdir("Commands"):
+    if fn.endswith(".py"):
+        logging.info(f"Loading {fn}")
+        client.load_extension(f"Commands.{fn[:-3]}")
+        logging.info(f"Loaded {fn}")
+logging.info(f"Loading Level System")
 client.load_extension("Systems.levelsys")
-logging.info('Loaded Levelsys')
-client.load_extension("Commands.rank")
-logging.info('Loaded Rank Command')
-client.load_extension("Commands.leaderboard")
-logging.info('Loaded Leaderboard Command')
-client.load_extension("Commands.background")
-logging.info('Loaded Background Command')
-client.load_extension("Commands.reset")
-logging.info('Loaded Reset Command')
-client.load_extension("Commands.circlepic")
-logging.info('Loaded Circlepic Command')
-client.load_extension("Commands.xpcolour")
-logging.info('Loaded XPColour Command')
-client.load_extension("Commands.fix")
-logging.info('Loaded Fix Command')
-client.load_extension("Commands.role")
-logging.info('Loaded Role Command')
-client.load_extension("Commands.doublexp")
-logging.info('Loaded DoubleXP Command')
-client.load_extension("Commands.levelchannel")
-logging.info('Loaded LevelChannel Command')
-client.load_extension("Commands.xppermessage")
-logging.info('Loaded XPPerMessage Command')
+logging.info(f"Loaded Level System")
+if spamconfig['antispam_system'] is True:
+    logging.info(f"Loading Anti-Spam System")
+    client.load_extension("Systems.spamsys")
+    logging.info(f"Loaded Anti-Spam System")
+logging.info("------------- Finished Loading -------------")
 
 # Uses the bot token to login, so don't remove this.
 token = os.getenv("DISCORD_TOKEN")

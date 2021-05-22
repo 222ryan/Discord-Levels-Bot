@@ -1,22 +1,7 @@
 # NOTE: Stopping + Starting the bot when a user is muted may cause issues such as users being perm muted until the role is manually removed from that user
 
 # Enables / Disables the AntiSpam system. True/False
-antispam_system: False
-
-# The Muted Role for when a user spams. NOTE: YOU MUST CHANGE THE ROLE SETTINGS TO MAKE SURE USERS CAN'T SEND MESSAGES! OTHERWISE THIS WILL BE USELESS. NOTE: THIS WON'T WORK FOR SERVER OWNERS AND ANY ROLE ABOVE MUTED ROLE!
-muted_role: Muted
-
-# The role which antispam will ignore
-ignored_role: 'Tester'
-
-# How long a user is muted for (in seconds - 300 = 5 mins)
-muted_time: 300
-
-# How many messages before a warning is sent - Recommended: 4-7
-messages_for_warning: 5
-
-# How many messages before being muted - Recommended: 8-12
-messages_for_mute: 6
+antispam_system: True
 
 # Clear Warnings -- WARNING: I RECOMMEND CHANGING THIS TO SOMETHING THAT WILL WORK WELL - THE HIGHER THE MESSAGES_FOR_WARNING & MESSAGES_FOR_MUTE IS, THE HIGHER THIS INT SHOULD BE! (CALCULATED IN: SECONDS)
 # Recommended 10-15

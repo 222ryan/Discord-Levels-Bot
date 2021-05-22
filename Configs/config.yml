@@ -40,6 +40,9 @@ leaderboard_alias: ['lb', 'leader', 'rankings']
 # Sets aliases for the rank command
 rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
 
+# Sends a ping to the user that levelled up
+level_up_ping: True
+
 
 # ======================================================================================
 #                                   EMBED
