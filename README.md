@@ -1,45 +1,30 @@
-# Modern Levels
-![](https://cdn.discordapp.com/attachments/812895798496591882/825329818148274186/MODERN_LEVELS.png)
-<p align="left">
+![](https://cdn.discordapp.com/attachments/831180817064656907/865166680483954708/MODERN_LEVELS_1.png)
+<p align="center">
   <a href="https://discord.gg/E56eZdNjK4">
     <img src="https://discordapp.com/api/guilds/809362745354354688/widget.png?style=shield" alt="Discord Server">
   <a href="https://www.python.org/downloads/">
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/Red-Discordbot">
   </a>
-</p
+	  </p>
 
-## Somethings To Know:
-- You will be required a MongoDB database (Free 500mb). Without one the bot will not run. There a no plans to support other platforms as of now.
-- Sometimes for some users, ruamel does not work. Your best bets are to A) Uninstall ruamel.yaml and reinstall ModernLevels. B) Use a different way of handling config files.
-- If changing the colours of the bots embeds breaks the bot, replace the # in the hex code to 0x.
-- If you recieve an error when running the bot, make sure you have both Privileged Gateway Intents enabled! If that doesn't work, feel free to join the discord server.
+<p align="center">
+	  Welcome to Modern Levels  </p>
 
----------------
-## Setup:
+Please be aware of a few things. You will be required to have a `MongoDB` Database for this to work. Please also keep in mind that there are currently **2** branches, ``Main & Beta``. 
+	  
+*Running into problems? Want to submit a bug report or suggestion? Join our [Support Server](https://discord.gg/E56eZdNjK4)*
 
-- Firstly, clone the Modern Levels Repository from this page. Once completed, run 'install.bat'. This will install all required dependincies for the bot to work.
-- Next, You will be required to create a MongoDB database. If you need help with this, feel free to join the support server, listed above.
-- You will then need to insert your Bots Token inside the .env file. After that, you can customise the bot then you're all set!
-- All you need to do now is run 'start.bat'. If you're using heroku, for example, use the provided 'requirements.txt' + 'procfile' and then enable the worker on heroku.
-- ---------------
+# Rank Card
+![](https://cdn.discordapp.com/attachments/831180817064656907/865171009207009280/MODERN_LEVELS_4.png)
+`Modern Levels` comes with a Rank Card which each user can customise their `Background`, `XPColour` or `Profile Picture Shape`.
 
-
-## Config:
-![](https://cdn.discordapp.com/attachments/812895798496591882/825330391358767144/MODERN_LEVELS_1.png)
-<p> Modern Levels lets you customise the bot in many different way within the 'config.yml' file. </p
-<p> I try to add as many customisable options as possible so that users don't have to write extra code. </p>
-<p> New Options are being added on a regular basis as updates don't take too long to push! </p>
-
-## Features:
-![](https://cdn.discordapp.com/attachments/812895798496591882/825330772830846976/MODERN_LEVELS_2.png)
-<p><b> This feature list is not up to date! Many more features have been added! Check config.yml for all features </b></p>
-
-<b> XP System: </b>
-	 <p>  Modern Levels has a fully working XP system with a clean menu which displays a users stats.</p>
-<b> Anti-Spam: </b> 
-	 <p>  Modern Levels comes with a built in Anti-Spamming system which can be customised to your preference to prevent people from spamming. Users who avoid the warning can be automatically muted!</p>
-<b> Level Roles: </b> 
-	 <p>  Roles can be automatically rewarded for reaching a certain level which can be fully customised inside the config.</p>
-<b> Leaderboards: </b> 
-	 <p>  Modern Levels shows a per-server leadeboard, sorted by xp which displays the top users Ranking, Level and Total XP inside of an Embed.</p>
+The Rank Card contains the following:
+| Content   | Information |
+| ------------- | ------------- |
+| Level  | Shows the users current level for that server  |
+| XP Bar  | Shows the user their current and remaining xp until their next level  |
+| Rank        | Shows the users current placement on the leaderboard for that server         |
+# Addons
+![](https://cdn.discordapp.com/attachments/831180817064656907/865170540750045184/MODERN_LEVELS_3.png)
+*`Addons` are coming very soon..*
 	 
