@@ -26,5 +26,8 @@ The Rank Card contains the following:
 | Rank        | Shows the users current placement on the leaderboard for that server         |
 # Addons
 ![](https://cdn.discordapp.com/attachments/831180817064656907/865170540750045184/MODERN_LEVELS_3.png)
-*`Addons` are coming very soon..*
-	 
+*`Addons` are fast ways to add features to the bot without writing any code. More Addons are to come!*
+| Name   | Information | Download |
+| ------------- | ------------- | ------------- |
+| Extras+ | Includes command for adding or removing xp from a user. Also includes a Help command.  | [v1.0.0](https://www.dropbox.com/s/37qmb4w4sp18in6/Extras%2B.zip?dl=1)|
+| Profile+  | Lets the user change their Background, XP Colour and if their profile picture is circular or not.  | [v1.0.0](https://www.dropbox.com/s/8rdg844qo1x1s76/Profile%2B.zip?dl=1) |
