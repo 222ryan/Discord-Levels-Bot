@@ -1,3 +1,5 @@
+import traceback
+
 import discord
 from discord.ext import commands
 from ruamel.yaml import YAML
@@ -17,6 +19,7 @@ class leaderboard(commands.Cog):
 
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
+    @commands.guild_only()
     async def leaderboard(self, ctx):
         rankings = levelling.find({"guildid": ctx.guild.id}).sort("xp", -1)
         i = 1
@@ -36,7 +39,6 @@ class leaderboard(commands.Cog):
             if i == config['leaderboard_amount'] + 1:
                 break
         await ctx.channel.send(embed=embed)
-
 
 # Sets-up the cog for help
 def setup(client):

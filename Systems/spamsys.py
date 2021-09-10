@@ -73,6 +73,7 @@ class spamsys(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
+    @commands.guild_only()
     async def antispamstats(self, ctx):
         serverstats = levelling.find_one({"server": ctx.guild.id})
         embed2 = discord.Embed(title=":warning: Anti-Spam", description="Anti-Spam System `v1.5`", colour=0xFFCC00)

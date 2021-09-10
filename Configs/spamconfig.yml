@@ -1,7 +1,7 @@
 # NOTE: Stopping + Starting the bot when a user is muted may cause issues such as users being perm muted until the role is manually removed from that user
 
 # Enables / Disables the AntiSpam system. True/False
-antispam_system: True
+antispam_system: False
 
 # Clear Warnings -- WARNING: I RECOMMEND CHANGING THIS TO SOMETHING THAT WILL WORK WELL - THE HIGHER THE MESSAGES_FOR_WARNING & MESSAGES_FOR_MUTE IS, THE HIGHER THIS INT SHOULD BE! (CALCULATED IN: SECONDS)
 # Recommended 10-15

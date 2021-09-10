@@ -19,6 +19,7 @@ class ignoredrole(commands.Cog):
     # Reset Command
     @commands.command()
     @commands.has_permissions(administrator=True)
+    @commands.guild_only()
     async def ignoredrole(self, ctx, role=None):
         if spamconfig['antispam_system'] is True:
             stats = levelling.find_one({"server": ctx.guild.id})

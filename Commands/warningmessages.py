@@ -19,6 +19,7 @@ class warningmessages(commands.Cog):
     # Reset Command
     @commands.command()
     @commands.has_permissions(administrator=True)
+    @commands.guild_only()
     async def warningmessages(self, ctx, amount=None):
         if spamconfig['antispam_system'] is True:
             stats = levelling.find_one({"server": ctx.guild.id})

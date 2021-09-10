@@ -17,6 +17,7 @@ class doublexp(commands.Cog):
     # Reset Command
     @commands.command()
     @commands.has_permissions(administrator=True)
+    @commands.guild_only()
     async def doublexp(self, ctx, *, role=None):
         stats = levelling.find_one({"server": ctx.guild.id})
         if stats is None:

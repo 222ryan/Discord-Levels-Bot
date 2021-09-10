@@ -13,6 +13,9 @@ bot_status_text: "[!] | Modern Levels"
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: online
 
+# The ID of the user who owns this bot (In most cases, that'll be you)
+bot_owner_id: 
+
 
 # ======================================================================================
 #                                     XP
@@ -27,9 +30,6 @@ xp_per_level: 100
 # Amount of users to be shown on the leaderboard
 leaderboard_amount: 10
 
-# Sets the image that displays on the leaderboard embed
-leaderboard_image: "https://cdn.discordapp.com/attachments/812895798496591882/825363205853151252/ML_1.png"
-
 # Sets aliases for the leaderboard command
 leaderboard_alias: ['lb', 'leader', 'rankings']
 
@@ -41,7 +41,7 @@ leaderboard_alias: ['lb', 'leader', 'rankings']
 rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
 
 # Sends a ping to the user that levelled up
-level_up_ping: True
+level_up_ping: False
 
 
 # ======================================================================================
@@ -67,6 +67,7 @@ success_embed_colour: 0x4863A0
 #                                     HELP
 # ======================================================================================
 # True/False - <prefix>help command
+# NOTE: REQUIRES Extras+ ADDON!
 help_command: True
 
 
