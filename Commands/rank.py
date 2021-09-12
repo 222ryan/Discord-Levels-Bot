@@ -19,7 +19,6 @@ class rank(commands.Cog):
     # Rank Command
     @commands.command(aliases=config['rank_alias'])
     async def rank(self, ctx, member: discord.Member = None):
-        number = random.randint()
         if member is None:
             member = ctx.author
         try:
