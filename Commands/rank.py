@@ -6,6 +6,8 @@ from Systems.levelsys import vac_api
 import random
 
 # Reads the config file, no need for changing.
+from kumoslab.get import getXPColour
+
 yaml = YAML()
 with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
@@ -64,7 +66,11 @@ class rank(commands.Cog):
                     is_boosting=bool(member.premium_since),
                     circle_avatar=stats["circle"]
                 )
-                embed = discord.Embed(colour=config['rank_embed_colour'])
+
+                xp_colour = getXPColour(id=member.id, guildID=ctx.guild.id)
+                colour_xp = await xp_colour
+                without_tag = colour_xp.replace("#", '')
+                embed = discord.Embed(colour=int(f"0x{without_tag}", 0))
                 embed.set_image(url=gen_card.url)
                 await ctx.send(embed=embed)
 

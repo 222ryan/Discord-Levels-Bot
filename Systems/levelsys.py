@@ -68,20 +68,6 @@ class levelsys(commands.Cog):
                         xp = stats["xp"] + serverstats['xp_per_message']
                         levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
 
-                guild = ctx.guild
-                member = ctx.author
-                for role in member.roles:
-                    x = re.search("@clan", str(role))
-                    if x:
-                        for member in guild.members:
-                            role_name = discord.utils.get(ctx.guild.roles, name=role)
-                            if role_name in member.roles:
-                                stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.member.id})
-                                xp = stats['xp'] + serverstats['xp_per_message']
-                                levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id},
-                                                     {"$set": {"xp": xp}})
-                                return
-
                 lvl = 0
                 while True:
                     if xp < ((config['xp_per_level'] / 2 * (lvl ** 2)) + (config['xp_per_level'] / 2 * lvl)):

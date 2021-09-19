@@ -50,7 +50,6 @@ async def on_ready():
     await client.change_presence(status=config_activity, activity=activity)
 
 
-
 @client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features and needed for testing (Don't forget to re-add)!)
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
@@ -76,7 +75,7 @@ async def on_command_error(ctx, error):
         return
     if isinstance(error, NoPrivateMessage):
         logging.error("Command isn't allowed in private messages!")
-        return 
+        return
     raise error
 
 logging.info("------------- Loading -------------")

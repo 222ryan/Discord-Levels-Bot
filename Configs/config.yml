@@ -14,7 +14,7 @@ bot_status_text: "[!] | Modern Levels"
 bot_activity: online
 
 # The ID of the user who owns this bot (In most cases, that'll be you)
-bot_owner_id: 
+bot_owner_id: 512760269764820993
 
 
 # ======================================================================================
@@ -22,6 +22,9 @@ bot_owner_id:
 # ======================================================================================
 # How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
 xp_per_level: 100
+
+# What level is required to create a clan (*requires clan system addon*)
+level_for_clan: 10
 
 
 # ======================================================================================

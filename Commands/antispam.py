@@ -30,12 +30,12 @@ class antispam(commands.Cog):
                                        colour=config['error_embed_colour'])
                 embed2.add_field(name="Example:", value=f"`{prefix}antispam <true|false>`")
                 await ctx.send(embed=embed2)
-            elif state == "true":
+            elif state.lower == "true":
                 levelling.update_one({"server": ctx.guild.id}, {"$set": {"Antispam": True}})
                 embed = discord.Embed(title=f":white_check_mark: ANTISPAM ENABLED!", description=f"Anti-Spam now set to: `{state}`",
                                       colour=config['success_embed_colour'])
                 await ctx.send(embed=embed)
-            elif state == "false":
+            elif state.lower == "false":
                 levelling.update_one({"server": ctx.guild.id}, {"$set": {"Antispam": False}})
                 embed = discord.Embed(title=f":white_check_mark: ANTISPAM DISABLED!", description=f"Anti-Spam now set to: `{state}`",
                                       colour=config['success_embed_colour'])
