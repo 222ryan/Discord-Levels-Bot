@@ -29,3 +29,4 @@ The Rank Card contains the following:
 | ------------- | ------------- | ------------- |
 | Extras+ | Includes command for adding or removing xp from a user. Also includes a Help command.  | [v1.0.1](https://www.dropbox.com/s/37qmb4w4sp18in6/Extras%2B.zip?dl=1)|
 | Profile+  | Lets the user change their Background, XP Colour and if their profile picture is circular or not.  | [v1.0.1](https://www.dropbox.com/s/8rdg844qo1x1s76/Profile%2B.zip?dl=1) |
+| Clan System  | Allows users to create a clan and invite up to 9 other members to earn xp together  | [v1.0.0](https://www.dropbox.com/s/3dy29k96v4w7t21/Clan%20System.zip?dl=1) |
