@@ -24,7 +24,7 @@ class rank(commands.Cog):
         if member is None:
             member = ctx.author
         try:
-            stats = levelling.find_one({"guildid": ctx.guild.id, "name": f"{member}"})
+            stats = levelling.find_one({"guildid": ctx.guild.id, "id": member.id})
             if stats is None:
                 embed = discord.Embed(title=":x: No Data Found!",
                                       colour=config['error_embed_colour'])
@@ -48,14 +48,10 @@ class rank(commands.Cog):
                     if stats["id"] == x["id"]:
                         break
 
-                # update the users pfp and name in case of name change
-                levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id},
-                                     {'$set': {"pfp": f"{ctx.author.avatar_url}", "name": f"{ctx.author}"}})
-
                 # generate and send the rank card using the vacefron-api
                 gen_card = await vac_api.rank_card(
-                    username=str(stats['name']),
-                    avatar=stats['pfp'],
+                    username=str(member),
+                    avatar=member.avatar_url,
                     level=int(lvl),
                     rank=int(rank),
                     current_xp=int(xp),

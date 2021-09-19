@@ -48,10 +48,10 @@ class leaderboard(commands.Cog):
             i = 1
             for x in rankings:
                 try:
-                    temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
-                    embed.add_field(name=f"#{i}: {temp.name}",
+                    server = x['guildid']
+                    embed.add_field(name=f"#{i}: {x['name']}\n`{server}`",
                                     value=f"Level: `{templvl}`\nTotal XP: `{tempxp}`\n", inline=True)
                     i += 1
                     embed.set_thumbnail(url=ctx.guild.icon_url)
