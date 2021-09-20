@@ -96,7 +96,7 @@ class levelsys(commands.Cog):
                     level_roles = serverstats["role"]
                     level_roles_num = serverstats["level"]
                     for i in range(len(level_roles)):
-                        if lvl == level_roles_num[i]:
+                        if lvl == int(level_roles_num[i]):
                             await ctx.author.add_roles(
                                 discord.utils.get(ctx.author.guild.roles, name=level_roles[i]))
                             embed = discord.Embed(title=":tada: **LEVEL UP**",
@@ -108,19 +108,6 @@ class levelsys(commands.Cog):
                             print(f"User: {ctx.author} | Unlocked Role: {level_roles[i]}")
                             embed.set_thumbnail(url=ctx.author.avatar_url)
                             await msg.edit(embed=embed)
-                        for i in range(len(level_roles)):
-                            if lvl == level_roles_num[i]:
-                                await ctx.author.add_roles(
-                                    discord.utils.get(ctx.author.guild.roles, name=level_roles[i]))
-                                embed = discord.Embed(title=":tada: **LEVEL UP**",
-                                                      description=f"{ctx.author.mention} just reached Level: **{lvl}**",
-                                                      colour=config['embed_colour'])
-                                embed.add_field(name="Next Level:",
-                                                 value=f"`{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp`")
-                                embed.add_field(name="Role Unlocked", value=f"`{level_roles[i]}`")
-                                print(f"User: {ctx.author} | Unlocked Role: {level_roles[i]}")
-                                embed.set_thumbnail(url=ctx.author.avatar_url)
-                                await msg.edit(embed=embed)
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
