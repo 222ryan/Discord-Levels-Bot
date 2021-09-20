@@ -32,8 +32,10 @@ class leaderboard(commands.Cog):
                     temp = ctx.guild.get_member(x["id"])
                     tempxp = x["xp"]
                     templvl = x["rank"]
+                    xp = "{:,}".format(tempxp)
+                    level = "{:,}".format(templvl)
                     embed.add_field(name=f"#{i}: {temp.name}",
-                                    value=f"Level: `{templvl}`\nTotal XP: `{tempxp}`\n", inline=True)
+                                    value=f"Level: `{level}`\nTotal XP: `{xp}`\n", inline=True)
                     i += 1
                     embed.set_thumbnail(url=ctx.guild.icon_url)
                 except:
@@ -41,6 +43,7 @@ class leaderboard(commands.Cog):
                 if i == config['leaderboard_amount'] + 1:
                     break
             await ctx.channel.send(embed=embed)
+            return
         if leader_type.lower() == 'global':
             rankings = levelling.find().sort("xp", -1)
             con = config['leaderboard_amount']
@@ -51,8 +54,13 @@ class leaderboard(commands.Cog):
                     tempxp = x["xp"]
                     templvl = x["rank"]
                     server = x['guildid']
-                    embed.add_field(name=f"#{i}: {x['name']}\n`{server}`",
-                                    value=f"Level: `{templvl}`\nTotal XP: `{tempxp}`\n", inline=True)
+                    level = "{:,}".format(templvl)
+                    guild = self.client.get_guild(server)
+                    if str(guild) == 'None':
+                        continue
+                    xp = "{:,}".format(tempxp)
+                    embed.add_field(name=f"#{i}: {x['name']}\n`{guild}`",
+                                    value=f"Level: `{level}`\nTotal XP: `{xp}`\n", inline=True)
                     i += 1
                     embed.set_thumbnail(url=ctx.guild.icon_url)
                 except:

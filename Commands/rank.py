@@ -71,7 +71,7 @@ class rank(commands.Cog):
                 await ctx.send(embed=embed)
 
         except Exception as e:
-            print(f"{self.client.name} generated an exception.\n\n{e}")
+            print(f"Rank generated an exception.\n\n{e}")
 
 
 # Sets-up the cog for rank

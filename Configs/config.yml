@@ -54,10 +54,10 @@ level_up_ping: False
 rank_embed_colour: 0x4863A0
 
 # Leaderboard Embed Colour | Must Be Hex Notation (Replace # with 0x)
-leaderboard_embed_colour: 0x4863A0
+leaderboard_embed_colour: 0xffffff
 
 # Embed Colour | Must Be Hex Notation
-embed_colour: 0x4863A0
+embed_colour: 0xffffff
 
 # Error Embed Colour | Must Be Hex Notation
 error_embed_colour: 0x4863A0
