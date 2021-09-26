@@ -50,34 +50,6 @@ async def on_ready():
     await client.change_presence(status=config_activity, activity=activity)
 
 
-@client.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features and needed for testing (Don't forget to re-add)!)
-async def on_command_error(ctx, error):
-    if isinstance(error, CommandNotFound):
-        logging.error('Command Not Found')
-        return
-    if isinstance(error, MissingRequiredArgument):
-        logging.error('Argument Error - Missing Arguments')
-        return
-    if isinstance(error, CommandInvokeError):
-        logging.error('Command Invoke Error')
-        return
-    if isinstance(error, MissingRole):
-        logging.error('A user has missing roles!')
-        return
-    if isinstance(error, PermissionError):
-        logging.error('A user has missing permissions!')
-        return
-    if isinstance(error, KeyError):
-        logging.error('Key Error')
-        return
-    if isinstance(error, TypeError):
-        logging.error('Type Error - Probably caused as server was being registered while anti-spam or double-xp tried triggering')
-        return
-    if isinstance(error, NoPrivateMessage):
-        logging.error("Command isn't allowed in private messages!")
-        return
-    raise error
-
 logging.info("------------- Loading -------------")
 for fn in listdir("Commands"):
     if fn.endswith(".py"):
@@ -99,11 +71,6 @@ if spamconfig['antispam_system'] is True:
     logging.info(f"Loading Anti-Spam System")
     client.load_extension("Systems.spamsys")
     logging.info(f"Loaded Anti-Spam System")
-
-if seasonconfig['seasonal_mode'] is True:
-    logging.info(f"Loading Holiday System")
-    client.load_extension("Systems.holidaysys")
-    logging.info(f"Loaded Holiday System")
 
 logging.info("------------- Finished Loading -------------")
 

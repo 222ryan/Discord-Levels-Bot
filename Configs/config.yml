@@ -24,8 +24,18 @@ bot_owner_id: 512760269764820993
 xp_per_level: 100
 
 # What level is required to create a clan (*requires clan system addon*)
-level_for_clan: 10
+level_for_clan: 1
 
+# ======================================================================================
+#                                   VOCAL XP
+# ======================================================================================
+# NOTE: REQUIRES VOCAL SYSTEM ADDON! DOWNLOAD FROM GITHUB REPOSITORY
+
+# How long until a user is granted their xp (e.g 60 = 1 minute)
+time_for_xp: 60
+
+# How much xp a user will receive when in a voice channel and has been in for time_for_xp
+xp_per_time: 5
 
 # ======================================================================================
 #                                  LEADERBOARD
