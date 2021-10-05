@@ -44,11 +44,22 @@ class levelsys(commands.Cog):
             if stats is None:
                 member = ctx.author
                 user = f"<@{member.id}>"
-                newuser = {"guildid": ctx.guild.id, "id": ctx.author.id, "tag": user, "xp": serverstats["xp_per_message"], "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "name": f"{ctx.author}", "pfp": f"{ctx.author.avatar_url}", "warnings": 0}
+                newuser = {"guildid": ctx.guild.id,
+                           "id": ctx.author.id,
+                           "tag": user,
+                           "xp": serverstats["xp_per_message"],
+                           "rank": 1,
+                           "background": " ",
+                           "circle": False,
+                           "xp_colour": "#ffffff",
+                           "name": f"{ctx.author}",
+                           "pfp": f"{ctx.author.avatar_url}",
+                           "warnings": 0}
                 print(f"User: {ctx.author.id} has been added to the database! ")
                 levelling.insert_one(newuser)
             else:
-                if config['Prefix'] in ctx.content:
+                ignored_list = serverstats["ignored_channel"]    # Fetches ignored channel id array 
+                if message.channel.id in ignored_list or config['Prefix'] in ctx.content:
                     stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
                     xp = stats["xp"]
                     levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
@@ -115,9 +126,11 @@ class levelsys(commands.Cog):
         if serverstats is None:
             newserver = {"server": guild.id, "xp_per_message": 10, "double_xp_role": "NA",
                          "level_channel": "private",
-                         "Antispam": False, "mutedRole": "Muted", "mutedTime": 300, "warningMessages": 5,
+                         "Antispam": False, "mutedRole": "Muted",
+                         "mutedTime": 300, "warningMessages": 5,
                          "muteMessages": 6,
-                         "ignoredRole": "Ignored", "event": "Ended"}
+                         "ignoredRole": "Ignored", "event": "Ended",
+                         "ignored_channel": []}
             overwrites = {
                 guild.default_role: discord.PermissionOverwrite(read_messages=False),
                 guild.me: discord.PermissionOverwrite(read_messages=True)
@@ -136,6 +149,24 @@ class levelsys(commands.Cog):
             return
         else:
             levelling.delete_one({"guildid": ctx.guild.id, "id": ctx.author.id})
+            levelling.delete_one({"server": guild.id})  # You have to delete the server collection too :)
+
+            
+    # ------------------------------------Member Join Event---------------------------------------------
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        server = db.find_one({"server": member.guild.id})
+        user = f"<@{member.id}>"  # cross check newuser in line 47
+        newuser = {"guildid": ctx.guild.id, "id": ctx.author.id, "tag": user, "xp": serverstats["xp_per_message"], "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "name": f"{ctx.author}", "pfp": f"{ctx.author.avatar_url}", "warnings": 0}
+        print(f"User: {member.id} has been added to the database! ") 
+        levelling.insert_one(new_user)
+
+    # ------------------------------------Member Leave Event---------------------------------------------
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        levelling.delete_one({"server": member.guild.id, "id": member.id})
+        print(f"User: {member.id} has been deleted from database! ")
+        
 
 def setup(client):
     client.add_cog(levelsys(client))
