@@ -31,4 +31,5 @@ The Rank Card contains the following:
 | Profile+  | Lets the user change their Background, XP Colour and if their profile picture is circular or not.  | [v1.0.1](https://www.dropbox.com/s/8rdg844qo1x1s76/Profile%2B.zip?dl=1) |
 | Clan System  | Allows users to create a clan and invite up to 9 other members to earn xp together  | [v1.0.2](https://www.dropbox.com/s/3dy29k96v4w7t21/Clan%20System.zip?dl=1) |
 | Vocal System  | Users can earn a certain amount xp for a certain amount of time spent in a voice channel  | [v1.0.0](https://www.dropbox.com/s/f7ktc9gv1jn99f1/Vocal%20System.zip?dl=1) |
+| Holiday System  | During seasonal periods, users can earn a boosted amount of xp for a certain duration of time. | [v1.0.0](https://www.dropbox.com/s/oox59aqiwl7tqx2/Holiday%20System.zip?dl=1) |
 
