@@ -48,6 +48,18 @@ class role(commands.Cog):
                     await ctx.send(embed=embed)
 
 
+    @commands.command()
+    @commands.guild_only()
+    async def roles(self, ctx):
+        serverstats = levelling.find_one({"server": ctx.guild.id})
+        embed = discord.Embed(title="🔓 // LEVEL ROLES", description=f"Level Roles for `{ctx.guild.name}`")
+        if len(serverstats['role']) < 1:
+            embed.add_field(name="Roles:", value="`There are no roles to unlock!`")
+            embed.add_field(name="Level:", value="`No level required!`")
+        else:
+            embed.add_field(name="Roles:", value=f"`{str(serverstats['role']).replace('[', '').replace(']', '')}`")
+            embed.add_field(name="Level:", value=f'`{str(serverstats["level"]).replace("[", "").replace("]", "")}`')
+        await ctx.send(embed=embed)
 
 
 # Sets-up the cog for help

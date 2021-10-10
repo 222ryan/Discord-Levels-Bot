@@ -16,6 +16,9 @@ bot_activity: online
 # The ID of the user who owns this bot (In most cases, that'll be you)
 bot_owner_id: 512760269764820993
 
+# Disable / Enable the bot from sending the private message when joining a guild (True/False)
+private_message: True
+
 
 # ======================================================================================
 #                                     XP

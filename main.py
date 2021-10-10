@@ -11,6 +11,8 @@ import logging
 import os
 from dotenv import load_dotenv
 
+from Systems.levelsys import levelling
+
 load_dotenv()
 
 # Opens the config and reads it, no need for changes unless you'd like to change the library (no need to do so unless having issues with ruamel)
@@ -48,6 +50,19 @@ async def on_ready():
     print(f"Status: {config_status}\nActivity: {config_activity}")
     print('------')
     await client.change_presence(status=config_activity, activity=activity)
+    for guild in client.guilds:
+        stats = levelling.find({"server": guild.id, "ignored_channels": {"$exists": False}})
+        for doc in stats:
+            levelling.update_one({"server": guild.id}, {"$set": {"ignored_channels": []}})
+            print(f"Guild: {guild.name} was missing 'ignored_channels' -  Automatically added it!")
+    stats = levelling.find_one({"bot_name": f"{client.user.name}"})
+    if stats is None:
+        bot_data = {"bot_name": f"{client.user.name}", "event_state": False}
+        levelling.insert_one(bot_data)
+
+
+
+
 
 
 logging.info("------------- Loading -------------")
