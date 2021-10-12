@@ -8,5 +8,3 @@ python-dotenv~=0.17.0
 python-dateutil~=2.8.1
 asyncio~=3.4.3
 DateTime~=4.3
-canvacord~=3.3.4
-requests==2.26.0

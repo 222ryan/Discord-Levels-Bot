@@ -48,58 +48,25 @@ class rank(commands.Cog):
                     if stats["id"] == x["id"]:
                         break
 
-                # generate and send the rank card using the vacefron-api
-                if str(config['generator']).lower() == "vacefron":
-                    gen_card = await vac_api.rank_card(
-                        username=str(member),
-                        avatar=member.avatar_url,
-                        level=int(lvl),
-                        rank=int(rank),
-                        current_xp=int(xp),
-                        next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
-                        previous_level_xp=0,
-                        xp_color=str(stats["xp_colour"]),
-                        custom_background=str(stats["background"]),
-                        is_boosting=bool(member.premium_since),
-                        circle_avatar=stats["circle"]
-                    )
-                    xp_colour = getXPColour(id=member.id, guildID=ctx.guild.id)
-                    colour_xp = await xp_colour
-                    without_tag = colour_xp.replace("#", '')
-                    embed = discord.Embed(colour=int(f"0x{without_tag}", 0))
-                    embed.set_image(url=gen_card.url)
-                    await ctx.send(embed=embed)
-
-                # generate and send the rank card using canvacord
-                elif str(config['generator']).lower() == "canvacord":
-                    user = member
-                    username = str(member)
-                    currentxp = int(xp)
-                    lastxp = 0
-                    nextxp = int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))
-                    current_level = int(lvl)
-                    current_rank = int(rank)
-                    background = None
-                    image = await canvacord.rankcard(user=user, username=username, currentxp=currentxp, lastxp=lastxp,
-                                                     nextxp=nextxp, level=current_level, rank=current_rank,
-                                                     background=background)
-
-
-                    file = discord.File(filename="rankcard.png", fp=image)
-                    await ctx.send(file=file)
-
-                    # if an incorrect generator was used
-                else:
-                    embed = discord.Embed(title=":x: // INCORRECT GENERATOR USED!", description="`You have set an "
-                                                                                                "incorrect generator "
-                                                                                                "in the "
-                                                                                                "config.yml!`\n\n"
-                                                                                                "**Available "
-                                                                                                "Generators:**\n- "
-                                                                                                "Vacefron ("
-                                                                                                "Recomended)\n- "
-                                                                                                "Canvacord")
-                    await ctx.send(embed=embed)
+                gen_card = await vac_api.rank_card(
+                    username=str(member),
+                    avatar=member.avatar_url,
+                    level=int(lvl),
+                    rank=int(rank),
+                    current_xp=int(xp),
+                    next_level_xp=int(config['xp_per_level'] * 2 * ((1 / 2) * lvl)),
+                    previous_level_xp=0,
+                    xp_color=str(stats["xp_colour"]),
+                    custom_background=str(stats["background"]),
+                    is_boosting=bool(member.premium_since),
+                    circle_avatar=stats["circle"]
+                )
+                xp_colour = getXPColour(id=member.id, guildID=ctx.guild.id)
+                colour_xp = await xp_colour
+                without_tag = colour_xp.replace("#", '')
+                embed = discord.Embed(colour=int(f"0x{without_tag}", 0))
+                embed.set_image(url=gen_card.url)
+                await ctx.send(embed=embed)
 
         except Exception as e:
             print(f"Rank generated an exception.\n\n{e}")

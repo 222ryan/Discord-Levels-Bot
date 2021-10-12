@@ -19,9 +19,6 @@ bot_owner_id: 512760269764820993
 # Disable / Enable the bot from sending the private message when joining a guild (True/False)
 private_message: True
 
-# Rank Card Generator (Vacefron / Canvacord) - Beware! Canvacord will be slightly slower, and will use your roles colour as your xp colour meaning you cannot have a custom xp colour!
-generator: Vacefron
-
 
 # ======================================================================================
 #                                     XP
