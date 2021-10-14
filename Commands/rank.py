@@ -1,4 +1,3 @@
-import canvacord
 import discord
 from discord.ext import commands
 from ruamel.yaml import YAML
