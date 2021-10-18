@@ -1,5 +1,4 @@
 # Imports
-import asyncio
 from os import listdir
 
 from discord.ext import commands
@@ -25,7 +24,7 @@ with open("Configs/holidayconfig.yml", "r", encoding="utf-8") as file3:
     seasonconfig = yaml.load(file3)
 
 # Command Prefix + Removes the default discord.py help command
-client = commands.Bot(command_prefix=config['Prefix'], intents=discord.Intents.all(), case_insensitive=True)
+client = commands.Bot(command_prefix=commands.when_mentioned_or(config['Prefix']), intents=discord.Intents.all(), case_insensitive=True)
 client.remove_command('help')
 
 # sends discord logging files which could potentially be useful for catching errors.
@@ -59,7 +58,6 @@ async def on_ready():
     if stats is None:
         bot_data = {"bot_name": f"{client.user.name}", "event_state": False}
         levelling.insert_one(bot_data)
-
 
 
 
