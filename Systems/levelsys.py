@@ -159,11 +159,12 @@ class levelsys(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        getGuild = levelling.find_one({"server": member.guild.id})
-        newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>", "xp": getGuild["xp_per_message"],
-                   "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0}
-        levelling.insert_one(newuser)
-        print(f"User: {member.id} has been added to the database!")
+        if not member.bot:
+            getGuild = levelling.find_one({"server": member.guild.id})
+            newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>", "xp": getGuild["xp_per_message"],
+                       "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0}
+            levelling.insert_one(newuser)
+            print(f"User: {member.id} has been added to the database!")
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
