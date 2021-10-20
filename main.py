@@ -20,8 +20,6 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file2:
     spamconfig = yaml.load(file2)
-with open("Configs/holidayconfig.yml", "r", encoding="utf-8") as file3:
-    seasonconfig = yaml.load(file3)
 
 # Command Prefix + Removes the default discord.py help command
 client = commands.Bot(command_prefix=commands.when_mentioned_or(config['Prefix']), intents=discord.Intents.all(), case_insensitive=True)
@@ -50,16 +48,68 @@ async def on_ready():
     print('------')
     await client.change_presence(status=config_activity, activity=activity)
     for guild in client.guilds:
-        stats = levelling.find({"server": guild.id, "ignored_channels": {"$exists": False}})
-        for doc in stats:
+        serverstats = levelling.find({"server": guild.id, "ignored_channels": {"$exists": False}})
+        for doc in serverstats:
             levelling.update_one({"server": guild.id}, {"$set": {"ignored_channels": []}})
             print(f"Guild: {guild.name} was missing 'ignored_channels' -  Automatically added it!")
+        userstats = levelling.find({"guildid": guild.id, "name": {"$exists": False}, "id": {"$exists": True}})
+        for doc in userstats:
+            member = await client.fetch_user(doc["id"])
+            levelling.update_one({"guildid": guild.id, "id": doc['id']}, {"$set": {"name": str(f"{member}")}})
+            print(f"The field NAME was missing for: {member} - Automatically added it!")
     stats = levelling.find_one({"bot_name": f"{client.user.name}"})
     if stats is None:
         bot_data = {"bot_name": f"{client.user.name}", "event_state": False}
         levelling.insert_one(bot_data)
 
+@client.command()
+async def addons(ctx):
+    # ✅ // ❌
+    embed = discord.Embed(title="ADDON PACKAGES")
 
+    # Clan System
+    if os.path.exists("Addons/Clan System.py") is True:
+        embed.add_field(name="Clan System", value="`Installed ✅`")
+    else:
+        embed.add_field(name="Clan System", value="`Installed ❌`")
+
+    # Holiday System
+    if os.path.exists("Addons/Holiday System.py") is True:
+        embed.add_field(name="Holiday System", value="`Installed ✅`")
+    else:
+        embed.add_field(name="Holiday System", value="`Installed ❌`")
+
+    # Vocal System
+    if os.path.exists("Addons/Vocal System.py") is True:
+        embed.add_field(name="Vocal System", value="`Installed ✅`")
+    else:
+        embed.add_field(name="Vocal System", value="`Installed ❌`")
+
+    # Profile+
+    if os.path.exists("Addons/Profile+.py") is True:
+        embed.add_field(name="Profile+", value="`Installed ✅`")
+    else:
+        embed.add_field(name="Profile+", value="`Installed ❌`")
+
+    # Extras+
+    if os.path.exists("Addons/Extras+.py") is True:
+        embed.add_field(name="Extras+", value="`Installed ✅`")
+    else:
+        embed.add_field(name="Extras+", value="`Installed ❌`")
+
+    # Stats
+    if os.path.exists("Addons/Stats.py") is True:
+        embed.add_field(name="Stats", value="`Installed ✅`")
+    else:
+        embed.add_field(name="Stats", value="`Installed ❌`")
+
+    # Events
+    if os.path.exists("Addons/Events.py") is True:
+        embed.add_field(name="Events", value="`Installed ✅`")
+    else:
+        embed.add_field(name="Events", value="`Installed ❌`")
+
+    await ctx.send(embed=embed)
 
 
 
