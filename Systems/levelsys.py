@@ -93,6 +93,8 @@ class levelsys(commands.Cog):
                     embed2.set_thumbnail(url=ctx.author.avatar_url)
                     member = ctx.author
                     channel = discord.utils.get(member.guild.channels, name=serverstats["level_channel"])
+                    if channel is None:
+                        return
                     if config['level_up_ping'] is True:
                         await channel.send(f"{ctx.author.mention}")
                     msg = await channel.send(embed=embed2)
