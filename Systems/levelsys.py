@@ -24,8 +24,9 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file2:
     spamconfig = yaml.load(file2)
-with open("Configs/holidayconfig.yml", "r", encoding="utf-8") as file2:
-    holidayconfig = yaml.load(file2)
+if os.path.exists("Configs/holidayconfig.yml") is True:
+    with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file3:
+        holidayconfig = yaml.load(file3)
 
 
 # Vac-API, no need for altering!
@@ -43,11 +44,14 @@ class levelsys(commands.Cog):
         bot_stats = levelling.find_one({"bot_name": self.client.user.name})
         if not ctx.author.bot:
             if stats is None:
+
+                # Used as a backup in case on_guild_join fails
                 member = ctx.author
                 user = f"<@{member.id}>"
                 newuser = {"guildid": ctx.guild.id, "id": ctx.author.id, "tag": user, "xp": serverstats["xp_per_message"], "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "name": f"{ctx.author}", "pfp": f"{ctx.author.avatar_url}", "warnings": 0}
                 print(f"User: {ctx.author.id} has been added to the database! ")
                 levelling.insert_one(newuser)
+
             else:
                 talk_channels = serverstats['ignored_channels']
                 if len(talk_channels) > 1 and ctx.channel.id not in talk_channels or config['Prefix'] in ctx.content:
@@ -124,12 +128,12 @@ class levelsys(commands.Cog):
                          "Antispam": False, "mutedRole": "None", "mutedTime": 300, "warningMessages": 5,
                          "muteMessages": 6,
                          "ignoredRole": "None", "event": "Ended", "ignored_channels": []}
+            levelling.insert_one(newserver)
             if config['private_message'] is True:
                 overwrites = {
                     guild.default_role: discord.PermissionOverwrite(read_messages=False),
                     guild.me: discord.PermissionOverwrite(read_messages=True)
                 }
-                levelling.insert_one(newserver)
                 prefix = config['Prefix']
                 embed = discord.Embed(title=f"👋 // Greetings, {guild.name}", description=f"Thanks for inviting me, my prefix here is: `{prefix}`")
                 if os.path.exists("Addons/Extras+.py") is True:
@@ -138,6 +142,8 @@ class levelsys(commands.Cog):
                 if guild.system_channel is None:
                     await guild.create_text_channel('private', overwrites=overwrites)
                     channel = discord.utils.get(guild.channels, name="private")
+                    if channel is None:
+                        return
                     await channel.send(embed=embed)
                 else:
                     await guild.system_channel.send(embed=embed)
