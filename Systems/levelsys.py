@@ -25,7 +25,7 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
 with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file2:
     spamconfig = yaml.load(file2)
 if os.path.exists("Configs/holidayconfig.yml") is True:
-    with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file3:
+    with open("Configs/holidayconfig.yml", "r", encoding="utf-8") as file3:
         holidayconfig = yaml.load(file3)
 
 
