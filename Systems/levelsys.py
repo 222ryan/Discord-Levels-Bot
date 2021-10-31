@@ -43,7 +43,12 @@ class levelsys(commands.Cog):
         serverstats = levelling.find_one({"server": ctx.guild.id})
         bot_stats = levelling.find_one({"bot_name": self.client.user.name})
         if not ctx.author.bot:
-            if stats is None:
+            economy_stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id, "money": {"$exists": True}})
+            if economy_stats:
+                member = ctx.author
+                user = f"<@{member.id}>"
+                levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"tag": user, "xp": serverstats['xp_per_message'], "rank": 1, "background": " ", "circle": False, "xp_color": "#ffffff", "name": f"{ctx.author}", "pfp": f"{ctx.author.avatar_url}", "warnings": 0}})
+            elif not economy_stats:
 
                 # Used as a backup in case on_guild_join fails
                 member = ctx.author
@@ -149,10 +154,19 @@ class levelsys(commands.Cog):
                     await guild.system_channel.send(embed=embed)
         for member in guild.members:
             if not member.bot:
-                newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>",
-                           "xp": 10,
-                           "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0, "name": str(member)}
-                levelling.insert_one(newuser)
+                economy_stats = levelling.find_one(
+                    {"guildid": guild.id, "id": member.id, "money": {"$exists": True}})
+                if economy_stats:
+                    user = f"<@{member.id}>"
+                    levelling.update_one({"guildid": guild.id, "id": member.id}, {
+                        "$set": {"tag": user, "xp": serverstats['xp_per_message'], "rank": 1, "background": " ",
+                                 "circle": False, "xp_color": "#ffffff", "name": f"{member}",
+                                 "pfp": f"{member.avatar_url}", "warnings": 0}})
+                else:
+                    newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>",
+                                   "xp": 10,
+                                   "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0, "name": str(member)}
+                    levelling.insert_one(newuser)
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
@@ -168,11 +182,21 @@ class levelsys(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         if not member.bot:
-            getGuild = levelling.find_one({"server": member.guild.id})
-            newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>", "xp": getGuild["xp_per_message"],
-                       "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0, "name": str(member)}
-            levelling.insert_one(newuser)
-            print(f"User: {member.id} has been added to the database!")
+            serverstats = levelling.find_one({"server": member.guild.id})
+            economy_stats = levelling.find_one(
+                {"guildid": member.guild.id, "id": member.id, "money": {"$exists": True}})
+            if economy_stats:
+                user = f"<@{member.id}>"
+                levelling.update_one({"guildid": member.guild.id, "id": member.id}, {
+                    "$set": {"tag": user, "xp": serverstats['xp_per_message'], "rank": 1, "background": " ",
+                             "circle": False, "xp_color": "#ffffff", "name": f"{member}",
+                             "pfp": f"{member.avatar_url}", "warnings": 0}})
+            else:
+                getGuild = levelling.find_one({"server": member.guild.id})
+                newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>", "xp": getGuild["xp_per_message"],
+                           "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0, "name": str(member)}
+                levelling.insert_one(newuser)
+                print(f"User: {member.id} has been added to the database!")
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
