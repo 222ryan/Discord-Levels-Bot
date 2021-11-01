@@ -1,0 +1,31 @@
+# ======================================================================================
+#                                 SEASONAL CONFIG
+# ======================================================================================
+
+# The amount of extra xp a user receives
+bonus_xp: 2
+
+
+# ======================================================================================
+#                                    Dates
+# ======================================================================================
+
+# When do you expect to start the easter event? (MONTH = April - Don't worry about year, it's already handled for you)
+easter_start_date: 1
+
+# When do you expect to start the Summer event? (MONTH = July - Don't worry about year, it's already handled for you)
+summer_start_date: 20
+
+# When do you expect to start the summer event? (MONTH = October - Don't worry about year, it's already handled for you)
+halloween_start_date: 10
+
+# When do you expect to start the summer event? (MONTH = December - Don't worry about year, it's already handled for you)
+christmas_start_date: 15
+
+
+# ======================================================================================
+#                                    THE END
+# ======================================================================================
+
+
+

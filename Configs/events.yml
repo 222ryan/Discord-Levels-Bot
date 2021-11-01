@@ -1,0 +1,49 @@
+# ======================================================================================
+#                                 EVENTS CONFIG
+# ======================================================================================
+
+# How long an event should be sent to servers (Note: Value is calculated by minutes)
+time: 1
+
+# ======================================================================================
+#                                 REACTION EVENT
+# ======================================================================================
+
+# The Emojis users will have to react to
+reaction_emoji: [⬜, 🟥, 🟧, 🟦, 🟩]
+
+# How much XP will the winner earn
+reaction_xp: 50
+
+# How long the event lasts (In seconds - If no one completes the event, it will automatically end)
+reaction_event_length: 10
+
+
+# ======================================================================================
+#                                 UNSCRAMBLE EVENT
+# ======================================================================================
+
+# The word list the bot will pick from (want random words? go to: https://www.randomlists.com/random-words and then go to https://arraythis.com/ to easily turn the words into an array)
+word_list: ["Ghost", "Haunted House", "Haunting", "Paranormal", "Phantom", "Possessed", "Spirit", "Witch", "Pumpkin", "Spider", "Web", "Trick or treat", "Evil", "Grave", "Satan", "Bat", "Skull", "Zombie", "Hound", "Demon"]
+
+# How much XP will the winner earn
+unscramble_xp: 150
+
+# How long the event lasts (In seconds - If no one completes the event, it will automatically end)
+unscramble_event_length: 25
+
+# If the event should check if the message is case-sensitive or not (e.g If true and word is Test, user has to enter Tree exactly - If false and word is Test, user can enter for examples: Test, test, tEsT, TeSt, etc)
+case_sensitive: False
+
+# ======================================================================================
+#                                 MATHS EVENT
+# ======================================================================================
+
+# How much XP will the winner earn
+maths_xp: 100
+
+# What Operators should the bot use? (Examples: +, -, *, /)
+operators: [+, -]
+
+# How long the event lasts (In seconds - If no one completes the event, it will automatically end)
+maths_event_length: 15
