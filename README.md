@@ -27,7 +27,7 @@ The Rank Card contains the following:
 *`Addons` are fast ways to add features to the bot without writing any code. More Addons are to come!*
 | Name   | Information | Download |
 | ------------- | ------------- | ------------- |
-| Extras+ | Includes command for adding or removing xp from a user. Also includes a Help command.  | [v1.0.3](https://www.dropbox.com/s/37qmb4w4sp18in6/Extras%2B.zip?dl=1)|
+| Extras+ | Includes command for adding or removing xp from a user. Also includes a Help command.  | [v1.0.4](https://www.dropbox.com/s/37qmb4w4sp18in6/Extras%2B.zip?dl=1)|
 | Profile+  | Lets the user change their Background, XP Colour and if their profile picture is circular or not.  | [v1.0.1](https://www.dropbox.com/s/8rdg844qo1x1s76/Profile%2B.zip?dl=1) |
 | Clan System  | Allows users to create a clan and invite up to 9 other members to earn xp together  | [v1.0.2](https://www.dropbox.com/s/3dy29k96v4w7t21/Clan%20System.zip?dl=1) |
 | Vocal System  | Users can earn a certain amount xp for a certain amount of time spent in a voice channel  | [v1.0.1](https://www.dropbox.com/s/f7ktc9gv1jn99f1/Vocal%20System.zip?dl=1) |
