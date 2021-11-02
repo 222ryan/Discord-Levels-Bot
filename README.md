@@ -12,6 +12,8 @@ Please be aware of a few things. You must use `Python v3.5` and up. You will als
 	  
 *Running into problems? Want to submit a bug report or suggestion? Join our [Support Server](https://discord.gg/E56eZdNjK4)*
 
+**NEW!** `Modern Economy` is now available with Modern Levels integration! Get it [here.](https://github.com/KumosLab/Discord-Economy-Bot)
+
 # Rank Card
 ![](https://cdn.discordapp.com/attachments/831180817064656907/865171009207009280/MODERN_LEVELS_4.png)
 `Modern Levels` comes with a Rank Card which each user can customise their `Background`, `XPColour` or `Profile Picture Shape`.
