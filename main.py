@@ -68,7 +68,7 @@ async def addons(ctx):
     embed = discord.Embed(title="ADDON PACKAGES")
 
     # Clan System
-    if os.path.exists("Clan System.py") is True:
+    if os.path.exists("Addons/Clan System.py") is True:
         embed.add_field(name="Clan System", value="`Installed ✅`")
     else:
         embed.add_field(name="Clan System", value="`Installed ❌`")
