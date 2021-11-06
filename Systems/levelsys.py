@@ -30,7 +30,6 @@ if os.path.exists("Configs/holidayconfig.yml") is True:
     with open("Configs/holidayconfig.yml", "r", encoding="utf-8") as file3:
         holidayconfig = yaml.load(file3)
 
-
 # Vac-API, no need for altering!
 vac_api = vacefron.Client()
 
@@ -93,7 +92,7 @@ class levelsys(commands.Cog):
                 if channel is None:
                     return
                 if config['level_up_ping'] is True:
-                    await channel.send(f"{ctx.author.mention}")
+                    await channel.send(f"{ctx.author.mention},")
                 msg = await channel.send(embed=embed2)
                 level_roles = serverstats["role"]
                 level_roles_num = serverstats["level"]
@@ -101,16 +100,17 @@ class levelsys(commands.Cog):
                     if lvl == int(level_roles_num[i]):
                         await ctx.author.add_roles(
                             discord.utils.get(ctx.author.guild.roles, name=level_roles[i]))
-                        await ctx.author.remove_roles(discord.utils.get(ctx.author.guild.roles, name=level_roles[i-1]))
-                        embed = discord.Embed(title=":tada: **LEVEL UP**",
-                                              description=f"{ctx.author.mention} just reached Level: **{lvl}**",
-                                              colour=config['embed_colour'])
-                        embed.add_field(name="Next Level:",
-                                        value=f"`{int(config['xp_per_level'] * 2 * ((1 / 2) * lvl))}xp`")
-                        embed.add_field(name="Role Unlocked", value=f"`{level_roles[i]}`")
+                        embed2.add_field(name="Role Unlocked", value=f"`{level_roles[i]}`")
                         print(f"User: {ctx.author} | Unlocked Role: {level_roles[i]}")
-                        embed.set_thumbnail(url=ctx.author.avatar_url)
-                        await msg.edit(embed=embed)
+                        embed2.set_thumbnail(url=ctx.author.avatar_url)
+                        await msg.edit(embed=embed2)
+                        # remove the previous role
+                        if i > 0:
+                            await ctx.author.remove_roles(
+                                discord.utils.get(ctx.author.guild.roles, name=level_roles[i - 1]))
+                        else:
+                            continue
+
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
@@ -129,10 +129,14 @@ class levelsys(commands.Cog):
                     guild.me: discord.PermissionOverwrite(read_messages=True)
                 }
                 prefix = config['Prefix']
-                embed = discord.Embed(title=f"👋 // Greetings, {guild.name}", description=f"Thanks for inviting me, my prefix here is: `{prefix}`")
+                embed = discord.Embed(title=f"👋 // Greetings, {guild.name}",
+                                      description=f"Thanks for inviting me, my prefix here is: `{prefix}`")
                 if os.path.exists("Addons/Extras+.py") is True:
-                    embed.add_field(name="🚀 | What's Next?", value=f"`{prefix}help` displays every command you need to know for {self.client.user.mention}", inline=False)
-                embed.add_field(name="🧭 | Important Links:", value=f"[Support Server](https://www.discord.gg/E56eZdNjK4) - Get support for {self.client.user.mention}")
+                    embed.add_field(name="🚀 | What's Next?",
+                                    value=f"`{prefix}help` displays every command you need to know for {self.client.user.mention}",
+                                    inline=False)
+                embed.add_field(name="🧭 | Important Links:",
+                                value=f"[Support Server](https://www.discord.gg/E56eZdNjK4) - Get support for {self.client.user.mention}")
                 if guild.system_channel is None:
                     await guild.create_text_channel('private', overwrites=overwrites)
                     channel = discord.utils.get(guild.channels, name="private")
@@ -154,8 +158,9 @@ class levelsys(commands.Cog):
                     continue
                 else:
                     newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>",
-                                   "xp": serverstats['xp_per_message'],
-                                   "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0, "name": str(member)}
+                               "xp": serverstats['xp_per_message'],
+                               "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0,
+                               "name": str(member)}
                     levelling.insert_one(newuser)
                 print(f"User: {member.id} has been added to the database!")
 
@@ -169,7 +174,6 @@ class levelsys(commands.Cog):
             if not member.bot:
                 levelling.delete_one({"guildid": guild.id, "id": member.id})
                 print(f"User: {member.id} has been removed from the database!")
-
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -185,8 +189,10 @@ class levelsys(commands.Cog):
                              "circle": False, "xp_colour": "#ffffff", "name": f"{member}", "warnings": 0}})
             else:
                 getGuild = levelling.find_one({"server": member.guild.id})
-                newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>", "xp": getGuild["xp_per_message"],
-                           "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0, "name": str(member)}
+                newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>",
+                           "xp": getGuild["xp_per_message"],
+                           "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0,
+                           "name": str(member)}
                 levelling.insert_one(newuser)
                 print(f"User: {member.id} has been added to the database!")
 
