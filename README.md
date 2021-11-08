@@ -38,3 +38,4 @@ The Rank Card contains the following:
 | Events  | Events will allow users to gain xp with events that will send every so often. The user that completes the event first wins xp. The events include Reaction Game, Unscramble Game and Maths Game | [v1.0.5](https://www.dropbox.com/s/j7yl4cl444l2xnx/Events.zip?dl=1) |
 
 
+
