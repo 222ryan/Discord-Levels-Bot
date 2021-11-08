@@ -19,35 +19,44 @@ class talkchannels(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     @commands.guild_only()
-    async def talkchannel(self, ctx, state=None, channel=None):
+    async def talkchannel(self, ctx, state=None, channel : discord.TextChannel = None):
         prefix = config['Prefix']
-        if state is None:
-            embed = discord.Embed(title=":x: SETUP FAILED!", description=f"`You need to define a state! {prefix}talkchannel <add|remove> <channel>`", colour=config['error_embed_colour'])
+        if state == None:
+            embed = discord.Embed(description=":x: You need to state if you want to `add` or `remove`")
             await ctx.send(embed=embed)
             return
         if channel is None:
-            embed = discord.Embed(title=":x: SETUP FAILED!",
-                                  description=f"`You need to define a channel! {prefix}talkchannel <add|remove> <channel>`",
-                                  colour=config['error_embed_colour'])
+            embed = discord.Embed(description=":x: You need to state a channel")
             await ctx.send(embed=embed)
             return
-        elif state.lower() == "add":
-            channel = discord.utils.get(ctx.guild.channels, name=channel)
+        if state.lower() == "add":
             stats = levelling.find_one({"server": ctx.guild.id})
-            if stats['ignored_channels'] == "None":
-                levelling.update_one({"server": ctx.guild.id}, {"$set": {"ignored_channels": []}})
-            levelling.update_one({"server": ctx.guild.id}, {"$push": {"ignored_channels": channel.id}})
-            embed = discord.Embed(title="✅ TALK CHANNEL ADDED!", description=f"`You can now earn xp in: {channel.name}`", colour=config['success_embed_colour'])
+            if channel.id in stats['ignored_channels']:
+                embed = discord.Embed(description=":x: This channel is already in the list")
+                await ctx.send(embed=embed)
+                return
+            stats['ignored_channels'].append(channel.id)
+            levelling.update_one({"server": ctx.guild.id}, {"$set": {"ignored_channels": stats['ignored_channels']}})
+            embed = discord.Embed(description=f":white_check_mark: Added {channel.mention} to the Talk List!")
             await ctx.send(embed=embed)
             return
-        elif state.lower() == "remove":
-            channel = discord.utils.get(ctx.guild.channels, name=channel)
-            levelling.update_one({"server": ctx.guild.id}, {"$pull": {"ignored_channels": channel.id}})
-            embed = discord.Embed(title="✅ TALK CHANNEL REMOVED!",
-                                  description=f"`You can no longer earn xp in: {channel.name}`",
-                                  colour=config['success_embed_colour'])
+        if state.lower() == "remove":
+            stats = levelling.find_one({"server": ctx.guild.id})
+            if channel.id not in stats['ignored_channels']:
+                embed = discord.Embed(description=":x: This channel is not in the list")
+                await ctx.send(embed=embed)
+                return
+            stats['ignored_channels'].remove(channel.id)
+            levelling.update_one({"server": ctx.guild.id}, {"$set": {"ignored_channels": stats['ignored_channels']}})
+            embed = discord.Embed(description=f":white_check_mark: Removed {channel.mention} from the Talk List!")
             await ctx.send(embed=embed)
             return
+        else:
+            embed = discord.Embed(description=":x: You need to state if you want to `add` or `remove`")
+            await ctx.send(embed=embed)
+            return
+
+
 
     @commands.command()
     @commands.guild_only()
