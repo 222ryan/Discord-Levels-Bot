@@ -36,6 +36,8 @@ The Rank Card contains the following:
 | Holiday System  | During seasonal periods, users can earn a boosted amount of xp for a certain duration of time. | [v1.0.2](https://www.dropbox.com/s/oox59aqiwl7tqx2/Holiday%20System.zip?dl=1) |
 | Stats  | Adds a monitor command to display bot stats, such as cpu and memory usage as well as other statistics | [v1.0.1](https://www.dropbox.com/s/3l30s2n11ph823e/Stats.zip?dl=1) |
 | Events  | Events will allow users to gain xp with events that will send every so often. The user that completes the event first wins xp. The events include Reaction Game, Unscramble Game and Maths Game | [v1.0.5](https://www.dropbox.com/s/j7yl4cl444l2xnx/Events.zip?dl=1) |
+| Antispam  | Antispam prevents users from gaining xp after sending too many messages in a short period of time | [v1.0.0](https://www.dropbox.com/s/s3ngfg2uni5myux/Antispam.zip?dl=1) |
+
 
 
 
