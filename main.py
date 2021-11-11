@@ -128,11 +128,6 @@ logging.info(f"Loading Level System")
 client.load_extension("Systems.levelsys")
 logging.info(f"Loaded Level System")
 
-if spamconfig['antispam_system'] is True:
-    logging.info(f"Loading Anti-Spam System")
-    client.load_extension("Systems.spamsys")
-    logging.info(f"Loaded Anti-Spam System")
-
 logging.info("------------- Finished Loading -------------")
 
 # Uses the bot token to login, so don't remove this.
