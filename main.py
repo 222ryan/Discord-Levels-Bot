@@ -18,8 +18,6 @@ load_dotenv()
 yaml = YAML()
 with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
-with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file2:
-    spamconfig = yaml.load(file2)
 
 # Command Prefix + Removes the default discord.py help command
 client = commands.Bot(command_prefix=commands.when_mentioned_or(config['Prefix']), intents=discord.Intents.all(), case_insensitive=True)
