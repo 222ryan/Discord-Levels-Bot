@@ -7,8 +7,6 @@ from Systems.levelsys import levelling
 yaml = YAML()
 with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
-with open("Configs/spamconfig.yml", "r", encoding="utf-8") as file:
-    spamconfig = yaml.load(file)
 
 
 class talkchannels(commands.Cog):

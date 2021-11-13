@@ -43,26 +43,41 @@ class levelsys(commands.Cog):
             serverstats = levelling.find_one({"server": ctx.guild.id})
             bot_stats = levelling.find_one({"bot_name": self.client.user.name})
 
-            talk_channels = serverstats['ignored_channels']
-            if len(talk_channels) > 1 and ctx.channel.id not in talk_channels or config['Prefix'] in ctx.content:
+            # check if prefix is in the message
+            if config['Prefix'] in ctx.content:
                 stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
                 xp = stats["xp"]
                 levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
-            elif len(talk_channels) < 1 or ctx.channel.id in talk_channels:
+            else:
+                user = ctx.author
+                role = discord.utils.get(ctx.guild.roles, name=serverstats["double_xp_role"])
+
+                # check if the length of talk channels is greater than 0
+                talk_channels = serverstats['ignored_channels']
+                if len(talk_channels) > 0 and ctx.channel.id not in talk_channels:
+                    if role in user.roles:
+                        stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
+                        xp = stats["xp"] + serverstats['xp_per_message'] * 2
+                        levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
+                    else:
+                        stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
+                        xp = stats["xp"]
+                        levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
+                elif len(talk_channels) < 1 or ctx.channel.id in talk_channels:
+                    if role in user.roles:
+                        stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
+                        xp = stats["xp"] + serverstats['xp_per_message'] * 2
+                        levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
+                    else:
+                        stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
+                        xp = stats['xp'] + serverstats['xp_per_message']
+                        levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
+
                 if bot_stats["event_state"] is True:
                     stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
                     xp = stats['xp'] + serverstats['xp_per_message'] * holidayconfig['bonus_xp']
                     levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
-                user = ctx.author
-                role = discord.utils.get(ctx.guild.roles, name=serverstats["double_xp_role"])
-                if role in user.roles:
-                    stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
-                    xp = stats["xp"] + serverstats['xp_per_message'] * 2
-                    levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
-                else:
-                    stats = levelling.find_one({"guildid": ctx.guild.id, "id": ctx.author.id})
-                    xp = stats["xp"] + serverstats['xp_per_message']
-                    levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
+
 
             xp = stats['xp']
             lvl = 0
@@ -110,13 +125,18 @@ class levelsys(commands.Cog):
                             continue
 
 
+
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
         await asyncio.sleep(1.5)
         serverstats = levelling.find_one({"server": guild.id})
         if serverstats is None:
+            if guild.system_channel is None:
+                levelchannel = "Private"
+            else:
+                levelchannel = guild.system_channel.name
             newserver = {"server": guild.id, "xp_per_message": 10, "double_xp_role": "None",
-                         "level_channel": "private",
+                         "level_channel": levelchannel,
                          "Antispam": False, "mutedRole": "None", "mutedTime": 300, "warningMessages": 5,
                          "muteMessages": 6,
                          "ignoredRole": "None", "event": "Ended", "ignored_channels": []}
