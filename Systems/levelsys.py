@@ -50,9 +50,11 @@ class levelsys(commands.Cog):
                 levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"xp": xp}})
             else:
                 user = ctx.author
-                role = discord.utils.get(ctx.guild.roles, name=serverstats["double_xp_role"])
+                try:
+                    role = discord.utils.get(ctx.guild.roles, name=serverstats["double_xp_role"])
+                except:
+                    role = None
 
-                # check if the length of talk channels is greater than 0
                 talk_channels = serverstats['ignored_channels']
                 if len(talk_channels) > 0 and ctx.channel.id not in talk_channels:
                     if role in user.roles:
@@ -139,7 +141,7 @@ class levelsys(commands.Cog):
                          "level_channel": levelchannel,
                          "Antispam": False, "mutedRole": "None", "mutedTime": 300, "warningMessages": 5,
                          "muteMessages": 6,
-                         "ignoredRole": "None", "event": "Ended", "ignored_channels": []}
+                         "ignoredRole": "None", "event": "Ended", "ignored_channels": [], "level": [], "role": []}
             levelling.insert_one(newserver)
             if config['private_message'] is True:
                 overwrites = {

@@ -46,10 +46,10 @@ async def on_ready():
     print('------')
     await client.change_presence(status=config_activity, activity=activity)
     for guild in client.guilds:
-        serverstats = levelling.find({"server": guild.id, "ignored_channels": {"$exists": False}})
+        serverstats = levelling.find({"server": guild.id, "role": {"$exists": False}})
         for doc in serverstats:
-            levelling.update_one({"server": guild.id}, {"$set": {"ignored_channels": []}})
-            print(f"Guild: {guild.name} was missing 'ignored_channels' -  Automatically added it!")
+            levelling.update_one({"server": guild.id}, {"$set": {"role": [], "level": []}})
+            print(f"Guild: {guild.name} was missing 'ROLE' and 'LEVEL' -  Automatically added it!")
         userstats = levelling.find({"guildid": guild.id, "name": {"$exists": False}, "id": {"$exists": True}})
         for doc in userstats:
             member = await client.fetch_user(doc["id"])
