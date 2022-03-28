@@ -7,12 +7,13 @@
 
 <p align="center">
 	  Welcome to Modern Levels  </p>
+	  
+**INFO!** Modern Levels 2.0 is well underway! Completely re-written from the ground up with custom rank card generators, custom level up images, MongoDB & Local database support, paginated leaderboard, functions for everything and a lot more! You can follow the progress in the Discord server!
 
 Please be aware of a few things. You must use `Python v3.5` and up. You will also be required to have a `MongoDB` Database for this to work. Please also keep in mind that there are currently **2** branches, ``Main & Beta``. 
 	  
 *Running into problems? Want to submit a bug report or suggestion? Join our [Support Server](https://discord.gg/E56eZdNjK4)*
 
-**NEW!** `Modern Economy` is now available with Modern Levels integration! Get it [here.](https://github.com/KumosLab/Discord-Economy-Bot)
 
 # Rank Card
 ![](https://cdn.discordapp.com/attachments/831180817064656907/865171009207009280/MODERN_LEVELS_4.png)
