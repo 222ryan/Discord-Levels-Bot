@@ -16,7 +16,7 @@ class Extras(commands.Cog):
         
     @commands.Cog.listener()
     async def on_ready(self):
-        print("[Extras Addon] Addon Started")
+        print("[Extras Addon] Addon Started - Add or Remove XP from users!")
 
     @commands.command()
     @commands.has_permissions(administrator=True)
