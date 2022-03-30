@@ -11,3 +11,5 @@ waiting_time: 300
 # How much XP is earned per waiting_time
 # Default: 100 XP
 xp_per_time: 100
+
+test: test
