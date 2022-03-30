@@ -21,7 +21,7 @@ class Vocal(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print("[Vocal Addon] Addon Started!")
+        print("[Vocal Addon] Addon Started - Join a VC to earn XP!")
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before, after):
