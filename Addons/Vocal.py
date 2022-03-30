@@ -21,7 +21,7 @@ class Vocal(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print("[Vocal Addon] Addon has Started!")
+        print("[Vocal Addon] Addon Started!")
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before, after):
