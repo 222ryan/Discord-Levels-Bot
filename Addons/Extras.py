@@ -34,6 +34,8 @@ class Extras(commands.Cog):
             await KumosLab.Database.check.levelUp(user=user, guild=ctx.guild)
             embed = discord.Embed(description=f"🟢 **SUCCESS**: `Added {xp}xp to {user}`")
             await ctx.reply(embed=embed)
+            await self.client.process_commands(ctx)
+        
 
         except Exception as e:
             print(f"[Extras Addon] {e}")
