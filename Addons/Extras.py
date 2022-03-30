@@ -13,6 +13,10 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
 class Extras(commands.Cog):
     def __init__(self, client):
         self.client = client
+        
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print("[Extras Addon] Addon Started")
 
     @commands.command()
     @commands.has_permissions(administrator=True)
