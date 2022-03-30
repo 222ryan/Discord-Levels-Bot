@@ -38,7 +38,7 @@ class Vocal(commands.Cog):
                     await KumosLab.Database.check.levelUp(user=member, guild=guild)
 
             except Exception as e:
-                print("[Vocal Addon] Error: " + str(e))
+                print("[Vocal Addon] " + str(e))
                 return
 
 def setup(client):
