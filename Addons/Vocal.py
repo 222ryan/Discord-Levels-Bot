@@ -1,5 +1,3 @@
-Addons can be installed via the addon command!
-
 import asyncio
 import os
 
