@@ -1,0 +1,112 @@
+# ======================================================================================
+#                             WELCOME TO THE CONFIG
+#                                      FOR
+#                               MODERN LEVELS 2.0
+# ======================================================================================
+
+# NOTE: BOT_TOKEN DETAILS ARE STORED IN THE .env FILE!
+# The prefix for the bots commands
+Prefix: "!"
+
+# Determines the database type to use. Note: MongoDB requires the details to be stored inside the .env file! **Note: Local is recommended**
+# MongoDB / Local
+Database_Type: "local"
+
+# Member ID of the bot owner (In most cases, whoever is reading this sentence right now AKA you.) **YOU WILL RECEIVE ERRORS IF THIS IS NOT FILLED**
+Bot_Owner: ""
+
+# The default background for each user when they get added to the database || Please do not leave this as nothing!! If you get errors, it means the url is invalid.
+# I recommend using imgur to get the link for your background.
+Default_Background: "https://coolbackgrounds.io/images/backgrounds/black/pure-black-background-f82588d3.jpg"
+
+# Default XP Colour for each user when they get added to the database
+Default_XP_Colour: "#ffffff"
+
+# The default border for the users profile picture on the rank card **ONLY IF THE RANK GENERATOR IS CUSTOM!!**
+Default_Border: "https://coolbackgrounds.io/images/backgrounds/black/pure-black-background-f82588d3.jpg"
+
+# Enables / Disables the help command (true = enabled, false = disabled)
+help_command: True
+
+
+# ======================================================================================
+#                                     XP
+# ======================================================================================
+
+# XP Type  'words' = User xp increases by how many words were said,
+#          'ranrange' = User xp increases by a random number between the min and max
+#          'normal' = User xp increases by set value
+xp_type: 'ranrange'
+
+# The amount of xp a user gets when they send a message -- This is only used if the xp_type is set to 'normal'
+xp_normal_amount: 10
+
+# The minimum amount of xp a user can gain -- This is only used if the xp_type is set to 'ranrange'
+xp_ranrange_min: 5
+
+# The maximum amount of xp a user can gain -- This is only used if the xp_type is set to 'ranrange'
+xp_ranrange_max: 50
+
+# How much XP is required per level (e.g - xp_per_level: 10 = Level 1 would require 10 xp to level up. Level 2 would require 20 xp to level up)
+xp_per_level: 100
+
+
+# ======================================================================================
+#                                  LEADERBOARD
+# ======================================================================================
+
+# Set aliases for the leaderboard command
+leaderboard_alias: ['lb', 'leader', 'rankings']
+
+
+# ======================================================================================
+#                                   RANK
+# ======================================================================================
+# Sets aliases for the rank command **DO NOT ADD 'RANK' AS AN ALIAS, RANK IS THE MAIN NAME FOR THE COMMAND!**
+rank_alias: ['r', 'level', 'l', 'stats', 'xp', 'progress']
+
+# Sends a ping to the user that levelled up
+level_up_ping: True
+
+# The background image for the level up card
+level_up_background: "https://wallpaperaccess.com/full/4956346.jpg"
+
+# The amount of blur on the background image for the level up card
+level_up_blur: 10
+
+# RankCard Generator (Vacefron, Custom, Text)
+#                    'Vacefron' - Uses the Vacefron rank card generator (The API may go down occasionally, or you can be rate limited) 1050 x 300
+#                    'Custom' - Uses the custom rank card generator (Will never go down / be rate limited) - 1050 x 240 - Can be most resource intensive at times
+#                    'Text' - Uses the text rank card generator (Will never go down / be rate limited) - Most resource light
+rank_generator: 'custom'
+
+# If the rank generator is set to custom, the name of the user on the rank card is the colour of the users xp colour **ONLY IF RANK GENERATOR IS CUSTOM!!**
+name_colour: True
+
+
+# ======================================================================================
+#                                   EMBED
+# ======================================================================================
+
+
+*Note: Below these have not been fully implemented, in 2.0.1, they will be!
+
+# Rank Embed Colour | Must Be Hex Notation
+rank_embed_colour: 0x4863A0
+
+# Leaderboard Embed Colour | Must Be Hex Notation (Replace # with 0x)
+leaderboard_embed_colour: 0xffffff
+
+# Embed Colour | Must Be Hex Notation
+embed_colour: 0xffffff
+
+# Error Embed Colour | Must Be Hex Notation
+error_embed_colour: 0x4863A0
+
+# Success Embed Colour | Must Be Hex Notation
+success_embed_colour: 0x4863A0
+
+
+# ======================================================================================
+#                                    THE END
+# ======================================================================================

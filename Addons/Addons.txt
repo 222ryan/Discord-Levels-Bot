@@ -1,0 +1,5 @@
+
+
+You can view the list of available addons via the command: !addon
+You can install an addon via the command: !addon <addon name>
+You can view the installed addons via the command: !addons
