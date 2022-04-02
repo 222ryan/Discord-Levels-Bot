@@ -43,7 +43,7 @@ class addonmanager(commands.Cog):
                 embed.add_field(name="📢 Status", value=f"`{config['Prefix']}addon status`", inline=False)
                 await ctx.reply(embed=embed)
             else:
-                if addon.title() not in ["Vocal", "Clan", "Extras", "Status"]:
+                if addon.title() not in ["Vocal", "Clan", "Extras", "Status", "Prestige"]:
                     await ctx.reply("❌ **Addon not found**")
                 else:
                     link = "https://github.com/KumosLab/Discord-Levels-Bot.git"
