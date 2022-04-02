@@ -1,14 +1,13 @@
 # ======================================================================================
 #                             WELCOME TO THE CONFIG
 #                                      FOR
-#                                THE VOCAL ADDON
+#                                THE STATUS ADDON
 # ======================================================================================
 
-# How many minutes until someone can earn XP in a VC (Repeats every x minutes)
-# Default: 5 minutes (300 seconds)
-waiting_time: 300
+# IDLE, DND, ONLINE, OFFLINE
+bot_activity: online
 
-# How much XP is earned per waiting_time
-# Default: 100 XP
-xp_per_time: 100
+# Set what the bot is currently playing
+bot_status_text: "[!] | Kumo"
+
 
