@@ -89,7 +89,7 @@ name_colour: True
 # ======================================================================================
 
 
-*Note: Below these have not been fully implemented, in 2.0.1, they will be!
+Note Below these have not been fully implemented, in 2.0.1, they will be!
 
 # Rank Embed Colour | Must Be Hex Notation
 rank_embed_colour: 0x4863A0
