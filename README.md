@@ -4,6 +4,9 @@
     <img src="https://discordapp.com/api/guilds/809362745354354688/widget.png?style=shield" alt="Discord Server">
   </a><h1 align="center">Welcome To Modern Levels</h1>
       </p>
+
+**NOTE**: Take part in the community voting in our Discord Server to vote for the next bot! Pick between `GeoBot, Modern Economy 2.0 & Dungeons & Quests`! (Discord Link stated below)
+                        
 Modern Levels is the most advanced open-source Discord Levelling Bot
 <ul>
 <li>Offers a plethora of config options to easily customise how the bot functions.</li>
