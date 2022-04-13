@@ -33,14 +33,27 @@ class setcolour(commands.Cog):
                 embed = discord.Embed(description=f"🟢 **SUCCESS**: `Colour Changed to {hex_number}`", color=int(str(hex_number).replace("#", "0x"), 16))
                 await ctx.reply(embed=embed)
             else:
-                if len(hex) > 7 or len(hex) < 7:
-                    embed = discord.Embed(
-                        description=f"🔴 **ERROR**: `Colour Change Failed! - Invalid Hex Code`")
-                    await ctx.reply(embed=embed)
+                # check if hex includes #
+                if hex.startswith("#"):
+                    if len(hex) > 7 or len(hex) < 7:
+                        embed = discord.Embed(
+                            description=f"🔴 **ERROR**: `Colour Change Failed! - Invalid Hex Code`")
+                        await ctx.reply(embed=embed)
+                    else:
+                        await KumosLab.Database.set.colour(user=member,guild=member.guild, hex=hex)
+                        embed = discord.Embed(description=f"🟢 **SUCCESS**: `Colour Changed to {hex}`", color=int(str(hex).replace("#", "0x"), 16))
+                        await ctx.reply(embed=embed)
+                # add # to hex
                 else:
-                    await KumosLab.Database.set.colour(user=member,guild=member.guild, hex=hex)
-                    embed = discord.Embed(description=f"🟢 **SUCCESS**: `Colour Changed to {hex}`", color=int(str(hex).replace("#", "0x"), 16))
-                    await ctx.reply(embed=embed)
+                    new_hex = "#" + hex
+                    if len(hex) > 7 or len(new_hex) < 7:
+                        embed = discord.Embed(
+                            description=f"🔴 **ERROR**: `Colour Change Failed! - Invalid Hex Code`")
+                        await ctx.reply(embed=embed)
+                    else:
+                        await KumosLab.Database.set.colour(user=member,guild=member.guild, hex=new_hex)
+                        embed = discord.Embed(description=f"🟢 **SUCCESS**: `Colour Changed to {new_hex}`", color=int(str(new_hex).replace("#", "0x"), 16))
+                        await ctx.reply(embed=embed)
 
 
         except Exception as e:

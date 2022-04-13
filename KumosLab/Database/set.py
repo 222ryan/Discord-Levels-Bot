@@ -46,6 +46,7 @@ async def xp(user: discord.Member = None, guild: discord.Guild = None, amount=No
             # add xp
             cursor.execute("UPDATE levelling SET xp = ? WHERE user_id = ? AND guild_id = ?", (amount, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/add.py' - " + str(e))
@@ -81,6 +82,7 @@ async def level(user: discord.Member = None, guild: discord.Guild = None, amount
             # add level
             cursor.execute("UPDATE levelling SET level = ? WHERE user_id = ? AND guild_id = ?", (amount, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/set.py' - " + str(e))
@@ -116,6 +118,7 @@ async def background(user: discord.Member = None, guild: discord.Guild = None, l
             # add level
             cursor.execute("UPDATE levelling SET background = ? WHERE user_id = ? AND guild_id = ?", (link, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/set.py' - " + str(e))
@@ -151,6 +154,7 @@ async def border(user: discord.Member = None, guild: discord.Guild = None, link=
             # add level
             cursor.execute("UPDATE levelling SET border = ? WHERE user_id = ? AND guild_id = ?", (link, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/set.py' - " + str(e))
@@ -186,6 +190,7 @@ async def colour(user: discord.Member = None, guild: discord.Guild = None, hex=N
             # add level
             cursor.execute("UPDATE levelling SET xp_colour = ? WHERE user_id = ? AND guild_id = ?", (hex, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/set.py' - " + str(e))
@@ -221,6 +226,7 @@ async def blur(user: discord.Member = None, guild: discord.Guild = None, amount=
             # add level
             cursor.execute("UPDATE levelling SET blur = ? WHERE user_id = ? AND guild_id = ?", (amount, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/set.py' - " + str(e))
@@ -242,6 +248,7 @@ async def mainChannel(guild: discord.Guild = None, channel: discord.TextChannel 
             cursor = db.cursor()
             cursor.execute("UPDATE levelling SET main_channel = ? WHERE guild_id = ?", (channel.name, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/set.py' - " + str(e))

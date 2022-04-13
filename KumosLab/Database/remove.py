@@ -46,6 +46,7 @@ async def xp(user: discord.Member = None, guild: discord.Guild = None, amount=No
             # add xp
             cursor.execute("UPDATE levelling SET xp = xp - ? WHERE user_id = ? AND guild_id = ?", (amount, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/remove.py' - " + str(e))
@@ -81,6 +82,7 @@ async def level(user: discord.Member = None, guild: discord.Guild = None, amount
             # add level
             cursor.execute("UPDATE levelling SET level = level - ? WHERE user_id = ? AND guild_id = ?", (amount, user.id, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/remove.py' - " + str(e))
@@ -107,6 +109,7 @@ async def role(guild: discord.Guild = None, role_name: discord.Role = None, role
             # delete guild, role and level
             cursor.execute("DELETE FROM levelling WHERE guild_id = ? AND role = ? AND role_levels = ?", (guild.id, role_name.name, role_level))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/remove.py' - " + str(e))
@@ -130,12 +133,10 @@ async def talkchannel(guild: discord.Guild = None, channel: discord.TextChannel 
         elif config['Database_Type'].lower() == "local":
             db = sqlite3.connect("KumosLab/Database/Local/serverbase.sqlite")
             cursor = db.cursor()
-            cursor.execute("SELECT * FROM levelling WHERE guild_id = ? AND talkchannels = ?", (guild.id, channel.id))
-            result = cursor.fetchone()
-            if result is not None:
-                return "error"
-            cursor.execute("DELETE FROM levelling WHERE guild_id = ? AND talkchannels = ?", (guild.id, channel.id))
+            # set talkchannels to none
+            cursor.execute("UPDATE levelling SET talkchannels = ? WHERE guild_id = ?", (None, guild.id))
             db.commit()
+            cursor.close()
             return
     except Exception as e:
         print("Error in 'KumosLab/Database/remove.py' - " + str(e))

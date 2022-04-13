@@ -77,8 +77,11 @@ async def levelUp(user: discord.Member = None, guild: discord.Guild = None):
             embed = discord.Embed()
 
             member = user
-            channel = discord.utils.get(member.guild.channels,
-                                        name=await KumosLab.Database.get.mainChannel(guild=member.guild))
+            if await KumosLab.Database.get.mainChannel(guild=guild) is None:
+                channel = guild.system_channel
+            else:
+                channel = discord.utils.get(member.guild.channels,
+                                            name=await KumosLab.Database.get.mainChannel(guild=member.guild))
             if channel is None:
                 return
             if config['level_up_ping'] is True:

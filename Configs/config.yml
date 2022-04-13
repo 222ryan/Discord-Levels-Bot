@@ -13,7 +13,7 @@ Prefix: "!"
 Database_Type: "local"
 
 # Member ID of the bot owner (In most cases, whoever is reading this sentence right now AKA you.) **YOU WILL RECEIVE ERRORS IF THIS IS NOT FILLED**
-Bot_Owner: ""
+Bot_Owner: "512760269764820993"
 
 # The default background for each user when they get added to the database || Please do not leave this as nothing!! If you get errors, it means the url is invalid.
 # I recommend using imgur to get the link for your background.
@@ -27,6 +27,15 @@ Default_Border: "https://coolbackgrounds.io/images/backgrounds/black/pure-black-
 
 # Enables / Disables the help command (true = enabled, false = disabled)
 help_command: True
+
+# Notifies the bot owner when a new version is released (Bot_Owner must be filled)
+update_notify: True
+
+# If XP Chance is enabled or disabled (true = enabled, false = disabled)
+XP_Chance: True
+
+# Chance to earn XP when a user sends a message (Chance Rate, 1 to x) - If number = x, user gains xp
+XP_Chance_Rate: 2
 
 
 # ======================================================================================

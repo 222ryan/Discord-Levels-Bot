@@ -84,6 +84,33 @@ class levelsys(commands.Cog):
         if not ctx.author.bot:
             if ctx.content.startswith(config["Prefix"]):
                 return
+
+            if config['XP_Chance'] is True:
+                chance_rate = config['XP_Chance_Rate']
+                random_num = random.randint(1, chance_rate)
+                if random_num != chance_rate:
+                    return
+
+            channels = await KumosLab.Database.get.talkchannels(guild=ctx.guild)
+            channel_Array = []
+            channel_List = []
+            for channel in channels:
+                channel_Array.append(channel)
+            if channel_Array[0] is None:
+                pass
+            else:
+                for x in channel_Array:
+                    channel = self.client.get_channel(int(x))
+                    channel_List.append(channel.name)
+
+            if str(channel_List) == "[]":
+                pass
+            elif channel_List is not None:
+                if ctx.channel.name in channel_List:
+                    pass
+                else:
+                    return
+
             xp_type = config['xp_type']
             if xp_type.lower() == "normal":
                 to_add = config['xp_normal_amount']

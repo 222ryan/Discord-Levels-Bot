@@ -3,7 +3,7 @@ import sqlite3
 from os import listdir
 
 import ruamel.yaml.error
-from discord.ext import commands
+from discord.ext import commands, ipc
 from discord.ext.commands import CommandNotFound, RoleNotFound, MemberNotFound
 import discord
 from ruamel.yaml import YAML
@@ -16,6 +16,15 @@ import pyfiglet
 
 load_dotenv()
 
+class client(commands.Bot):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.ipc = ipc.Server(self, secret_key="ModernLevels")
+
+    async def on_ipc_error(self, endpoint, error):
+        print(f"IPC Error: {endpoint} raised {error}")
+
 
 # Opens the config and reads it, no need for changes unless you'd like to change the library (no need to do so unless having issues with ruamel)
 yaml = YAML()
@@ -25,8 +34,8 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
 warnings.simplefilter('ignore', ruamel.yaml.error.UnsafeLoaderWarning)
 
 # Command Prefix + Removes the default discord.py help command
-client = commands.Bot(command_prefix=commands.when_mentioned_or(config['Prefix']), intents=discord.Intents.all(), case_insensitive=True)
-client.remove_command('help')
+Client = client(command_prefix=commands.when_mentioned_or(config['Prefix']), intents=discord.Intents.all(), case_insensitive=True)
+Client.remove_command('help')
 
 # sends discord logging files which could potentially be useful for catching errors.
 os.close(os.open("Logs/logs.txt", os.O_CREAT))
@@ -37,7 +46,7 @@ logging.debug('Begin Logging')
 logging.info('Getting ready to login to Discord...')
 
 
-@client.event  # On Bot Startup, Will send some details about the bot and sets it's activity and status. Feel free to remove the print messages, but keep everything else.
+@Client.event  # On Bot Startup, Will send some details about the bot and sets it's activity and status. Feel free to remove the print messages, but keep everything else.
 async def on_ready():
     if config['Database_Type'].lower() == 'local':
         print("Connecting to KumosLab/Database/Local/userbase.sqlite")
@@ -82,10 +91,10 @@ async def on_ready():
           "want "
           "a place to hang out, join the Discord! discord.gg/E56eZdNjK4\n")
     print('Logged In As:')
-    print(f"Username: {client.user.name}\nID: {client.user.id}")
+    print(f"Username: {Client.user.name}\nID: {Client.user.id}")
     print(f'Database Type: {str(config["Database_Type"]).title()}')
 
-@client.event
+@Client.event
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
         return
@@ -101,29 +110,37 @@ async def on_command_error(ctx, error):
         return
     raise error
 
+@Client.ipc.route()
+async def get_guild_ids(data):
+    guildArray = []
+    for guild in Client.guilds:
+        guildArray.append(guild.id)
+    return guildArray
+
 logging.info("------------- Loading -------------")
 for fn in listdir("Commands"):
     if fn.endswith(".py"):
         logging.info(f"Loading: {fn}")
-        client.load_extension(f"Commands.{fn[:-3]}")
+        Client.load_extension(f"Commands.{fn[:-3]}")
         logging.info(f"Loaded {fn}")
 
 for fn in listdir("Addons"):
     if fn.endswith(".py"):
         logging.info(f"Loading: {fn} Addon")
-        client.load_extension(f"Addons.{fn[:-3]}")
+        Client.load_extension(f"Addons.{fn[:-3]}")
         logging.info(f"Loaded {fn} Addon")
 
 for fn in listdir("System"):
     if fn.endswith(".py"):
         logging.info(f"Loading: {fn} System")
-        client.load_extension(f"System.{fn[:-3]}")
+        Client.load_extension(f"System.{fn[:-3]}")
         logging.info(f"Loaded {fn} System")
 logging.info("------------- Finished Loading -------------")
 
 # Uses the bot token to login, so don't remove this.
 token = os.getenv("DISCORD_TOKEN")
-client.run(token)
+Client.ipc.start()
+Client.run(token)
 
 
 # End Of Main

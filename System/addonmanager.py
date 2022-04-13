@@ -40,7 +40,7 @@ class addonmanager(commands.Cog):
                 embed = discord.Embed(title="📬 ADDON MANAGER")
                 embed.add_field(name="📢 Vocal", value=f"`{config['Prefix']}addon vocal`", inline=False)
                 embed.add_field(name="➕ Extras", value=f"`{config['Prefix']}addon extras`", inline=False)
-                embed.add_field(name="📢 Status", value=f"`{config['Prefix']}addon status`", inline=False)
+                embed.add_field(name="👤 Status", value=f"`{config['Prefix']}addon status`", inline=False)
                 await ctx.reply(embed=embed)
             else:
                 if addon.title() not in ["Vocal", "Clan", "Extras", "Status", "Prestige"]:

@@ -6,6 +6,7 @@ import discord
 from discord.ext import commands
 from pymongo import MongoClient
 from ruamel.yaml import YAML
+import KumosLab.Database.conversion as conversion
 
 
 
@@ -59,7 +60,7 @@ async def leaderboard(self=None, ctx=None, guild=None):
         embed.clear_fields()
         for users, levels, xp in i:
             num += 1
-            embed.add_field(name=f"#{num}: {users}", value=f"```Level: {levels:,} - {xp:,} XP```", inline=False)
+            embed.add_field(name=f"#{num}: {users}", value=f"```Level: {levels:,} - {conversion.translate(xp)} XP```", inline=True)
         embed.set_footer(text=f"Page {page + 1}/{len(pages)}")
         message = await ctx.send(embed=embed)
         page += 1
@@ -87,7 +88,7 @@ async def leaderboard(self=None, ctx=None, guild=None):
                             xp_list.append(xp)
                         for x in range(0, 10):
                             embed.add_field(name=f"#{x + 1 + num - len(user_list)}: {user_list[x]}",
-                                            value=f"```Level: {level_list[x]:,} - {xp_list[x]:,} XP```", inline=True)
+                                            value=f"```Level: {level_list[x]:,} - {conversion.translate(xp_list[x])} XP```", inline=True)
                         user_list.clear()
                         level_list.clear()
                         xp_list.clear()
@@ -109,7 +110,7 @@ async def leaderboard(self=None, ctx=None, guild=None):
                             xp_list.append(xp)
                         for x in range(0, 10):
                             embed.add_field(name=f"#{x + 1 + num - len(user_list)}: {user_list[x]}",
-                                            value=f"```Level: {level_list[x]:,} - {xp_list[x]:,} XP```", inline=True)
+                                            value=f"```Level: {level_list[x]:,} - {conversion.translate(xp_list[x])} XP```", inline=True)
                         user_list.clear()
                         level_list.clear()
                         xp_list.clear()
