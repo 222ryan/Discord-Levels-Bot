@@ -35,7 +35,7 @@ Modern Levels Allows you to switch between 3 Rank Card Generators:
 <ul>
     <li>Levelling System</li>
     <li>Paginated Leaderboards</li>
-    <li>Auto-Updater</li>
+    <li>Update-Notifier</li>
     <li>Addon Manager</li>
     <li>High Level of Customisation</li>
     <li>Supports MongoDB and SQLite</li>
