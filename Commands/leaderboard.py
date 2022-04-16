@@ -20,11 +20,15 @@ class leaderboard(commands.Cog):
 
     # Leaderboard Command
     @commands.command(aliases=config['leaderboard_alias'])
-    async def leaderboard(self, ctx):
+    async def leaderboard(self, ctx, leader_type=None):
+        if leader_type == None:
+            leader_type = "local"
+        else:
+            leader_type = leader_type
         if config['Database_Type'].lower() == "local":
-            await KumosLab.Database.Create.Leaderboard.Local.leaderboard.leaderboard(self=self, ctx=ctx, guild=ctx.guild)
+            await KumosLab.Database.Create.Leaderboard.Local.leaderboard.leaderboard(self=self, ctx=ctx, guild=ctx.guild, leader_type=leader_type)
         elif config['Database_Type'].lower() == "mongodb":
-            await KumosLab.Database.Create.Leaderboard.MongoDB.leaderboard.leaderboard(self=self, ctx=ctx, guild=ctx.guild)
+            await KumosLab.Database.Create.Leaderboard.MongoDB.leaderboard.leaderboard(self=self, ctx=ctx, guild=ctx.guild, leader_type=leader_type)
 
 
 

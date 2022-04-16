@@ -21,7 +21,7 @@ if config['Database_Type'].lower() == 'mongodb':
     cluster = MongoClient(MONGODB_URI)
     levelling = cluster[COLLECTION][DB_NAME]
 
-async def leaderboard(self=None, ctx=None, guild=None):
+async def leaderboard(self=None, ctx=None, guild=None, leader_type=None):
     if self is None:
         print("[Leaderboard-MongoDB] Self is None")
         return
@@ -31,9 +31,18 @@ async def leaderboard(self=None, ctx=None, guild=None):
     if guild is None:
         print("[Leaderboard-MongoDB] Guild is None")
         return
+    if leader_type is None:
+        print("[Leaderboard-MongoDB] Leaderboard Type is None")
+        return
 
-    result = levelling.find({"guild_id": ctx.guild.id, "xp": {"$exists": True}}).sort(
-        "xp", -1)
+    if leader_type.lower() == 'local':
+        result = levelling.find({"guild_id": ctx.guild.id, "xp": {"$exists": True}}).sort(
+            "xp", -1)
+        embed = discord.Embed(title=f":trophy: {guild}'s Leaderboard", colour=config['leaderboard_embed_colour'])
+    else:
+        result = levelling.find({"xp": {"$exists": True}}).sort(
+            "xp", -1)
+        embed = discord.Embed(title=f"🌎 Global Leaderboard", colour=config['leaderboard_embed_colour'])
 
     if result is None:
         print("Server Not Found!")
@@ -46,8 +55,6 @@ async def leaderboard(self=None, ctx=None, guild=None):
         users.append(x["name"])
         level.append(x["level"])
         xp.append(x["xp"])
-
-    embed = discord.Embed(title=f":trophy: {guild}'s Leaderboard", colour=config['leaderboard_embed_colour'])
 
     pagination = list(zip(users, level, xp))
     pages = [pagination[i:i + 10] for i in range(0, len(pagination), 10)]

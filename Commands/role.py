@@ -70,8 +70,38 @@ class role(commands.Cog):
             embed.add_field(name="Level:", value="`No level required!`")
         else:
             embed.add_field(name="Roles:", value=f"`{str(role_array).replace('[', '').replace(']', '')}`")
-            embed.add_field(name="Level:", value=f"`{str(role_level_array).replace('[', '').replace(']', '').replace(' ', ', ')}`", inline=True)
+            embed.add_field(name="Level:", value=f"`{str(role_level_array).replace('[', '').replace(']', '')}`", inline=False)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def creator(self, ctx, amount: int = None, prefix: str = None):
+        if amount is None:
+            embed = discord.Embed(description=f"🔴 **ERROR**: `You must define a amount! - {config['Prefix']}creator <amount> <role-prefix>`")
+            await ctx.reply(embed=embed)
+            return
+        if prefix is None:
+            embed = discord.Embed(description=f"🔴 **ERROR**: `You must define a role-prefix! - {config['Prefix']}creator <amount> <role-prefix>`")
+            await ctx.reply(embed=embed)
+            return
+        if amount > 50 or amount < 1:
+            embed = discord.Embed(description=f"🔴 **ERROR**: `You can only create 50 roles at a time! - {config['Prefix']}creator <amount> <role-prefix>`")
+            await ctx.reply(embed=embed)
+            return
+        if len(prefix) > 10 or len(prefix) < 1:
+            embed = discord.Embed(description=f"🔴 **ERROR**: `You can only create a prefix with 10 characters! - {config['Prefix']}creator <amount> <role-prefix>`")
+            await ctx.reply(embed=embed)
+            return
+        # loop amount of times
+        message = await ctx.send(f"🔓 **CREATING ROLES**: `Creating {amount} roles with prefix {prefix}. Please wait, this may take some time...`")
+        for i in range(amount):
+            # create role
+            role = await ctx.guild.create_role(name=f"{prefix} {i + 1}")
+            # add role to database
+            await KumosLab.Database.add.role(guild=ctx.guild, role_name=role, role_level=i + 1)
+
+        await message.edit(content=f"🔓 **CREATING ROLES**: `Created {amount} roles with prefix {prefix}.`")
+
+
 
 
 

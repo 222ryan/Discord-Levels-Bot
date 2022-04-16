@@ -53,7 +53,7 @@ class helpcommand(commands.Cog):
                         if reaction.emoji == "📷":
                             # remove all reactions
                             await msg.clear_reactions()
-                            embed = discord.Embed(title="📷 Profile Commands", description="```background, setblur, setcolour```")
+                            embed = discord.Embed(title="📷 Profile Commands", description="```background, setblur, setcolour, setborder```")
                             embed.add_field(name="Examples:", value=f"```🖼️ {prefix}background <link> - Changes your Rank Card background\n"
                                                                     f"⚪ {prefix}setcolour <#hex|random> - Sets your XP Bar to the chosen HEX code\n"
                                                                     f"👁️ {prefix}setblur <integer> - Blurs your Rank Cards background\n"
@@ -62,9 +62,11 @@ class helpcommand(commands.Cog):
                         elif reaction.emoji == "🔧":
                             # remove all reactions
                             await msg.clear_reactions()
-                            embed = discord.Embed(title="🔧 Admin Commands", description="```role, mainchannel```")
+                            embed = discord.Embed(title="🔧 Admin Commands", description="```role, mainchannel, talkchannel, creator```")
                             embed.add_field(name="Examples:", value=f"```🔨 {prefix}role <add|remove> <@role> <role level> - Adds or removes a role from being unlocked at a certain level\n"
-                                                                    f"📢 {prefix}mainchannel <@channel> - Sets the main channel for level up and other sorts```")
+                                                                    f"📢 {prefix}mainchannel <@channel> - Sets the main channel for level up and other sorts\n"
+                                                                    f"🗣️ {prefix}talkchannel <add|remove> <@channel> - Adds or removes a channel that allows xp gain\n"
+                                                                    f"🔧 {prefix}creator <amount> <role-prefix> - Auto-create roles for the amount and adds to database```")
                             await msg.edit(embed=embed)
 
                         elif reaction.emoji == "💼":
@@ -77,10 +79,11 @@ class helpcommand(commands.Cog):
                         elif reaction.emoji == "😃":
                             # remove all reactions
                             await msg.clear_reactions()
-                            embed = discord.Embed(title="😃 Fun Commands", description="```rank, leaderboard```")
+                            embed = discord.Embed(title="😃 Fun Commands", description="```rank, leaderboard, roles, talkchannels```")
                             embed.add_field(name="Examples:", value=f"```🏆 {prefix}rank <@user> - Displays the users Rank Card\n"
-                                                                    f"📊 {prefix}leaderboard - Displays the rankings of all users in the guild\n"
-                                                                    f"🔒 {prefix}roles - Displays all the roles you can unlock for levelling up```")
+                                                                    f"📊 {prefix}leaderboard <local|global> - Displays the rankings of all users in the guild or global\n"
+                                                                    f"🔒 {prefix}roles - Displays all the roles you can unlock for levelling up\n"
+                                                                    f"🗣️ {prefix}talkchannels - Displays all the channels that allow xp gain```")
                             await msg.edit(embed=embed)
                         elif reaction.emoji == "🔗":
                             # remove all reactions

@@ -11,7 +11,7 @@ yaml = YAML()
 with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
-async def leaderboard(self=None, ctx=None, guild=None):
+async def leaderboard(self=None, ctx=None, guild=None, leader_type=None):
     if self is None:
         print("[Leaderboard-Local] Self is None")
         return
@@ -21,14 +21,23 @@ async def leaderboard(self=None, ctx=None, guild=None):
     if guild is None:
         print("[Leaderboard-Local] Guild is None")
         return
+    if leader_type is None:
+        print("[Leaderboard-Local] Type is None")
+        return
     db = sqlite3.connect("KumosLab/Database/Local/userbase.sqlite")
     cursor = db.cursor()
     # sort by xp desc
-    cursor.execute(
-        "SELECT * FROM levelling WHERE guild_id = ? ORDER BY xp DESC", (guild.id,))
-    result = cursor.fetchall()
+    if leader_type.lower() == "local":
+        cursor.execute(
+            "SELECT * FROM levelling WHERE guild_id = ? ORDER BY xp DESC", (guild.id,))
+        result = cursor.fetchall()
+        embed = discord.Embed(title=f":trophy: {guild}'s Leaderboard", colour=config['leaderboard_embed_colour'])
+    else:
+        cursor.execute("SELECT * FROM levelling ORDER BY xp DESC")
+        result = cursor.fetchall()
+        embed = discord.Embed(title=f"🌎 Global Leaderboard", colour=config['leaderboard_embed_colour'])
     if result is None:
-        print("Server Not Found!")
+        return "Server Not Found!"
 
     users = []
     level = []
@@ -38,8 +47,6 @@ async def leaderboard(self=None, ctx=None, guild=None):
         users.append(x[1])
         level.append(x[3])
         xp.append(x[4])
-
-    embed = discord.Embed(title=f":trophy: {guild}'s Leaderboard", colour=config['leaderboard_embed_colour'])
 
     pagination = list(zip(users, level, xp))
     pages = [pagination[i:i + 10] for i in range(0, len(pagination), 10)]
