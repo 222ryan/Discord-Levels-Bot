@@ -13,7 +13,7 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
     config = yaml.load(file)
 
 
-bot_version = "2.0.2-Beta"
+bot_version = "v2.0.2-Beta"
 
 class autoupdater(commands.Cog):
     def __init__(self, client):
