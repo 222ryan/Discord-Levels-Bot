@@ -1,6 +1,6 @@
 ![](https://cdn.discordapp.com/attachments/831180817064656907/958877659629248512/Modern_Levels.png)
 <p align="center">
-  <a href="https://discord.gg/E56eZdNjK4%22%3E
+  <a href="https://discord.gg/UgvTHmuyNK
     <img src="https://discordapp.com/api/guilds/809362745354354688/widget.png?style=shield" alt="Discord Server">
   </a><h1 align="center">Welcome To Modern Levels</h1>
       </p>
@@ -14,7 +14,7 @@ Modern Levels is the most advanced open-source Discord Levelling Bot
 </ul>
 
 
-Running into problems? Want to submit a bug report or suggestion? Join our [Support Server](https://discord.gg/E56eZdNjK4)
+Running into problems? Want to submit a bug report or suggestion? Join our [Support Server](https://discord.gg/UgvTHmuyNK)
 
 
 # The Rank Card
