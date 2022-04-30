@@ -96,7 +96,7 @@ class levelsys(commands.Cog):
             channel_List = []
             for channel in channels:
                 channel_Array.append(channel)
-            if channel_Array[0] is None:
+            if len(channel_Array) < 1 or channel_Array[0] is None:
                 pass
             else:
                 for x in channel_Array:
