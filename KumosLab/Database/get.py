@@ -29,8 +29,7 @@ async def xp(user: discord.Member = None, guild: discord.Guild = None):
         if config['Database_Type'].lower() == "mongodb":
             member = levelling.find_one({'user_id': user.id, 'guild_id': guild.id})
             if user is None:
-                print("User Not Found!")
-                return
+                return "User Not Found!"
             return member['xp']
         elif config['Database_Type'].lower() == "local":
             db = sqlite3.connect("KumosLab/Database/Local/userbase.sqlite")
@@ -38,8 +37,7 @@ async def xp(user: discord.Member = None, guild: discord.Guild = None):
             cursor.execute("SELECT xp FROM levelling WHERE user_id = ? AND guild_id = ?", (user.id, guild.id))
             result = cursor.fetchone()
             if result is None:
-                print("User Not Found!")
-                return
+                return "User Not Found!"
             cursor.close()
             return result[0]
 

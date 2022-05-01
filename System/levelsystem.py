@@ -1,22 +1,18 @@
 # Imports
-import asyncio
 import random
 
-import discord
-from discord import File
 from discord.ext import commands
-from easy_pil import Editor, Canvas, load_image, Font
 from pymongo import MongoClient
 from ruamel.yaml import YAML
 import os
 from dotenv import load_dotenv
 import sqlite3
-import numpy as np
 
 import KumosLab.Database.get
 import KumosLab.Database.set
 import KumosLab.Database.add
 import KumosLab.Database.check
+import KumosLab.Database.insert
 
 yaml = YAML()
 with open("Configs/config.yml", "r", encoding="utf-8") as file:
@@ -37,53 +33,15 @@ class levelsys(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
-    async def on_ready(self):
-        # get database type from config file
-        db_type = config["Database_Type"]
-        if db_type.lower() == "mongodb":
-            for member in self.client.get_all_members():
-                if not member.bot:
-                    if not levelling.find_one({"user_id": member.id, "guild_id": member.guild.id}):
-                        levelling.insert_one({"guild_id": member.guild.id, "user_id": member.id, "name": str(member), "level": 1, "xp": 0, "background": config['Default_Background'], "xp_colour": config['Default_XP_Colour'], "blur": 0, "border": config['Default_Border']})
-                    else:
-                        continue
-            for guild in self.client.guilds:
-                if not levelling.find_one({"guild": guild.id}):
-                    levelling.insert_one({"guild": guild.id, "main_channel": None, "admin_role": None, "roles": [],
-                                          "role_levels": [], 'talkchannels': []})
-                else:
-                    continue
-        elif db_type.lower() == "local":
-            for guild in self.client.guilds:
-                db = sqlite3.connect("KumosLab/Database/Local/serverbase.sqlite")
-                cursor = db.cursor()
-                cursor.execute("SELECT * FROM levelling where guild_id = ?", (guild.id,))
-                if cursor.fetchone() is None:
-                    sql = "INSERT INTO levelling (guild_id, admin_role, main_channel, talkchannels) VALUES (?, ?, ?, ?) "
-                    cursor.execute(sql, (guild.id, None, None, None))
-                    db.commit()
-                    cursor.close()
-                for member in guild.members:
-                    # check if member is a bot
-                    db = sqlite3.connect("KumosLab/Database/Local/userbase.sqlite")
-                    cursor = db.cursor()
-                    if not member.bot:
-                        cursor.execute("SELECT * FROM levelling WHERE user_id = ? AND guild_id = ?",
-                                       (member.id, guild.id))
-                        result = cursor.fetchone()
-                        if result is None:
-                            sql = "INSERT INTO levelling (guild_id, user_id, name, level, xp, background, xp_colour, blur, border) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                            val = (guild.id, member.id, str(member), 1, 0, config['Default_Background'], config['Default_XP_Colour'], 0, config['Default_Border'])
-                            cursor.execute(sql, val)
-                            db.commit()
-                        else:
-                            continue
-
-    @commands.Cog.listener()
     async def on_message(self, ctx):
         if not ctx.author.bot:
             if ctx.content.startswith(config["Prefix"]):
                 return
+
+            if config['loader_type'].lower() == 'message':
+                user_check = await KumosLab.Database.get.xp(user=ctx.author, guild=ctx.guild)
+                if user_check == "User Not Found!":
+                    await KumosLab.Database.insert.userField(member=ctx.author, guild=ctx.guild)
 
             if config['XP_Chance'] is True:
                 chance_rate = config['XP_Chance_Rate']
@@ -96,7 +54,7 @@ class levelsys(commands.Cog):
             channel_List = []
             for channel in channels:
                 channel_Array.append(channel)
-            if channel_Array[0] is None:
+            if channel_Array is None:
                 pass
             else:
                 for x in channel_Array:
@@ -129,7 +87,6 @@ class levelsys(commands.Cog):
 
             await KumosLab.Database.check.levelUp(user=ctx.author, guild=ctx.guild)
 
-
     # on guild join
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
@@ -141,7 +98,10 @@ class levelsys(commands.Cog):
             for member in guild.members:
                 # check if member is a bot
                 if not member.bot:
-                    levelling.insert_one({"guild_id": guild.id, "user_id": member.id, "name": str(member), "level": 1, "xp": 0, "background": config['Default_Background'], "xp_colour": config['Default_XP_Colour'], "blur": 0, "border": config['Default_Border']})
+                    levelling.insert_one(
+                        {"guild_id": guild.id, "user_id": member.id, "name": str(member), "level": 1, "xp": 0,
+                         "background": config['Default_Background'], "xp_colour": config['Default_XP_Colour'],
+                         "blur": 0, "border": config['Default_Border']})
         elif db_type.lower() == "local":
             db = sqlite3.connect("KumosLab/Database/Local/serverbase.sqlite")
             cursor = db.cursor()
@@ -155,13 +115,14 @@ class levelsys(commands.Cog):
                 cursor = db.cursor()
                 if not member.bot:
                     sql = "INSERT INTO levelling (guild_id, user_id, name, level, xp, background, xp_colour, blur, border) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                    val = (guild.id, member.id, str(member), 1, 0, config['Default_Background'], config['Default_XP_Colour'], 0, config['Default_Border'])
+                    val = (
+                    guild.id, member.id, str(member), 1, 0, config['Default_Background'], config['Default_XP_Colour'],
+                    0, config['Default_Border'])
                     cursor.execute(sql, val)
                     db.commit()
                 else:
                     continue
             cursor.close()
-
 
     # on guild leave
     @commands.Cog.listener()
@@ -192,18 +153,7 @@ class levelsys(commands.Cog):
     # on member join
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        # get database type from config file
-        db_type = config["Database_Type"]
-        if db_type.lower() == "mongodb":
-            levelling.insert_one({"guild_id": member.guild.id, "user_id": member.id, "name": str(member), "level": 1, "xp": 0, "background": config['Default_Background'], "xp_colour": config['Default_XP_Colour'], "blur": 0, "border": config['Default_Border']})
-        elif db_type.lower() == "local":
-            db = sqlite3.connect("KumosLab/Database/Local/userbase.sqlite")
-            cursor = db.cursor()
-            sql = "INSERT INTO levelling (guild_id, user_id, name, level, xp, background, xp_colour, blur, border) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
-            val = (member.guild.id, member.id, str(member), 1, 0, config['Default_Background'], config['Default_XP_Colour'], 0, config['Default_Border'])
-            cursor.execute(sql, val)
-            db.commit()
-            cursor.close()
+        await KumosLab.Database.insert.userField(member=member, guild=member.guild)
 
     # on member leave
     @commands.Cog.listener()
@@ -220,14 +170,6 @@ class levelsys(commands.Cog):
             cursor.execute(sql, val)
             db.commit()
             cursor.close()
-
-
-
-
-
-
-
-
 
 
 def setup(client):

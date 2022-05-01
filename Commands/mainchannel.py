@@ -39,6 +39,20 @@ class mainchannel(commands.Cog):
             await ctx.reply(embed=embed)
             return
 
+    @commands.Cog.listener()
+    async def on_guild_channel_delete(self, channel):
+        try:
+            channels = await KumosLab.Database.get.mainChannel(guild=channel.guild)
+            if channel.id in channels:
+                # get random channel in guild
+                channel = await channel.guild.fetch_channels()
+                channel = channel[0]
+                await KumosLab.Database.set.mainChannel(guild=channel.guild, channel=None)
+                return
+        except Exception as e:
+            print(f"[MainChannel Command] {e}")
+            return
+
 
 
 

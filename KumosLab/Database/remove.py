@@ -126,7 +126,7 @@ async def talkchannel(guild: discord.Guild = None, channel: discord.TextChannel 
         if config['Database_Type'].lower() == "mongodb":
             # find if role is already in database
             talk_db = levelling.find_one({'guild': guild.id, 'talkchannels': channel.id})
-            if talk_db is not None:
+            if talk_db is None:
                 return "error"
             levelling.update_one({'guild': guild.id}, {'$pull': {'talkchannels': channel.id}})
             return

@@ -19,8 +19,8 @@ class blur(commands.Cog):
     # Rank Command
     @commands.command()
     async def setblur(self, ctx, value: int = None):
-        if value is None:
-            embed = discord.Embed(description="🔴 **Error**: Please enter a value.")
+        if value is None or value < 0 or value > 10:
+            embed = discord.Embed(description="🔴 **Error**: `Please enter a value less than or equal to 10.`")
             await ctx.reply(embed=embed)
             return
         try:

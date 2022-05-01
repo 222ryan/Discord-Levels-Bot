@@ -107,7 +107,7 @@ async def role(guild: discord.Guild = None, role_name: discord.Role = None, role
     try:
         if config['Database_Type'].lower() == "mongodb":
             # find if role is already in database
-            role_db = levelling.find_one({'guild_id': guild.id, 'role_name': role_name.name})
+            role_db = levelling.find_one({'guild': guild.id, 'role_name': role_name.name})
             if role_db is not None:
                 return "error"
             # add role
@@ -139,7 +139,7 @@ async def talkchannel(guild: discord.Guild = None, channel: discord.TextChannel 
         return
     try:
         if config['Database_Type'].lower() == "mongodb":
-            talk_db = levelling.find_one({'guild_id': guild.id, 'talkchannels': channel.id})
+            talk_db = levelling.find_one({'guild': guild.id, 'talkchannels': channel.id})
             if talk_db is not None:
                 return "error"
             levelling.update_one({'guild': guild.id}, {'$push': {'talkchannels': channel.id}})

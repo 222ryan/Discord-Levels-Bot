@@ -77,6 +77,17 @@ class talkchannel(commands.Cog):
             await ctx.reply(embed=embed)
             return
 
+    @commands.Cog.listener()
+    async def on_guild_channel_delete(self, channel):
+        try:
+            channels = await KumosLab.Database.get.talkchannels(guild=channel.guild)
+            if channel.id in channels:
+                await KumosLab.Database.remove.talkchannel(guild=channel.guild, channel=channel)
+                return
+        except Exception as e:
+            print(f"[TalkChannels Command] {e}")
+            return
+
 
 
 def setup(client):

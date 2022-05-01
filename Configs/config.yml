@@ -10,10 +10,15 @@ Prefix: "!"
 
 # Determines the database type to use. Note: MongoDB requires the details to be stored inside the .env file! **Note: Local is recommended**
 # MongoDB / Local
-Database_Type: "local"
+Database_Type: "mongodb"
 
 # Member ID of the bot owner (In most cases, whoever is reading this sentence right now AKA you.) **YOU WILL RECEIVE ERRORS IF THIS IS NOT FILLED**
 Bot_Owner: "512760269764820993"
+
+# How the bot adds users to the database when the bot starts
+# startup - Adds all missing users to the database when the bot starts (Recommended for those with smaller member amounts - Not great performance for large servers)
+# message - Adds users to the database once they send a message (Recommended for those with any member amounts - Better performance for large servers)
+loader_type: "message"
 
 # The default background for each user when they get added to the database || Please do not leave this as nothing!! If you get errors, it means the url is invalid.
 # I recommend using imgur to get the link for your background.

@@ -82,14 +82,13 @@ async def on_ready():
                             role_levels INTEGER
                             )""")
         cursor.close()
-    logging.info('Getting Bot Activity from Config')
 
     ascii_banner = pyfiglet.figlet_format("MODERN LEVELS")
     print(ascii_banner)
 
     print("Thank you for downloading Modern Levels 2.0 <3 \nIf you run into any issues, want to suggest a feature or "
           "want "
-          "a place to hang out, join the Discord! discord.gg/E56eZdNjK4\n")
+          "a place to hang out, join the Discord! discord.gg/UgvTHmuyNK\n")
     print('Logged In As:')
     print(f"Username: {Client.user.name}\nID: {Client.user.id}")
     print(f'Database Type: {str(config["Database_Type"]).title()}')
@@ -109,13 +108,6 @@ async def on_command_error(ctx, error):
         await ctx.send(embed=embed)
         return
     raise error
-
-@Client.ipc.route()
-async def get_guild_ids(data):
-    guildArray = []
-    for guild in Client.guilds:
-        guildArray.append(guild.id)
-    return guildArray
 
 logging.info("------------- Loading -------------")
 for fn in listdir("Commands"):
