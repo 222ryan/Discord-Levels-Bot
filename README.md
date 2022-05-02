@@ -7,7 +7,6 @@
                         
 Modern Levels is the most advanced open-source Discord Levelling Bot
                         
-**RIGHT NOW!** - Join the Discord server to partake in the on-going poll for potential future products!
 <ul>
 <li>Offers a plethora of config options to easily customise how the bot functions.</li>
 <li>Functions for whatever you need, making development easier.</li>
