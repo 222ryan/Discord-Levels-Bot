@@ -28,7 +28,7 @@ async def xp(user: discord.Member = None, guild: discord.Guild = None):
     try:
         if config['Database_Type'].lower() == "mongodb":
             member = levelling.find_one({'user_id': user.id, 'guild_id': guild.id})
-            if member is None:
+            if user is None:
                 return "User Not Found!"
             return member['xp']
         elif config['Database_Type'].lower() == "local":
