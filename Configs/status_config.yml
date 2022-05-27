@@ -1,0 +1,13 @@
+# ======================================================================================
+#                             WELCOME TO THE CONFIG
+#                                      FOR
+#                                THE STATUS ADDON
+# ======================================================================================
+
+# IDLE, DND, ONLINE, OFFLINE
+bot_activity: online
+
+# Set what the bot is currently playing
+bot_status_text: "[!] | Kumo"
+
+
