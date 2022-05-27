@@ -54,7 +54,7 @@ class levelsys(commands.Cog):
             channel_List = []
             for channel in channels:
                 channel_Array.append(channel)
-            if channel_Array is None:
+            if len(channel_Array) < 1 or channel_Array[0] is None:
                 pass
             else:
                 for x in channel_Array:
@@ -93,7 +93,7 @@ class levelsys(commands.Cog):
         # get database type from config file
         db_type = config["Database_Type"]
         if db_type.lower() == "mongodb":
-            levelling.insert_one({"guild_id": guild.id, "main_channel": None, "admin_role": None, "roles": [],
+            levelling.insert_one({"guild": guild.id, "main_channel": None, "admin_role": None, "roles": [],
                                   "role_levels": [], 'talkchannels': []})
             for member in guild.members:
                 # check if member is a bot
@@ -130,7 +130,7 @@ class levelsys(commands.Cog):
         # get database type from config file
         db_type = config["Database_Type"]
         if db_type.lower() == "mongodb":
-            levelling.delete_one({"guild_id": guild.id})
+            levelling.delete_one({"guild": guild.id})
             for member in guild.members:
                 levelling.delete_one({"guild_id": guild.id, "user_id": member.id})
         elif db_type.lower() == "local":

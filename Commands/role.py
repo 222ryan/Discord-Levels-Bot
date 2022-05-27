@@ -65,9 +65,10 @@ class role(commands.Cog):
         embed = discord.Embed(title="🔓 // LEVEL ROLES", description=f"**Level Roles for** `{ctx.guild.name}`")
         role_array = np.asarray(await KumosLab.Database.get.roles(guild=ctx.guild))
         role_level_array = np.asarray(await KumosLab.Database.get.roleLevel(guild=ctx.guild))
-        if role_array is None or len(role_array) < 1:
+        if role_array is None or role_level_array is None:
             embed.add_field(name="Roles:", value="`There are no roles to unlock!`")
             embed.add_field(name="Level:", value="`No level required!`")
+            return
         else:
             embed.add_field(name="Roles:", value=f"`{str(role_array).replace('[', '').replace(']', '')}`")
             embed.add_field(name="Level:", value=f"`{str(role_level_array).replace('[', '').replace(']', '')}`", inline=False)
