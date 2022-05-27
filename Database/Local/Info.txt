@@ -1,1 +1,0 @@
-When starting the bot and using the 'Local' database type, your databases will be automatically created here.
