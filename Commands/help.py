@@ -28,7 +28,7 @@ class helpcommand(commands.Cog):
                     embed.set_thumbnail(url=self.client.user.avatar_url)
                     embed.add_field(name="📷 Profile", value=f"`Profile Customisation`")
                     embed.add_field(name="😃 Fun", value=f"`Fun Commands`")
-                    if ctx.author.guild_permissions.administrator:
+                    if ctx.author.guild_permissions.administrator or ctx.author.id == int(config["Bot_Owner"]):
                         embed.add_field(name="🔧 Admin", value=f"`Admin Commands`")
                     if ctx.author.id == int(config["Bot_Owner"]):
                         embed.add_field(name="💼 Owner", value=f"`Owner Commands`")
@@ -40,7 +40,7 @@ class helpcommand(commands.Cog):
                     await msg.add_reaction("😃")
                     if ctx.author.id == int(config["Bot_Owner"]):
                         await msg.add_reaction("💼")
-                    if ctx.author.guild_permissions.administrator:
+                    if ctx.author.guild_permissions.administrator or ctx.author.id == int(config["Bot_Owner"]):
                         await msg.add_reaction("🔧")
                     if os.path.isfile("Addons/Extras.py"):
                         await msg.add_reaction("🔗")
