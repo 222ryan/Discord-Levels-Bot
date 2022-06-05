@@ -16,6 +16,8 @@ Modern Levels is the most advanced open-source Discord Levelling Bot
 
 
 Running into problems? Want to submit a bug report or suggestion? Join our [Support Server](https://discord.gg/UgvTHmuyNK)
+                        
+**Please do not use REPLIT to host the bot!**
 
 
 # The Rank Card
