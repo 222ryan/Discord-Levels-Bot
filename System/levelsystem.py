@@ -105,7 +105,7 @@ class levelsys(commands.Cog):
         elif db_type.lower() == "local":
             db = sqlite3.connect("KumosLab/Database/Local/serverbase.sqlite")
             cursor = db.cursor()
-            sql = "INSERT INTO levelling (guild_id, admin_role, main_channel, talkchannels) VALUES (?, ?, ?, ?)"
+            sql = "INSERT INTO levelling (guild, admin_role, main_channel, talkchannels) VALUES (?, ?, ?, ?)"
             val = (guild.id, None, None, None)
             cursor.execute(sql, val)
             db.commit()
@@ -136,7 +136,7 @@ class levelsys(commands.Cog):
         elif db_type.lower() == "local":
             db = sqlite3.connect("KumosLab/Database/Local/serverbase.sqlite")
             cursor = db.cursor()
-            sql = "DELETE FROM levelling WHERE guild_id = ?"
+            sql = "DELETE FROM levelling WHERE guild = ?"
             val = (guild.id,)
             cursor.execute(sql, val)
             db.commit()
